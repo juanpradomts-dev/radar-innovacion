@@ -5,6 +5,7 @@ llama decide qué hacer si una fuente cae (el radar conserva lo anterior).
 """
 from __future__ import annotations
 
+import gzip
 import json
 import time
 import urllib.error
@@ -12,6 +13,7 @@ import urllib.parse
 import urllib.request
 import urllib.robotparser
 import xml.etree.ElementTree as ET
+import zlib
 from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 
@@ -145,9 +147,29 @@ def _imagen(el) -> str | None:
     return None
 
 
+class NoEsXML(ValueError):
+    """La respuesta no es un feed (página de bloqueo, HTML, etc.). El mensaje dice cómo empieza."""
+
+
+def leer_xml(datos: bytes) -> ET.Element:
+    """ET.fromstring tolerante: descomprime gzip enviado sin avisar y salta espacios antes de
+    la declaración XML (error común de WordPress). Si aun así no es XML, NoEsXML con una muestra."""
+    if datos[:2] == b"\x1f\x8b":
+        try:
+            datos = gzip.decompress(datos)
+        except (OSError, EOFError, zlib.error):
+            pass
+    datos = datos.lstrip()
+    try:
+        return ET.fromstring(datos)
+    except ET.ParseError as e:
+        muestra = " ".join(datos[:160].decode("utf-8", "replace").split())
+        raise NoEsXML(f"{e}; empieza con: {muestra!r}") from None
+
+
 def parse_feed(datos: bytes, fuente: str) -> list[dict]:
     """Lee RSS 2.0, RSS 1.0 (RDF) o Atom. Devuelve [{titulo, url, fecha, resumen, imagen, fuente}]."""
-    raiz = ET.fromstring(datos)
+    raiz = leer_xml(datos)
     items = raiz.findall(".//item") or raiz.findall(".//rss1:item", _NS) or raiz.findall(".//atom:entry", _NS)
     out = []
     for it in items:
@@ -189,17 +211,8 @@ def _url_real(link: str) -> str:
 
 
 def bing_news(consulta: str) -> list[dict]:
-    # desde IPs de GitHub, Bing a veces responde algo que no es RSS válido; se reintenta una vez
-    for intento in range(2):
-        datos = http_get(BING + urllib.parse.quote_plus(consulta), ua=UA_NAVEGADOR, intentos=2)
-        try:
-            raiz = ET.fromstring(datos)
-            break
-        except ET.ParseError as e:
-            if intento:
-                muestra = datos[:160].decode("utf-8", "replace").replace("\n", " ")
-                raise ValueError(f"respuesta no es RSS ({e}); empieza con: {muestra!r}") from None
-            time.sleep(4)
+    # desde IPs de GitHub, Bing a veces responde algo que no es RSS (NoEsXML); radar.py reintenta más tarde
+    raiz = leer_xml(http_get(BING + urllib.parse.quote_plus(consulta), ua=UA_NAVEGADOR, intentos=2))
     out = []
     for it in raiz.findall(".//item"):
         titulo = (it.findtext("title") or "").strip()

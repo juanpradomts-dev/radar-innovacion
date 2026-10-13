@@ -2,6 +2,7 @@
 
     python -m unittest -v test_radar
 """
+import gzip
 import json
 import math
 import re
@@ -11,6 +12,7 @@ import tempfile
 import unittest
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from unittest import mock
 
 import clasificar as C
 import fuentes as F
@@ -208,9 +210,57 @@ class Lectura(unittest.TestCase):
         self.assertEqual(r["titulo"], "Paper RDF")
         self.assertEqual(r["fecha"].date(), date(2026, 10, 10))
 
+    def test_xml_tolerante_y_diagnostico(self):
+        self.assertEqual(len(F.parse_feed(gzip.compress(self.RSS), "A")), 2)       # gzip enviado sin avisar
+        self.assertEqual(len(F.parse_feed(b"\n\n  " + self.RSS, "A")), 2)          # espacios antes de <?xml
+        with self.assertRaises(F.NoEsXML) as cm:
+            F.parse_feed(b"<!DOCTYPE html><html><head><meta charset=utf-8><title>Bing</title>", "B")
+        self.assertIn("empieza con: '<!DOCTYPE html><html><head><meta charset=utf-8>", str(cm.exception))
+
     def test_url_real_de_bing(self):
         link = "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=x&url=https%3a%2f%2fwww.reuters.com%2ftech%2fnota&c=1"
         self.assertEqual(F._url_real(link), "https://www.reuters.com/tech/nota")
+
+
+class Recoleccion(unittest.TestCase):
+    TENDS = [{"id": f"t{i}", "bing": [f"consulta {i}"]} for i in range(6)]
+
+    def correr(self, bing_news):
+        ef = {}
+        with mock.patch.object(F, "permitido", return_value=True), mock.patch.object(F, "bing_news", side_effect=bing_news), \
+                mock.patch("radar.time.sleep"), mock.patch("radar.log"):
+            out = radar.recolectar_bing(self.TENDS, ef, [])
+        return out, ef["Bing News (búsqueda por tendencia)"]
+
+    def test_bing_reintenta_al_final_lo_que_fallo(self):
+        llamadas = []
+
+        def bing(q):
+            llamadas.append(q)
+            if q in ("consulta 1", "consulta 4") and llamadas.count(q) == 1:
+                raise F.NoEsXML("not well-formed; empieza con: '<!DOCTYPE html>'")
+            return [{"titulo": q, "url": "https://x.com/" + q, "fuente": "Reuters"}]
+
+        out, ef = self.correr(bing)
+        self.assertEqual(llamadas[6:], ["consulta 1", "consulta 4"])   # lo fallido va al final, no enseguida
+        self.assertEqual(sorted(it["consulta_de"] for it in out), [f"t{i}" for i in range(6)])
+        self.assertEqual((ef["fallos"], ef["recuperadas"]), (0, 2))
+        self.assertNotIn("error", ef)
+        self.assertIn("<!DOCTYPE html>", ef["ultimo_fallo"])           # el diagnóstico queda guardado
+
+    def test_bing_bloqueado_no_insiste(self):
+        llamadas = []
+
+        def bing(q):
+            llamadas.append(q)
+            raise F.NoEsXML("bloqueado")
+
+        tends = [{"id": f"t{i}", "bing": [f"q{i}"]} for i in range(radar.BING_MAX_SEGUIDAS + 10)]
+        with mock.patch.object(self, "TENDS", tends):
+            out, ef = self.correr(bing)
+        self.assertEqual(out, [])
+        self.assertEqual(len(llamadas), radar.BING_MAX_SEGUIDAS)
+        self.assertEqual(ef["error"], "todas las búsquedas fallaron")
 
 
 class Metricas(unittest.TestCase):

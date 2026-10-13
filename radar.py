@@ -39,6 +39,12 @@ RETENCION_CONTEOS = 400     # días de conteos diarios por tendencia
 MAX_POR_TENDENCIA = 30
 MAX_ULTIMAS = 120
 MAX_FUERA = 40
+BING_PAUSA = 1.0              # s entre búsquedas; se duplica con cada fallo hasta BING_PAUSA_MAX
+BING_PAUSA_MAX = 8.0
+BING_PAUSA_REINTENTO = 3.0    # ritmo de la segunda ronda
+BING_ESPERA_REINTENTO = 30    # s antes de reintentar lo fallido
+BING_MAX_SEGUIDAS = 12        # fallos seguidos = Bing nos bloqueó: se deja para la próxima corrida
+BING_TIEMPO_MAX = 600         # s en total para Bing
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -77,7 +83,7 @@ def recolectar_rss(feeds: list[dict], estado_fuentes: dict) -> list[dict]:
             items = F.leer_feed(feed)
             return feed, items, None
         except Exception as e:  # una fuente caída no detiene el radar
-            return feed, [], f"{type(e).__name__}: {str(e)[:120]}"
+            return feed, [], f"{type(e).__name__}: {str(e)[:300]}"
 
     out = []
     with ThreadPoolExecutor(max_workers=8) as ex:
@@ -99,37 +105,67 @@ def recolectar_rss(feeds: list[dict], estado_fuentes: dict) -> list[dict]:
 
 
 def recolectar_bing(tendencias: list[dict], estado_fuentes: dict, nivel1: list[str]) -> list[dict]:
+    """Una búsqueda por consulta. Desde IPs de GitHub, Bing responde a ratos una página que no es
+    RSS, en rachas: al fallar se baja el ritmo y lo fallido se reintenta al final, más despacio."""
     ef = estado_fuentes.setdefault("Bing News (búsqueda por tendencia)", {"tipo": "busqueda"})
     if not F.permitido(F.BING + "test"):
         ef["error"] = "robots.txt no lo permite"
         log("  ✗ Bing News: robots.txt no lo permite; se omite")
         return []
     nivel1_norm = [n.lower() for n in nivel1]
-    out, fallos, total = [], 0, 0
-    for t in tendencias:
-        for q in t["bing"]:
-            if total:
-                time.sleep(1.0)
-            total += 1
+    consultas = [(t["id"], q) for t in tendencias for q in t["bing"]]
+    out, pendientes, ultimo_error, recuperadas = [], consultas, None, 0
+    pausa, seguidas, fin = BING_PAUSA, 0, time.monotonic() + BING_TIEMPO_MAX
+    for ronda in (1, 2):
+        if ronda == 2:
+            if not pendientes or seguidas >= BING_MAX_SEGUIDAS or time.monotonic() > fin:
+                break
+            log(f"  reintentando {len(pendientes)} búsquedas de Bing…")
+            time.sleep(BING_ESPERA_REINTENTO)
+            pausa, seguidas = max(pausa, BING_PAUSA_REINTENTO), 0
+        fallidas = []
+        for i, (tid, q) in enumerate(pendientes):
+            if seguidas >= BING_MAX_SEGUIDAS or time.monotonic() > fin:
+                fallidas.extend(pendientes[i:])  # Bing nos bloqueó o se acabó el tiempo: se deja para la próxima corrida
+                break
+            if i:
+                time.sleep(pausa)
             try:
                 items = F.bing_news(q)
             except Exception as e:
-                fallos += 1
-                log(f"  ✗ Bing «{q}»: {type(e).__name__}: {str(e)[:80]}")
+                fallidas.append((tid, q))
+                seguidas += 1
+                pausa = min(BING_PAUSA_MAX, pausa * 2)
+                ultimo_error = f"«{q}»: {type(e).__name__}: {str(e)[:300]}"
+                if ronda == 2 or len(fallidas) == 1:  # el primer fallo completo, con la muestra de la respuesta
+                    log(f"  ✗ Bing {ultimo_error}")
                 continue
+            seguidas = 0
+            pausa = max(BING_PAUSA if ronda == 1 else BING_PAUSA_REINTENTO, pausa / 2)
+            recuperadas += ronda == 2
             for it in items:
                 f = (it.get("fuente") or "").lower()
-                it.update(origen="bing", consulta_de=t["id"], idioma="en",
+                it.update(origen="bing", consulta_de=tid, idioma="en",
                           nivel=1 if any(n in f for n in nivel1_norm) else 3)
             out.extend(items)
-    if fallos == total:
+        if ronda == 1 and fallidas:
+            log(f"  Bing: {len(fallidas)} de {len(consultas)} búsquedas fallaron en la primera ronda")
+        pendientes = fallidas
+    if seguidas >= BING_MAX_SEGUIDAS:
+        log(f"  ✗ Bing: {seguidas} fallos seguidos; se deja el resto para la próxima corrida")
+    if len(pendientes) == len(consultas):
         ef["error"] = "todas las búsquedas fallaron"
         ef["fallo"] = F.ahora().isoformat(timespec="minutes")
     else:
         ef.pop("error", None)
         ef["ok"] = F.ahora().isoformat(timespec="minutes")
         ef["n"] = len(out)
-        ef["fallos"] = fallos
+    ef["fallos"] = len(pendientes)
+    ef["recuperadas"] = recuperadas
+    if ultimo_error:
+        ef["ultimo_fallo"] = ultimo_error
+    else:
+        ef.pop("ultimo_fallo", None)
     return out
 
 

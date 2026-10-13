@@ -52,4 +52,4 @@ Sin clave, OpenAlex da un presupuesto diario pequeño compartido por IP, que en 
 
 ## Respeto a las fuentes
 
-Se lee robots.txt de cada medio antes de su feed (por eso se omite Logistics Viewpoints) y se espera 1 s entre búsquedas. Los titulares enlazan siempre al medio original.
+Se lee robots.txt de cada medio antes de su feed (por eso se omite Logistics Viewpoints) y se espera 1 s entre búsquedas. Si Bing responde algo que no es RSS (pasa a ratos desde GitHub Actions), se baja el ritmo y esas búsquedas se reintentan al final de la corrida; tras 12 fallos seguidos se deja para la próxima. El último fallo, con cómo empezaba la respuesta, queda en `datos/estado.json`. Los titulares enlazan siempre al medio original.
