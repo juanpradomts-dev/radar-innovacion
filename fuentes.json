@@ -1,0 +1,327 @@
+{
+  "nota": "Feeds RSS públicos de medios de tecnología, ciencia e industria. nivel 1 = medio de referencia; 2 = especializado. Se leen en cada corrida; las búsquedas por tendencia van aparte (Bing News RSS).",
+  "feeds": [
+    {
+      "nombre": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/feed/",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "IEEE Spectrum",
+      "url": "https://spectrum.ieee.org/feeds/feed.rss",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Nature",
+      "url": "https://www.nature.com/nature.rss",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "MIT News",
+      "url": "https://news.mit.edu/rss/feed",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "The Verge",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Ars Technica",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Wired",
+      "url": "https://www.wired.com/feed/rss",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "New Scientist",
+      "url": "https://www.newscientist.com/subject/technology/feed/",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Rest of World",
+      "url": "https://restofworld.org/feed/latest",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Quanta Magazine",
+      "url": "https://www.quantamagazine.org/feed/",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "McKinsey Insights",
+      "url": "https://www.mckinsey.com/insights/rss",
+      "nivel": 1,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Fast Company",
+      "url": "https://www.fastcompany.com/latest/rss",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "ScienceDaily",
+      "url": "https://www.sciencedaily.com/rss/top/technology.xml",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "TechXplore",
+      "url": "https://techxplore.com/rss-feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Singularity Hub",
+      "url": "https://singularityhub.com/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Interesting Engineering",
+      "url": "https://interestingengineering.com/feed",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Engadget",
+      "url": "https://www.engadget.com/rss.xml",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "The Next Web",
+      "url": "https://thenextweb.com/feed",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Sifted",
+      "url": "https://sifted.eu/feed",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "The Robot Report",
+      "url": "https://www.therobotreport.com/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Electrek",
+      "url": "https://electrek.co/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "CleanTechnica",
+      "url": "https://cleantechnica.com/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Canary Media",
+      "url": "https://www.canarymedia.com/rss.rss",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Trellis",
+      "url": "https://trellis.net/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Supply Chain Dive",
+      "url": "https://www.supplychaindive.com/feeds/news/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Manufacturing Dive",
+      "url": "https://www.manufacturingdive.com/feeds/news/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "DC Velocity",
+      "url": "https://www.dcvelocity.com/rss/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Retail Dive",
+      "url": "https://www.retaildive.com/feeds/news/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Healthcare Dive",
+      "url": "https://www.healthcaredive.com/feeds/news/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Smart Cities Dive",
+      "url": "https://www.smartcitiesdive.com/feeds/news/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "STAT",
+      "url": "https://www.statnews.com/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "SpaceNews",
+      "url": "https://spacenews.com/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "NASA",
+      "url": "https://www.nasa.gov/feed/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "AgFunderNews",
+      "url": "https://agfundernews.com/feed",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Google AI",
+      "url": "https://blog.google/technology/ai/rss/",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Hugging Face",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "nivel": 2,
+      "idioma": "en"
+    },
+    {
+      "nombre": "Xataka",
+      "url": "https://feeds.weblogssl.com/xataka2",
+      "nivel": 2,
+      "idioma": "es"
+    },
+    {
+      "nombre": "Hipertextual",
+      "url": "https://hipertextual.com/feed",
+      "nivel": 2,
+      "idioma": "es"
+    },
+    {
+      "nombre": "El País Tecnología",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/tecnologia/portada",
+      "nivel": 1,
+      "idioma": "es"
+    }
+  ],
+  "medios_nivel1": [
+    "Reuters",
+    "Bloomberg",
+    "Financial Times",
+    "The Wall Street Journal",
+    "WSJ",
+    "The New York Times",
+    "The Economist",
+    "Associated Press",
+    "AP News",
+    "BBC",
+    "The Guardian",
+    "CNBC",
+    "Nature",
+    "Science",
+    "MIT Technology Review",
+    "IEEE Spectrum",
+    "TechCrunch",
+    "The Verge",
+    "Wired",
+    "Ars Technica",
+    "Axios",
+    "Forbes",
+    "Fortune",
+    "Nikkei Asia",
+    "El País",
+    "Rest of World",
+    "Electrek",
+    "The Robot Report",
+    "Supply Chain Dive",
+    "Canary Media",
+    "SpaceNews",
+    "STAT"
+  ],
+  "medios_excluidos": [
+    "Motley Fool",
+    "The Motley Fool",
+    "Zacks",
+    "Benzinga",
+    "MarketBeat",
+    "Seeking Alpha",
+    "InvestorPlace",
+    "TipRanks",
+    "Simply Wall St",
+    "openPR",
+    "EIN Presswire",
+    "AInvest",
+    "Investing.com",
+    "TradingView",
+    "Barchart",
+    "24/7 Wall St.",
+    "Insider Monkey",
+    "GuruFocus",
+    "FX Leaders",
+    "CoinCentral",
+    "Finbold",
+    "The Economic Times Markets",
+    "Stocktwits",
+    "WebProNews",
+    "Devdiscourse",
+    "Startup Fortune",
+    "note",
+    "The Tech Edvocate",
+    "Analytics Insight",
+    "tradersunion",
+    "finance.biggo",
+    "Stock Titan",
+    "stockstotrade",
+    "financialcontent",
+    "Futubull News",
+    "Crypto Briefing",
+    "Geeky Gadgets",
+    "Morning Overview on MSN",
+    "Morning Overview",
+    "Knowridge Science Report"
+  ]
+}

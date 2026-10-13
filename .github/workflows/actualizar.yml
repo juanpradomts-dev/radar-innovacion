@@ -1,0 +1,53 @@
+name: Actualizar radar
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"   # cada 3 h (UTC); GitHub suele atrasarlo un poco
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore: ["datos/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # si una prueba falla no se publica: la página anterior sigue en línea
+      - run: python -m unittest -v test_radar
+      - run: python radar.py
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+      - name: Guardar datos acumulados
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add datos/
+          git diff --cached --quiet && exit 0
+          git commit -m "datos: $(date -u '+%F %H:%M') UTC"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin main && git push && break
+            sleep 5
+          done || echo "::warning::no se pudieron guardar los datos; se publica igual"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

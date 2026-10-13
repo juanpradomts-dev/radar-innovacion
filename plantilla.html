@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar de Innovación</title>
+<meta name="description" content="Las tendencias que están cambiando el mundo, medidas cada pocas horas con noticias, ciencia e interés público.">
+<meta property="og:title" content="Radar de Innovación">
+<meta property="og:description" content="49 tendencias de tecnología, sociedad y negocio. Se actualiza solo con noticias, papers e interés público.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.png">
+<meta name="theme-color" content="#F4F6F9">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icono-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6F9; --panel:#FFFFFF; --ink:#13202C; --ink2:#33414E; --muted:#5E6B78; --line:#E2E7ED; --line2:#EEF1F5;
+  --soc:#0E8F66; --soc-2:#1FAE7E; --soc-weak:#DCF2E8; --soc-ink:#0A6B4C;
+  --tec:#1B6BD3; --tec-2:#3B86E8; --tec-weak:#DCE8F9; --tec-ink:#14529F;
+  --rojo:#E5413A; --ambar:#E8930C; --ambar-weak:#FDF0D8;
+  --t-lanzamiento:#1B6BD3; --t-inversion:#C07A06; --t-investigacion:#7A4CC2; --t-regulacion:#4E5D6C; --t-otro:#7D8994;
+  --radio:16px; --sombra:0 1px 2px rgba(19,32,44,.05),0 6px 24px rgba(19,32,44,.06);
+  --curva:cubic-bezier(.16,.84,.24,1);
+  --f-tit:"Outfit",system-ui,sans-serif; --f-txt:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-txt);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--f-tit);letter-spacing:-.01em;margin:0}
+.envoltura{max-width:1440px;margin:0 auto;padding:0 20px}
+@media (max-width:640px){.envoltura{padding:0 16px}}
+
+/* ---------- cabecera ---------- */
+.cabecera{padding:22px 0 8px}
+.cab-fila{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{width:44px;height:44px;flex:none}
+.cab-txt h1{font-size:28px;font-weight:700;line-height:1.1}
+.cab-txt p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:640px}
+.estado{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;color:var(--ink2);box-shadow:var(--sombra)}
+.estado .luz{width:8px;height:8px;border-radius:50%;background:var(--soc-2);box-shadow:0 0 0 3px rgba(31,174,126,.18)}
+.estado .luz.tarde{background:var(--ambar);box-shadow:0 0 0 3px rgba(232,147,12,.18)}
+.estado .luz.vieja{background:var(--rojo);box-shadow:0 0 0 3px rgba(229,65,58,.18)}
+@media (max-width:820px){.estado{margin-left:0}}
+
+/* ---------- distribución ---------- */
+.tablero{display:grid;grid-template-columns:250px minmax(0,1fr) 290px;gap:18px;align-items:start;margin-top:14px}
+@media (max-width:1180px){.tablero{grid-template-columns:240px minmax(0,1fr)}.lateral{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}}
+@media (max-width:860px){.tablero{grid-template-columns:1fr}.filtros{order:2}.radar-caja{order:1}.lateral{order:3}}
+.caja{background:var(--panel);border:1px solid var(--line);border-radius:var(--radio);box-shadow:var(--sombra)}
+
+/* ---------- filtros ---------- */
+.filtros{padding:16px 16px 12px;position:sticky;top:12px}
+@media (max-width:860px){.filtros{position:static}}
+.filtros h2{font-size:17px}
+.filtros .ayuda{font-size:13px;color:var(--muted);margin:2px 0 10px}
+.buscar{position:relative;margin-bottom:12px}
+.buscar input{width:100%;border:1px solid var(--line);background:#FAFBFC;border-radius:10px;padding:9px 12px 9px 34px;font:inherit;font-size:14px;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+.buscar input:focus{border-color:var(--tec-2);box-shadow:0 0 0 3px rgba(59,134,232,.15);background:#fff}
+.buscar svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted)}
+.grupo{border-top:1px solid var(--line2);padding:10px 0 6px}
+.grupo summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);padding:2px 0 8px;user-select:none}
+.grupo summary::-webkit-details-marker{display:none}
+.grupo summary .flecha{transition:transform .3s var(--curva);color:var(--muted)}
+.grupo[open] summary .flecha{transform:rotate(180deg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 10px;font-size:13px;cursor:pointer;transition:background .2s,border-color .2s,color .2s,opacity .2s;line-height:1.25;text-align:left}
+.chip .n{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chip:hover{border-color:#C4CDD7}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip[aria-pressed="true"] .n{color:#C9D3DD}
+.chip[disabled]{opacity:.38;cursor:default}
+.chip.f-soc[aria-pressed="true"]{background:var(--soc);border-color:var(--soc)}
+.chip.f-tec[aria-pressed="true"]{background:var(--tec);border-color:var(--tec)}
+.resumen-filtro{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted);border-top:1px solid var(--line2);padding-top:10px;margin-top:4px;min-height:34px}
+.btn-txt{background:none;border:0;padding:4px 2px;color:var(--tec);font-weight:600;cursor:pointer;font-size:13px}
+.btn-txt:hover{text-decoration:underline}
+
+/* ---------- radar ---------- */
+.radar-caja{padding:14px 14px 10px;position:relative}
+.radar-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:2px 6px 6px}
+.radar-cab .pista{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.radar-cab .pista b{color:var(--ink2);font-weight:600}
+.mano{width:16px;height:16px;color:var(--tec)}
+.radar-svg{display:block;width:100%;height:auto;max-height:min(900px,calc(100vh - 120px));aspect-ratio:1/1;margin:0 auto;touch-action:manipulation;user-select:none}
+@media (max-width:860px){.radar-svg{max-height:none}}
+.leyenda{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;font-size:12.5px;color:var(--muted);padding:6px 4px 2px}
+.leyenda span{display:inline-flex;align-items:center;gap:6px}
+.leyenda i{display:inline-block;border-radius:50%}
+
+.nodo{cursor:pointer;outline:none}
+.nodo .punto{transition:r .25s var(--curva)}
+.nodo .etq rect{fill:#fff;stroke:rgba(19,32,44,.10);stroke-width:1;transition:stroke .2s,fill .2s;filter:drop-shadow(0 1px 1.5px rgba(19,32,44,.10))}
+.nodo .etq text{font-family:var(--f-txt);font-size:14.5px;font-weight:600;fill:var(--ink)}
+.nodo:hover .etq rect,.nodo:focus-visible .etq rect,.nodo.activo .etq rect{stroke:currentColor;stroke-width:1.6}
+.nodo:focus-visible .punto{stroke:var(--ink);stroke-width:3}
+.nodo{transition:opacity .35s var(--curva)}
+.nodo.apagado{opacity:.13}
+.nodo.apagado .etq{display:none}
+.nodo .halo{fill:none;stroke-width:2;opacity:.45}
+.nodo.sin-etq .etq{display:none}
+.nodo.sin-etq:hover .etq,.nodo.sin-etq:focus-visible .etq,.nodo.sin-etq.activo .etq{display:inline}
+.compacto .nodo .etq{display:none}
+.nodo.entra{animation:aparecer .55s var(--curva) backwards}
+@keyframes aparecer{from{opacity:0}to{opacity:1}}
+.barrido{transform-box:view-box;transform-origin:500px 500px;animation:barrer 1.5s cubic-bezier(.45,.05,.3,1) both}
+@keyframes barrer{from{transform:rotate(0deg);opacity:1}85%{opacity:1}to{transform:rotate(360deg);opacity:0}}
+@media (prefers-reduced-motion:no-preference){
+  .nodo.caliente .halo{animation:latir 2.6s ease-in-out infinite}
+  @keyframes latir{0%,100%{opacity:.45}50%{opacity:.08}}
+  .hoy-pulso{animation:pulso 2.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes pulso{0%{transform:scale(1);opacity:.45}100%{transform:scale(3.2);opacity:0}}
+}
+.globo{position:fixed;z-index:30;pointer-events:none;background:var(--ink);color:#fff;border-radius:10px;padding:8px 11px;font-size:13px;line-height:1.35;max-width:260px;box-shadow:0 8px 28px rgba(0,0,0,.18);opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s var(--curva)}
+.globo.ver{opacity:1;transform:none}
+.globo b{display:block;font-size:14px;margin-bottom:2px}
+.globo span{color:#C9D3DD}
+
+/* ---------- lateral ---------- */
+.lateral{display:flex;flex-direction:column;gap:18px}
+.bloque{padding:16px}
+.bloque h2{font-size:17px;display:flex;align-items:center;gap:8px}
+.bloque .sub{font-size:13px;color:var(--muted);margin:2px 0 10px}
+.fila-t{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:8px 6px;border-radius:10px;cursor:pointer;border:0;background:none;width:100%;text-align:left;transition:background .2s}
+.fila-t:hover{background:#F3F6F9}
+.fila-t .bola{width:10px;height:10px;border-radius:50%}
+.fila-t .nom{font-weight:600;font-size:14px;line-height:1.25}
+.fila-t .det{font-size:12px;color:var(--muted)}
+.medidor{width:46px;height:6px;border-radius:99px;background:#EBEFF3;overflow:hidden}
+.medidor i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#F2B544,var(--ambar))}
+.imp-num{display:flex;align-items:center;gap:7px;font-size:13px;font-variant-numeric:tabular-nums}.imp-num b{min-width:20px;text-align:right}
+.delta{font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.delta.sube{color:var(--soc)}.delta.baja{color:var(--rojo)}
+.cambios-grid{display:grid;gap:10px}
+.cambio h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:var(--f-txt);font-weight:700;margin:4px 0 2px}
+
+/* ---------- secciones ---------- */
+.seccion{margin-top:22px;padding:18px}
+.sec-cab{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.sec-cab h2{font-size:21px}
+.sec-cab p{margin:3px 0 0;color:var(--muted);font-size:14px}
+.pestanas{display:flex;flex-wrap:wrap;gap:6px}
+.pestana{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.pestana:hover{border-color:#C4CDD7}
+.pestana[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.noticias{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.noticia{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:12px;border:1px solid var(--line2);border-radius:14px;background:#fff;text-decoration:none;transition:border-color .2s,box-shadow .25s var(--curva),transform .25s var(--curva);min-width:0}
+.noticia.sin-img{grid-template-columns:1fr}
+@media (hover:hover) and (pointer:fine){.noticia:hover{border-color:#D3DAE2;box-shadow:0 8px 24px rgba(19,32,44,.08);transform:translateY(-2px)}}
+.noticia .img{width:76px;height:76px;border-radius:10px;object-fit:cover;background:#EEF2F6}
+.noticia .tit{font-weight:600;font-size:14.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.noticia .meta{font-size:12.5px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.noticia .res{font-size:13px;color:var(--ink2);margin-top:5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tipo{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;letter-spacing:.02em}
+.tipo::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.tipo.lanzamiento{color:var(--t-lanzamiento)}.tipo.inversion{color:var(--t-inversion)}.tipo.investigacion{color:var(--t-investigacion)}.tipo.regulacion{color:var(--t-regulacion)}.tipo.otro{color:var(--t-otro)}
+.etiqueta-t{font-size:11.5px;font-weight:600;border-radius:6px;padding:1px 7px;border:0;cursor:pointer}
+.etiqueta-t.soc{background:var(--soc-weak);color:var(--soc-ink)}.etiqueta-t.tec{background:var(--tec-weak);color:var(--tec-ink)}
+.mas{display:flex;justify-content:center;margin-top:14px}
+.boton{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14px;cursor:pointer;transition:border-color .2s,background .2s;text-decoration:none}
+.boton:hover{border-color:#C4CDD7;background:#FAFBFC}
+.vacio{padding:24px;text-align:center;color:var(--muted);font-size:14px;border:1px dashed var(--line);border-radius:14px}
+
+.lista-t{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:8px}
+.tarjeta-t{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:11px 12px;border:1px solid var(--line2);border-radius:12px;background:#fff;cursor:pointer;text-align:left;width:100%;transition:border-color .2s,box-shadow .25s var(--curva),transform .25s var(--curva)}
+@media (hover:hover) and (pointer:fine){.tarjeta-t:hover{border-color:#D3DAE2;box-shadow:0 6px 18px rgba(19,32,44,.07);transform:translateY(-2px)}}
+.tarjeta-t .bola{width:12px;height:12px;border-radius:50%}
+.tarjeta-t .nom{font-weight:600;font-size:14.5px;line-height:1.3}
+.tarjeta-t .det{font-size:12.5px;color:var(--muted)}
+.tarjeta-t .der{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:12px;color:var(--muted)}
+select.orden{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font:inherit;font-size:13px;background:#fff;color:var(--ink)}
+
+/* ---------- pie ---------- */
+.pie{margin:26px 0 40px;font-size:13.5px;color:var(--muted)}
+.pie details{background:var(--panel);border:1px solid var(--line);border-radius:var(--radio);padding:14px 18px;margin-bottom:10px}
+.pie summary{cursor:pointer;font-weight:600;color:var(--ink2)}
+.pie h3{font-size:15px;color:var(--ink);margin:14px 0 4px}
+.pie ul{margin:6px 0;padding-left:20px}
+.pie li{margin:3px 0}
+.pie .fuentes-lista{columns:3 220px;font-size:12.5px;margin-top:8px}
+.pie .fuentes-lista div{break-inside:avoid;padding:1px 0}
+.pie .ok{color:var(--soc)}.pie .mal{color:var(--rojo)}
+.firma{text-align:center;margin-top:16px}
+
+/* ---------- detalle (modo enfoque) ---------- */
+dialog.detalle{border:0;padding:0;border-radius:22px;width:min(880px,calc(100vw - 24px));max-height:calc(100dvh - 32px);background:var(--panel);color:var(--ink);box-shadow:0 30px 80px rgba(10,20,30,.28);overflow:hidden}
+dialog.detalle::backdrop{background:rgba(16,26,36,.38);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+dialog.detalle[open]{animation:abrir .38s var(--curva)}
+dialog.detalle[open]::backdrop{animation:fondo .38s ease}
+@keyframes abrir{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fondo{from{opacity:0}to{opacity:1}}
+.det-scroll{max-height:calc(100dvh - 32px);overflow:auto;scrollbar-width:thin;scrollbar-color:#CBD3DC transparent}
+.det-scroll::-webkit-scrollbar{width:8px}.det-scroll::-webkit-scrollbar-thumb{background:#CBD3DC;border-radius:8px}
+.det-cab{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:12px 14px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line2)}
+.det-cab .migas{font-size:12.5px;color:var(--muted);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icono-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;display:inline-grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s;flex:none}
+.icono-btn:hover{background:#F3F6F9;border-color:#C4CDD7}
+.icono-btn svg{width:17px;height:17px}
+.det-cuerpo{padding:18px 24px 26px}
+@media (max-width:640px){.det-cuerpo{padding:16px 16px 22px}}
+.det-titulo h2{font-size:28px;line-height:1.15}
+.det-titulo .en{color:var(--muted);font-size:14px;margin-top:2px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 6px}
+@media (max-width:640px){.kpis{grid-template-columns:1fr}}
+.kpi{border:1px solid var(--line2);border-radius:14px;padding:12px 14px;background:#FBFCFD}
+.kpi .k{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.kpi .v{font-family:var(--f-tit);font-size:24px;font-weight:700;margin-top:2px;display:flex;align-items:baseline;gap:8px}
+.kpi .v small{font-family:var(--f-txt);font-size:13px;font-weight:600;color:var(--muted)}
+.kpi .x{font-size:12.5px;color:var(--ink2);margin-top:3px;line-height:1.4}
+.parr{margin:14px 0 0}
+.parr h3{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-family:var(--f-txt);font-weight:700;margin-bottom:3px}
+.parr p{margin:0;font-size:15.5px;line-height:1.55}
+.graficos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+@media (max-width:760px){.graficos{grid-template-columns:1fr}}
+.grafico{border:1px solid var(--line2);border-radius:14px;padding:12px 12px 8px}
+.grafico .g-tit{font-size:13px;font-weight:700}
+.grafico .g-sub{font-size:12px;color:var(--muted)}
+.grafico svg{display:block;width:100%;height:74px;margin-top:6px}
+.grafico .g-pie{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.mezcla-barra{display:flex;height:10px;border-radius:99px;overflow:hidden;background:#EEF1F5;margin:8px 0 6px}
+.mezcla-barra i{display:block;height:100%}
+.mezcla-ley{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)}
+.chips-det{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip-s{font-size:12px;border-radius:999px;padding:3px 9px;background:#F0F3F6;color:var(--ink2)}
+.enlaces{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.lista-sen{display:grid;gap:8px;margin-top:8px}
+.lista-sen .noticia{grid-template-columns:60px 1fr}
+.lista-sen .noticia.sin-img{grid-template-columns:1fr}
+.lista-sen .noticia .img{width:60px;height:60px}
+.oculto{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.aviso{font-size:12.5px;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="envoltura">
+  <header class="cabecera">
+    <div class="cab-fila">
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" x2="1"><stop offset=".5" stop-color="#0E8F66"/><stop offset=".5" stop-color="#1B6BD3"/></linearGradient></defs>
+        <circle cx="32" cy="32" r="30" fill="url(#lg)"/>
+        <circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
+        <circle cx="32" cy="32" r="11" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
+        <circle cx="32" cy="32" r="4.5" fill="#E5413A" stroke="#fff" stroke-width="2"/>
+        <circle cx="44" cy="20" r="3.4" fill="#fff"/><circle cx="18" cy="40" r="3" fill="#fff"/><circle cx="46" cy="42" r="2.6" fill="#fff"/>
+      </svg>
+      <div class="cab-txt">
+        <h1>Radar de Innovación</h1>
+        <p>Las tendencias que están cambiando el mundo, medidas con noticias, ciencia e interés público. Se actualiza solo varias veces al día.</p>
+      </div>
+      <div class="estado" id="estado"><span class="luz"></span><span id="estado-txt">Cargando…</span></div>
+    </div>
+  </header>
+
+  <main class="tablero">
+    <aside class="filtros caja" aria-label="Filtros">
+      <h2>Filtrar tendencias</h2>
+      <p class="ayuda">Toca una opción para resaltarla en el radar.</p>
+      <label class="buscar"><span class="sr">Buscar una tendencia</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Buscar: robots, baterías, IA…" autocomplete="off">
+      </label>
+      <div id="grupos"></div>
+      <div class="resumen-filtro"><span id="cuenta-filtro"></span><button class="btn-txt oculto" id="limpiar" type="button">Quitar filtros</button></div>
+    </aside>
+
+    <section class="radar-caja caja" aria-label="Radar de tendencias">
+      <div class="radar-cab">
+        <div class="pista"><svg class="mano" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4.5A6.5 6.5 0 0 1 11.5 21h-.6a6 6 0 0 1-4.5-2L3.6 15.8a1.6 1.6 0 0 1 2.3-2.2L9 16"/></svg><span><b>Toca un punto</b> para ver qué está pasando en esa tendencia.</span></div>
+      </div>
+      <svg class="radar-svg" id="radar" viewBox="0 0 1000 1000" role="img" aria-labelledby="radar-tit">
+        <title id="radar-tit">Radar de tendencias: a la izquierda sociedad y negocio, a la derecha tecnología; más cerca del centro, se adopta antes; más arriba, más impacto.</title>
+      </svg>
+      <p class="aviso oculto" id="pista-movil" style="text-align:center;margin:2px 0 4px">Los nombres están en la lista «Todas las tendencias», más abajo.</p>
+      <div class="leyenda" aria-hidden="true">
+        <span><i style="width:9px;height:9px;background:var(--rojo)"></i>Centro = hoy</span>
+        <span>Más cerca del centro = se adopta antes</span>
+        <span>Arriba = más impacto</span>
+        <span><i style="width:7px;height:7px;background:#8896A4"></i><i style="width:11px;height:11px;background:#8896A4"></i>Tamaño = impulso</span>
+      </div>
+    </section>
+
+    <aside class="lateral">
+      <section class="bloque caja" aria-labelledby="t-impulso">
+        <h2 id="t-impulso">🔥 Con más impulso</h2>
+        <p class="sub">Lo que más está creciendo en noticias, ciencia e interés público.</p>
+        <div id="top-impulso"></div>
+      </section>
+      <section class="bloque caja oculto" id="caja-cambios" aria-labelledby="t-cambios">
+        <h2 id="t-cambios">Cambios de la semana</h2>
+        <p class="sub" id="cambios-sub"></p>
+        <div class="cambios-grid" id="cambios"></div>
+      </section>
+      <section class="bloque caja" aria-labelledby="t-semana">
+        <h2 id="t-semana">Esta semana</h2>
+        <p class="sub" id="semana-sub"></p>
+        <div id="semana-tipos"></div>
+      </section>
+    </aside>
+  </main>
+
+  <section class="seccion caja" aria-labelledby="t-ultimo">
+    <div class="sec-cab">
+      <div><h2 id="t-ultimo">Lo último en el mundo</h2><p id="ultimo-sub">Señales recientes clasificadas por tendencia.</p></div>
+      <div class="pestanas" role="tablist" id="tabs-tipo"></div>
+    </div>
+    <div class="noticias" id="ultimas"></div>
+    <div class="mas"><button class="boton oculto" id="ver-mas" type="button">Ver más</button></div>
+  </section>
+
+  <section class="seccion caja" aria-labelledby="t-fuera" id="sec-fuera">
+    <div class="sec-cab"><div><h2 id="t-fuera">Fuera del radar (por ahora)</h2><p>Novedades de las últimas dos semanas que todavía no encajan en ninguna tendencia. Así empiezan las tendencias nuevas.</p></div></div>
+    <div class="noticias" id="fuera"></div>
+  </section>
+
+  <section class="seccion caja" aria-labelledby="t-todas">
+    <div class="sec-cab">
+      <div><h2 id="t-todas">Todas las tendencias</h2><p id="todas-sub"></p></div>
+      <label>Ordenar por <select class="orden" id="orden">
+        <option value="impulso">Impulso</option><option value="anios">Llega antes</option><option value="impacto">Impacto</option><option value="nombre">A–Z</option>
+      </select></label>
+    </div>
+    <div class="lista-t" id="todas"></div>
+  </section>
+
+  <footer class="pie">
+    <details>
+      <summary>¿Cómo se mide?</summary>
+      <h3>Dónde está cada punto</h3>
+      <ul>
+        <li><b>Distancia al centro:</b> años estimados hasta la adopción masiva. Parte de una evaluación base y se ajusta solo según el tipo de señales de los últimos 60 días: si una tendencia acumula más lanzamientos e inversiones de lo típico para su plazo, se acerca; si tiene menos (predomina la investigación), se aleja. Máximo ±30 %.</li>
+        <li><b>Altura:</b> impacto esperado en la economía y la vida diaria (arriba, más). Mitad izquierda: sociedad y negocio; derecha: tecnología.</li>
+        <li><b>Tamaño:</b> impulso relativo (0–100) frente a las demás tendencias.</li>
+      </ul>
+      <h3>Qué es el impulso</h3>
+      <ul>
+        <li>30 % <b>interés público</b>: vistas en Wikipedia, últimos 3 meses frente a los 3 anteriores.</li>
+        <li>20 % <b>ciencia</b>: artículos científicos en OpenAlex, últimos 12 meses frente a los 12 previos.</li>
+        <li>30 % <b>volumen de noticias</b> de los últimos 14 días.</li>
+        <li>20 % <b>aceleración de noticias</b>: última semana frente a las 4 anteriores (se activa con 5 semanas de historia).</li>
+      </ul>
+      <h3>Límites honestos</h3>
+      <ul>
+        <li>Es vigilancia tecnológica, no una predicción. La posición base es una estimación editorial revisada a mano (<span id="revisado"></span>).</li>
+        <li>Predominan medios en inglés. La clasificación es automática por palabras clave: puede equivocarse con titulares ambiguos.</li>
+        <li>Se excluyen notas de bolsa, informes de mercado pagados, ofertas y reseñas de productos.</li>
+      </ul>
+      <h3>Fuentes</h3>
+      <p id="fuentes-txt"></p>
+      <div class="fuentes-lista" id="fuentes-lista"></div>
+    </details>
+    <p class="firma">Radar de Innovación · datos públicos: medios vía RSS, Bing News, Wikipedia (Wikimedia) y OpenAlex · <span id="generado"></span></p>
+  </footer>
+</div>
+
+<dialog class="detalle" id="detalle" aria-labelledby="det-nombre">
+  <div class="det-scroll" id="det-scroll">
+    <div class="det-cab">
+      <button class="icono-btn" id="det-ant" type="button" aria-label="Tendencia anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></button>
+      <button class="icono-btn" id="det-sig" type="button" aria-label="Tendencia siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></button>
+      <span class="migas" id="det-migas"></span>
+      <button class="icono-btn" id="det-compartir" type="button" aria-label="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></button>
+      <button class="icono-btn" id="det-cerrar" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="det-cuerpo" id="det-cuerpo"></div>
+  </div>
+</dialog>
+<div class="globo" id="globo" role="tooltip"></div>
+
+<script>
+"use strict";
+const D = /*__DATOS__*/null;
+const NS = "http://www.w3.org/2000/svg";
+const CX = 500, CY = 500, R = 440, R0 = 38;
+const TIPOS = {lanzamiento:"Lanzamiento", inversion:"Inversión", investigacion:"Investigación", regulacion:"Regulación", otro:"Noticia"};
+const COLOR = {soc:"#0E8F66", tec:"#1B6BD3"};
+const $ = s => document.querySelector(s);
+const T = Object.fromEntries(D.tendencias.map(t => [t.id, t]));
+const filtros = {foco:null, familia:null, sector:null, q:""};
+let tipoNoticia = "todo", limiteNoticias = 12, ordenLista = "impulso", abierta = null;
+
+/* ---------- utilidades ---------- */
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const urlSegura = u => /^https?:\/\//i.test(u || "") ? u : "#";
+const nf = new Intl.NumberFormat("es-PE");
+const sinTildes = s => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+function hace(iso){
+  const s = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (s < 90) return "hace un momento";
+  if (s < 3600) return `hace ${Math.round(s/60)} min`;
+  if (s < 86400) return `hace ${Math.round(s/3600)} h`;
+  const d = Math.round(s/86400);
+  return d === 1 ? "ayer" : d < 30 ? `hace ${d} días` : new Date(iso).toLocaleDateString("es-PE", {day:"numeric", month:"short"});
+}
+function aniosTxt(a){
+  if (a < 1) return "menos de 1 año";
+  const r = Math.round(a * 2) / 2;
+  return `≈ ${String(r).replace(".", ",")} ${r === 1 ? "año" : "años"}`;
+}
+const impactoTxt = i => i >= 8 ? "Alto" : i >= 5 ? "Medio" : "Moderado";
+const nivelTxt = {alto:"Alto", medio:"Medio", bajo:"Bajo", "sin datos":"Sin datos"};
+function deltaDe(id){
+  const c = D.cambios || {};
+  for (const k of ["acelera","enfria"]) for (const x of (c[k] || [])) if (x.id === id) return x.delta;
+  return null;
+}
+function coincide(t, ignorar){
+  if (ignorar !== "foco" && filtros.foco && !t.focos.includes(filtros.foco)) return false;
+  if (ignorar !== "familia" && filtros.familia && t.familia !== filtros.familia) return false;
+  if (ignorar !== "sector" && filtros.sector && !t.sectores.includes(filtros.sector)) return false;
+  if (ignorar !== "q" && filtros.q){
+    const h = sinTildes([t.nombre, t.corto, t.en, t.que_es, D.catalogo.familias[t.familia].nombre].join(" "));
+    if (!filtros.q.split(/\s+/).every(p => h.includes(p))) return false;
+  }
+  return true;
+}
+const hayFiltro = () => !!(filtros.foco || filtros.familia || filtros.sector || filtros.q);
+function el(tag, attrs = {}, padre){
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (padre) padre.appendChild(e);
+  return e;
+}
+
+/* ---------- radar: geometría ---------- */
+const rDe = a => R0 + (R - 30 - R0) * Math.pow(Math.min(Math.max(a, 0), 12) / 12, 0.62);
+function angulos(){
+  const out = {};
+  for (const m of ["soc","tec"]){
+    const lst = D.tendencias.filter(t => t.mitad === m).sort((a, b) => b.impacto - a.impacto || a.anios - b.anios || a.id.localeCompare(b.id));
+    lst.forEach((t, i) => {
+      const porRango = 14 + 152 * (lst.length > 1 ? i / (lst.length - 1) : .5);
+      const porValor = 14 + 152 * (10 - t.impacto) / 9;
+      out[t.id] = (0.5 * porRango + 0.5 * porValor) * Math.PI / 180;
+    });
+  }
+  return out;
+}
+function medidor(){
+  const c = document.createElement("canvas").getContext("2d");
+  c.font = "600 14.5px 'DM Sans', system-ui, sans-serif";
+  return s => c.measureText(s).width;
+}
+function colocar(prioridad = []){
+  const ancho = medidor();
+  const ang = angulos();
+  const ocupados = [
+    {x0:CX-30, y0:CY-16, x1:CX+30, y1:CY+30},
+  ];
+  for (const a of [5, 10]) for (const s of [-1, 1]) { const x = CX + s * rDe(a); ocupados.push({x0:x-20, y0:CY-14, x1:x+20, y1:CY+14}); }
+  ocupados.push({x0:CX+R-120, y0:CY-30, x1:CX+R, y1:CY-6}, {x0:CX-R, y0:CY-30, x1:CX-R+120, y1:CY-6});
+  const choca = b => ocupados.some(o => b.x0 < o.x1 + 3 && b.x1 + 3 > o.x0 && b.y0 < o.y1 + 3 && b.y1 + 3 > o.y0);
+  const dentro = b => [[b.x0,b.y0],[b.x1,b.y0],[b.x0,b.y1],[b.x1,b.y1]].every(([x, y]) => Math.hypot(x - CX, y - CY) <= R + 2);
+  const res = {};
+  const pri = new Map(prioridad.map((id, i) => [id, i]));
+  const orden = [...D.tendencias].sort((a, b) => (pri.get(a.id) ?? 1e9) - (pri.get(b.id) ?? 1e9) || a.anios - b.anios || (b.impulso ?? 0) - (a.impulso ?? 0));
+  const DR = [0, 10, -10, 20, -20, 32, -32, 46, -46, 60, -60, 76, -76];
+  const DA = [0, 3, -3, 6, -6, 9, -9, 13, -13, 18, -18, 24, -24, 30, -30, 37, -37];
+  // dónde va la etiqueta respecto del punto: hacia afuera (preferido), arriba, abajo o hacia el eje
+  const MODOS = [["fuera", 0], ["arriba", 0.9], ["abajo", 0.9], ["dentro", 1.6]];
+  const caja = (modo, x, y, rp, w, h, lado) => {
+    if (modo === "arriba") return {x0:x - w / 2, y0:y - rp - 4 - h, x1:x + w / 2, y1:y - rp - 4};
+    if (modo === "abajo") return {x0:x - w / 2, y0:y + rp + 4, x1:x + w / 2, y1:y + rp + 4 + h};
+    const derecha = (lado === 1) === (modo === "fuera");
+    const x0 = derecha ? x + rp + 5 : x - rp - 5 - w;
+    return {x0, y0:y - h / 2, x1:x0 + w, y1:y + h / 2};
+  };
+  for (const t of orden){
+    const lado = t.mitad === "tec" ? 1 : -1;
+    const lineas = t.corto.split("\n");
+    const w = Math.max(...lineas.map(ancho)) + 16;
+    const h = lineas.length === 1 ? 23 : 40;
+    const rp = radioPunto(t);
+    const r0 = rDe(t.anios), a0 = ang[t.id];
+    const cands = [];
+    for (const dr of DR) for (const da of DA) for (const [modo, cm] of MODOS)
+      cands.push({dr, da, modo, costo: Math.abs(dr) / 12 + Math.abs(da) / 3.5 + cm});
+    cands.sort((a, b) => a.costo - b.costo);
+    const posicion = c => {
+      const r = r0 + c.dr, a = a0 + c.da * Math.PI / 180;
+      if (r < R0 + 6 || r > R - 16 || a < 0.1 || a > Math.PI - 0.1) return null;
+      const x = CX + lado * r * Math.sin(a), y = CY - r * Math.cos(a);
+      return (x - CX) * lado < rp + 5 ? null : {x, y};
+    };
+    let elegido = null;
+    for (const c of cands){
+      const p = posicion(c);
+      if (!p) continue;
+      const etq = caja(c.modo, p.x, p.y, rp, w, h, lado);
+      if (lado === 1 ? etq.x0 < CX + 4 : etq.x1 > CX - 4) continue;
+      const pto = {x0:p.x - rp - 2, y0:p.y - rp - 2, x1:p.x + rp + 2, y1:p.y + rp + 2};
+      if (!dentro(etq) || choca(etq) || choca(pto)) continue;
+      elegido = {x:p.x, y:p.y, etq, w, h, lineas, modo:c.modo, conEtq:true};
+      ocupados.push(etq, pto);
+      break;
+    }
+    if (!elegido){
+      // sin sitio para la etiqueta: el punto igual busca un hueco libre y la etiqueta aparece al pasar el mouse
+      let p = posicion({dr:0, da:0}) || {x:CX + lado * r0 * Math.sin(a0), y:CY - r0 * Math.cos(a0)};
+      for (const c of cands){
+        if (c.modo !== "fuera") continue;
+        const q = posicion(c);
+        if (q && !choca({x0:q.x - rp - 3, y0:q.y - rp - 3, x1:q.x + rp + 3, y1:q.y + rp + 3})){ p = q; break; }
+      }
+      elegido = {x:p.x, y:p.y, etq:caja("fuera", p.x, p.y, rp, w, h, lado), w, h, lineas, modo:"fuera", conEtq:false};
+      ocupados.push({x0:p.x - rp - 2, y0:p.y - rp - 2, x1:p.x + rp + 2, y1:p.y + rp + 2});
+    }
+    res[t.id] = elegido;
+  }
+  return res;
+}
+function radioPunto(t){
+  const v = t.impulso ?? 30;
+  return 6 + 5.5 * v / 100;
+}
+
+/* ---------- radar: dibujo ---------- */
+function dibujarFondo(svg){
+  const defs = el("defs", {}, svg);
+  const g1 = el("radialGradient", {id:"gSoc", cx:"500", cy:"500", r:"440", gradientUnits:"userSpaceOnUse"}, defs);
+  el("stop", {offset:"0", "stop-color":"#BFE6D3"}, g1); el("stop", {offset:".55", "stop-color":"#DFF3E9"}, g1); el("stop", {offset:"1", "stop-color":"#F5FBF8"}, g1);
+  const g2 = el("radialGradient", {id:"gTec", cx:"500", cy:"500", r:"440", gradientUnits:"userSpaceOnUse"}, defs);
+  el("stop", {offset:"0", "stop-color":"#C3D9F6"}, g2); el("stop", {offset:".55", "stop-color":"#E0EBFA"}, g2); el("stop", {offset:"1", "stop-color":"#F4F8FE"}, g2);
+  const gb = el("linearGradient", {id:"gBanda", x1:"0", x2:"1", y1:"0", y2:"0"}, defs);
+  el("stop", {offset:"0", "stop-color":"#0E8F66"}, gb); el("stop", {offset:".5", "stop-color":"#1592A0"}, gb); el("stop", {offset:"1", "stop-color":"#1B6BD3"}, gb);
+  const gs = el("linearGradient", {id:"gBarrido", x1:"0", x2:"1", y1:"0", y2:"0"}, defs);
+  el("stop", {offset:"0", "stop-color":"#fff", "stop-opacity":"0"}, gs); el("stop", {offset:"1", "stop-color":"#fff", "stop-opacity":".75"}, gs);
+  // banda exterior
+  el("circle", {cx:CX, cy:CY, r:474, fill:"none", stroke:"url(#gBanda)", "stroke-width":44}, svg);
+  el("circle", {cx:CX, cy:CY, r:R + 6, fill:"#fff"}, svg);
+  // mitades
+  el("path", {d:`M${CX},${CY - R} A${R},${R} 0 0 0 ${CX},${CY + R} Z`, fill:"url(#gSoc)"}, svg);
+  el("path", {d:`M${CX},${CY - R} A${R},${R} 0 0 1 ${CX},${CY + R} Z`, fill:"url(#gTec)"}, svg);
+  // anillos por año
+  for (let a = 1; a <= 11; a++){
+    const fuerte = a === 5 || a === 10;
+    el("circle", {cx:CX, cy:CY, r:rDe(a), fill:"none", stroke: fuerte ? "#5E7A8C" : "#FFFFFF", "stroke-opacity": fuerte ? .55 : .85, "stroke-width": fuerte ? 1.6 : 1.1}, svg);
+  }
+  // ejes
+  el("line", {x1:CX - R, y1:CY, x2:CX + R, y2:CY, stroke:"#5E7A8C", "stroke-opacity":.5, "stroke-width":1.4}, svg);
+  el("line", {x1:CX, y1:CY - R, x2:CX, y2:CY + R, stroke:"#5E7A8C", "stroke-opacity":.35, "stroke-width":1.2, "stroke-dasharray":"4 6"}, svg);
+  for (const a of [5, 10]) for (const s of [-1, 1]){
+    const x = CX + s * rDe(a);
+    el("rect", {x:x - 15, y:CY - 11, width:30, height:22, rx:6, fill: a === 5 ? "#33546B" : "#5E7A8C"}, svg);
+    const tx = el("text", {x, y:CY + 5, "text-anchor":"middle", "font-size":13, "font-weight":700, fill:"#fff", "font-family":"DM Sans, sans-serif"}, svg);
+    tx.textContent = a;
+  }
+  for (const s of [-1, 1]){
+    const tx = el("text", {x:CX + s * (R - 14), y:CY - 14, "text-anchor": s > 0 ? "end" : "start", "font-size":12, "font-weight":700, "letter-spacing":".08em", fill:"#4A6375", "font-family":"DM Sans, sans-serif"}, svg);
+    tx.textContent = "AÑOS PARA LA ADOPCIÓN";
+  }
+  // textos curvos de la banda
+  const arcos = [
+    ["aTop", `M${CX - 474 * Math.sin(.55)},${CY - 474 * Math.cos(.55)} A474,474 0 0 1 ${CX + 474 * Math.sin(.55)},${CY - 474 * Math.cos(.55)}`, "MÁS IMPACTO"],
+    ["aBot", `M${CX - 474 * Math.sin(.55)},${CY + 474 * Math.cos(.55)} A474,474 0 0 0 ${CX + 474 * Math.sin(.55)},${CY + 474 * Math.cos(.55)}`, "MENOS IMPACTO"],
+    ["aIzq", `M${CX - 474 * Math.cos(1.1)},${CY + 474 * Math.sin(1.1)} A474,474 0 0 1 ${CX - 474 * Math.cos(1.1)},${CY - 474 * Math.sin(1.1)}`, "SOCIEDAD Y NEGOCIO"],
+    ["aDer", `M${CX + 474 * Math.cos(1.1)},${CY - 474 * Math.sin(1.1)} A474,474 0 0 1 ${CX + 474 * Math.cos(1.1)},${CY + 474 * Math.sin(1.1)}`, "TECNOLOGÍA"],
+  ];
+  for (const [id, d, txt] of arcos){
+    el("path", {id, d, fill:"none"}, defs);
+    const t = el("text", {"font-size":19, "font-weight":700, "letter-spacing":".16em", fill:"#fff", "font-family":"Outfit, sans-serif", dy:6.5}, svg);
+    const tp = el("textPath", {href:"#" + id, startOffset:"50%", "text-anchor":"middle"}, t);
+    tp.textContent = txt;
+  }
+  // flechas pequeñas en la banda
+  for (const g of [20, 70, 110, 160, 200, 250, 290, 340]){
+    const a = g * Math.PI / 180, x = CX + 474 * Math.sin(a), y = CY - 474 * Math.cos(a);
+    el("circle", {cx:x, cy:y, r:2.4, fill:"#fff", "fill-opacity":.7}, svg);
+  }
+}
+function dibujarRadar(){
+  const svg = $("#radar");
+  dibujarFondo(svg);
+  const capaNodos = el("g", {id:"nodos"}, svg);
+  // centro
+  el("circle", {class:"hoy-pulso", cx:CX, cy:CY, r:9, fill:"#E5413A", "fill-opacity":.45}, svg);
+  el("circle", {cx:CX, cy:CY, r:9, fill:"#E5413A", stroke:"#fff", "stroke-width":3}, svg);
+  const hoy = el("text", {x:CX, y:CY + 26, "text-anchor":"middle", "font-size":12, "font-weight":700, "letter-spacing":".1em", fill:"#9B2C26", "font-family":"DM Sans, sans-serif"}, svg);
+  hoy.textContent = "HOY";
+  // barrido inicial (una sola vuelta)
+  const barr = el("path", {class:"barrido", d:`M${CX},${CY} L${CX},${CY - R} A${R},${R} 0 0 1 ${CX + R * Math.sin(.5)},${CY - R * Math.cos(.5)} Z`, fill:"url(#gBarrido)", "pointer-events":"none"}, svg);
+  barr.addEventListener("animationend", () => barr.remove());
+
+  // si alguna tendencia se queda sin etiqueta, se reintenta colocándola primero (hasta 4 veces)
+  let pos = colocar(), prioridad = [];
+  const faltan = p => Object.keys(p).filter(id => !p[id].conEtq);
+  for (let i = 0; i < 4 && faltan(pos).length; i++){
+    prioridad = [...new Set([...prioridad, ...faltan(pos)])];
+    const alt = colocar(prioridad);
+    if (faltan(alt).length < faltan(pos).length) pos = alt;
+  }
+  const calientes = new Set([...D.tendencias].filter(t => t.impulso != null).sort((a, b) => b.impulso - a.impulso).slice(0, 5).map(t => t.id));
+  for (const t of D.tendencias){
+    const p = pos[t.id];
+    const col = COLOR[t.mitad];
+    const rp = radioPunto(t);
+    const g = el("g", {class:"nodo entra" + (p.conEtq ? "" : " sin-etq") + (calientes.has(t.id) ? " caliente" : ""), "data-id":t.id, tabindex:0, role:"button",
+      "aria-label":`${t.nombre}: ${aniosTxt(t.anios)} para la adopción, impacto ${impactoTxt(t.impacto).toLowerCase()}, impulso ${t.impulso ?? "sin datos"}`, style:`color:${col}`}, capaNodos);
+    const angReloj = Math.atan2(p.x - CX, -(p.y - CY));
+    const frac = ((angReloj + 2 * Math.PI) % (2 * Math.PI)) / (2 * Math.PI);
+    g.style.animationDelay = (0.1 + frac * 1.25).toFixed(2) + "s";
+    if (calientes.has(t.id)) el("circle", {class:"halo", cx:p.x, cy:p.y, r:rp + 6, stroke:col}, g);
+    el("circle", {class:"toque", cx:p.x, cy:p.y, r:Math.max(rp + 10, 20), fill:"transparent"}, g);
+    el("circle", {class:"punto", cx:p.x, cy:p.y, r:rp, fill:col, stroke:"#fff", "stroke-width":2.2, "data-r":rp}, g);
+    const etq = el("g", {class:"etq"}, g);
+    el("rect", {x:p.etq.x0, y:p.etq.y0, width:p.w, height:p.h, rx:7}, etq);
+    const tx = el("text", {x:p.etq.x0 + 8, y:p.etq.y0 + (p.lineas.length === 1 ? 16 : 16)}, etq);
+    p.lineas.forEach((l, i) => { const s = el("tspan", {x:p.etq.x0 + 8, dy: i ? 17 : 0}, tx); s.textContent = l; });
+    g.addEventListener("click", () => abrir(t.id));
+    g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrir(t.id); } });
+    g.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") globo(t, g); });
+    g.addEventListener("pointerleave", () => ocultarGlobo());
+    g.addEventListener("focus", () => globo(t, g));
+    g.addEventListener("blur", () => ocultarGlobo());
+  }
+  const ajustar = () => {
+    const compacto = svg.getBoundingClientRect().width < 560;
+    svg.classList.toggle("compacto", compacto);
+    svg.querySelectorAll(".punto").forEach(c => c.setAttribute("r", (+c.dataset.r) * (compacto ? 1.7 : 1)));
+    // en el celular la zona que responde al dedo es más grande que el punto (≈ 24 px)
+    svg.querySelectorAll(".toque").forEach(c => c.setAttribute("r", compacto ? 34 : 20));
+    $("#pista-movil").classList.toggle("oculto", !compacto);
+  };
+  ajustar();
+  new ResizeObserver(ajustar).observe(svg);
+}
+function globo(t, g){
+  const b = $("#globo");
+  const d = deltaDe(t.id);
+  b.innerHTML = `<b>${esc(t.nombre)}</b><span>${aniosTxt(t.anios)} · impacto ${impactoTxt(t.impacto).toLowerCase()} · impulso ${t.impulso ?? "—"}${d ? ` (${d > 0 ? "+" : ""}${d})` : ""}</span>`;
+  const r = g.querySelector(".punto").getBoundingClientRect();
+  b.classList.add("ver");
+  const bw = b.offsetWidth, bh = b.offsetHeight;
+  let x = r.left + r.width / 2 - bw / 2, y = r.top - bh - 10;
+  if (y < 8) y = r.bottom + 10;
+  x = Math.max(8, Math.min(innerWidth - bw - 8, x));
+  b.style.left = x + "px"; b.style.top = y + "px";
+}
+const ocultarGlobo = () => $("#globo").classList.remove("ver");
+
+/* ---------- filtros ---------- */
+function dibujarFiltros(){
+  const grupos = [
+    ["foco", "Áreas de impacto", D.catalogo.focos, t => t.focos],
+    ["familia", "Familias", Object.fromEntries(Object.entries(D.catalogo.familias).map(([k, v]) => [k, v.nombre])), t => [t.familia]],
+    ["sector", "Sectores", D.catalogo.sectores, t => t.sectores],
+  ];
+  const cont = $("#grupos");
+  cont.innerHTML = "";
+  for (const [clave, titulo, opciones, valores] of grupos){
+    const det = document.createElement("details");
+    det.className = "grupo"; det.open = clave === "foco";
+    det.innerHTML = `<summary>${titulo}<svg class="flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></summary><div class="chips"></div>`;
+    const chips = det.querySelector(".chips");
+    for (const [id, nombre] of Object.entries(opciones)){
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip";
+      if (clave === "familia") b.classList.add("f-" + D.catalogo.familias[id].mitad);
+      b.dataset.grupo = clave; b.dataset.id = id;
+      b.innerHTML = `<span>${esc(nombre)}</span><span class="n"></span>`;
+      b.addEventListener("click", () => { filtros[clave] = filtros[clave] === id ? null : id; aplicarFiltros(); });
+      chips.appendChild(b);
+    }
+    det._valores = valores;
+    cont.appendChild(det);
+  }
+  let tmr;
+  $("#q").addEventListener("input", e => { clearTimeout(tmr); tmr = setTimeout(() => { filtros.q = sinTildes(e.target.value.trim()); aplicarFiltros(); }, 120); });
+  $("#limpiar").addEventListener("click", () => { filtros.foco = filtros.familia = filtros.sector = null; filtros.q = ""; $("#q").value = ""; aplicarFiltros(); });
+}
+function aplicarFiltros(){
+  // conteo de cada opción = lo que se verá al tocarla (con los demás filtros como están)
+  document.querySelectorAll(".chip").forEach(b => {
+    const g = b.dataset.grupo, id = b.dataset.id;
+    const n = D.tendencias.filter(t => coincide(t, g) && (g === "foco" ? t.focos.includes(id) : g === "familia" ? t.familia === id : t.sectores.includes(id))).length;
+    b.querySelector(".n").textContent = n;
+    const activo = filtros[g] === id;
+    b.setAttribute("aria-pressed", activo);
+    b.disabled = !activo && n === 0;
+  });
+  const visibles = D.tendencias.filter(t => coincide(t));
+  const ids = new Set(visibles.map(t => t.id));
+  document.querySelectorAll(".nodo").forEach(n => n.classList.toggle("apagado", !ids.has(n.dataset.id)));
+  $("#cuenta-filtro").textContent = hayFiltro() ? `Mostrando ${visibles.length} de ${D.tendencias.length}` : `${D.tendencias.length} tendencias`;
+  $("#limpiar").classList.toggle("oculto", !hayFiltro());
+  limiteNoticias = 12;
+  dibujarNoticias();
+  dibujarTodas();
+}
+
+/* ---------- lateral ---------- */
+function filaTendencia(t, extra){
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "fila-t";
+  b.innerHTML = `<span class="bola" style="background:${COLOR[t.mitad]}"></span><span><span class="nom">${esc(t.corto.replace(/\n/g, " "))}</span><br><span class="det">${extra}</span></span>` +
+    `<span class="imp-num"><span class="medidor" title="Impulso ${t.impulso ?? "—"} de 100"><i style="width:${t.impulso ?? 0}%"></i></span><b>${t.impulso ?? "—"}</b></span>`;
+  b.addEventListener("click", () => abrir(t.id));
+  return b;
+}
+function dibujarLateral(){
+  const top = [...D.tendencias].filter(t => t.impulso != null).sort((a, b) => b.impulso - a.impulso).slice(0, 6);
+  const c = $("#top-impulso"); c.innerHTML = "";
+  for (const t of top) c.appendChild(filaTendencia(t, `${t.n7} señales esta semana`));
+
+  const cam = D.cambios || {};
+  const grupos = [["acelera","Acelera", x => `+${x.delta} de impulso`], ["enfria","Se enfría", x => `${x.delta} de impulso`],
+                  ["acerca","Se acerca", x => `${String(x.delta).replace(".", ",")} años`], ["aleja","Se aleja", x => `+${String(x.delta).replace(".", ",")} años`]];
+  const hay = cam.dias > 0 && grupos.some(([k]) => (cam[k] || []).length);
+  $("#caja-cambios").classList.toggle("oculto", !hay);
+  if (hay){
+    $("#cambios-sub").textContent = `Comparado con hace ${cam.dias} días.`;
+    const cc = $("#cambios"); cc.innerHTML = "";
+    for (const [k, tit, fmt] of grupos){
+      const lst = (cam[k] || []).filter(x => T[x.id]).slice(0, 3);
+      if (!lst.length) continue;
+      const div = document.createElement("div"); div.className = "cambio";
+      div.innerHTML = `<h3>${tit}</h3>`;
+      for (const x of lst) div.appendChild(filaTendencia(T[x.id], fmt(x)));
+      cc.appendChild(div);
+    }
+  }
+  const e = D.estado;
+  $("#semana-sub").textContent = `${nf.format(e.senales_7d)} señales de ${nf.format(e.medios_7d)} medios en los últimos 7 días.`;
+  const tot = {lanzamiento:0, inversion:0, investigacion:0, regulacion:0, otro:0};
+  for (const t of D.tendencias) for (const k in tot) tot[k] += (t.mezcla?.[k] || 0);
+  const suma = Object.values(tot).reduce((a, b) => a + b, 0) || 1;
+  $("#semana-tipos").innerHTML = `<div class="sub" style="margin:0">Tipo de señal (60 días)</div>` + barraMezcla(tot, suma);
+}
+function barraMezcla(m, suma){
+  const ks = ["lanzamiento","inversion","investigacion","regulacion","otro"];
+  return `<div class="mezcla-barra">${ks.map(k => `<i style="width:${100 * (m[k] || 0) / suma}%;background:var(--t-${k})" title="${TIPOS[k]}: ${m[k] || 0}"></i>`).join("")}</div>` +
+    `<div class="mezcla-ley">${ks.filter(k => m[k]).map(k => `<span class="tipo ${k}">${TIPOS[k]} ${Math.round(100 * m[k] / suma)} %</span>`).join("")}</div>`;
+}
+
+/* ---------- noticias ---------- */
+function tarjetaNoticia(s, conTend = true, conResumen = false){
+  const a = document.createElement("a");
+  a.className = "noticia" + (s.i ? "" : " sin-img");
+  a.href = urlSegura(s.u); a.target = "_blank"; a.rel = "noopener noreferrer";
+  const tends = conTend ? (s.tend || []).filter(id => T[id]).slice(0, 2) : [];
+  const otras = s.n > 1 ? ` · <span title="${esc((s.otras || []).join(", "))}">+${s.n - 1} medio${s.n > 2 ? "s" : ""}</span>` : "";
+  a.innerHTML = (s.i ? `<img class="img" src="${esc(urlSegura(s.i))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.noticia').classList.add('sin-img');this.remove()">` : "") +
+    `<div style="min-width:0"><div class="tit">${esc(s.t)}</div>` +
+    (conResumen && s.r ? `<div class="res">${esc(s.r)}</div>` : "") +
+    `<div class="meta"><span class="tipo ${esc(s.tipo)}">${TIPOS[s.tipo] || "Noticia"}</span><span>${esc(s.f)}${otras}</span><span>${hace(s.d)}</span>` +
+    tends.map(id => `<span class="etiqueta-t ${T[id].mitad}" data-t="${id}" role="button" tabindex="0">${esc(T[id].nombre)}</span>`).join("") + `</div></div>`;
+  a.querySelectorAll(".etiqueta-t").forEach(x => {
+    const ir = e => { e.preventDefault(); e.stopPropagation(); abrir(x.dataset.t); };
+    x.addEventListener("click", ir);
+    x.addEventListener("keydown", e => { if (e.key === "Enter") ir(e); });
+  });
+  return a;
+}
+function dibujarTabsTipo(){
+  const c = $("#tabs-tipo");
+  for (const [k, n] of [["todo","Todo"], ["lanzamiento","Lanzamientos"], ["inversion","Inversión"], ["investigacion","Investigación"], ["regulacion","Regulación"]]){
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "pestana"; b.role = "tab"; b.dataset.k = k; b.textContent = n;
+    b.setAttribute("aria-selected", k === tipoNoticia);
+    b.addEventListener("click", () => { tipoNoticia = k; limiteNoticias = 12; c.querySelectorAll(".pestana").forEach(x => x.setAttribute("aria-selected", x.dataset.k === k)); dibujarNoticias(); });
+    c.appendChild(b);
+  }
+  $("#ver-mas").addEventListener("click", () => { limiteNoticias += 12; dibujarNoticias(); });
+}
+function dibujarNoticias(){
+  const ids = new Set(D.tendencias.filter(t => coincide(t)).map(t => t.id));
+  const lst = D.ultimas.filter(s => (tipoNoticia === "todo" || s.tipo === tipoNoticia) && (!hayFiltro() || (s.tend || []).some(id => ids.has(id))));
+  const c = $("#ultimas"); c.innerHTML = "";
+  if (!lst.length) c.innerHTML = `<div class="vacio">No hay señales recientes con esta combinación.${hayFiltro() ? ' <button class="btn-txt" type="button" id="vacio-limpiar">Ver todas las tendencias</button>' : ""}</div>`;
+  for (const s of lst.slice(0, limiteNoticias)) c.appendChild(tarjetaNoticia(s));
+  $("#vacio-limpiar")?.addEventListener("click", () => $("#limpiar").click());
+  $("#ver-mas").classList.toggle("oculto", lst.length <= limiteNoticias);
+  $("#ultimo-sub").textContent = hayFiltro() ? `Señales de las ${ids.size} tendencias filtradas.` : "Señales recientes de todo el radar, clasificadas por tendencia.";
+}
+function dibujarFuera(){
+  const c = $("#fuera"); c.innerHTML = "";
+  if (!D.fuera.length){ $("#sec-fuera").classList.add("oculto"); return; }
+  for (const s of D.fuera.slice(0, 9)) c.appendChild(tarjetaNoticia(s, false, true));
+}
+function dibujarTodas(){
+  const lst = D.tendencias.filter(t => coincide(t));
+  const ord = {impulso:(a, b) => (b.impulso ?? -1) - (a.impulso ?? -1), anios:(a, b) => a.anios - b.anios, impacto:(a, b) => b.impacto - a.impacto || a.anios - b.anios, nombre:(a, b) => a.nombre.localeCompare(b.nombre, "es")}[ordenLista];
+  lst.sort(ord);
+  const c = $("#todas"); c.innerHTML = "";
+  $("#todas-sub").textContent = hayFiltro() ? `${lst.length} de ${D.tendencias.length} tendencias con los filtros actuales.` : `${D.tendencias.length} tendencias: ${D.tendencias.filter(t => t.mitad === "tec").length} de tecnología y ${D.tendencias.filter(t => t.mitad === "soc").length} de sociedad y negocio.`;
+  for (const t of lst){
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "tarjeta-t";
+    const d = deltaDe(t.id);
+    b.innerHTML = `<span class="bola" style="background:${COLOR[t.mitad]}"></span><span><span class="nom">${esc(t.nombre)}</span><br><span class="det">${esc(D.catalogo.familias[t.familia].nombre)} · ${aniosTxt(t.anios)}</span></span>` +
+      `<span class="der"><span class="medidor"><i style="width:${t.impulso ?? 0}%"></i></span><span>impulso ${t.impulso ?? "—"}${d ? ` <b class="delta ${d > 0 ? "sube" : "baja"}">${d > 0 ? "▲" : "▼"}${Math.abs(d)}</b>` : ""}</span></span>`;
+    b.addEventListener("click", () => abrir(t.id));
+    c.appendChild(b);
+  }
+  if (!lst.length) c.innerHTML = `<div class="vacio">Ninguna tendencia coincide. <button class="btn-txt" type="button" onclick="document.getElementById('limpiar').click()">Quitar filtros</button></div>`;
+}
+
+/* ---------- detalle ---------- */
+function sparkArea(vals, col){
+  const v = vals.map(x => x ?? 0);
+  const max = Math.max(...v, 1), n = v.length;
+  const pts = v.map((y, i) => [i * 300 / (n - 1), 70 - 64 * y / max]);
+  const linea = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join("");
+  return `<svg viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="${linea}L300,74L0,74Z" fill="${col}" fill-opacity=".14"/><path d="${linea}" fill="none" stroke="${col}" stroke-width="2.2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+}
+function barras(vals, col, ultimaParcial, vacias = 0){
+  // "vacias": barras iniciales de semanas en que el radar aún no medía (se dibujan como marcas grises)
+  const medidas = vals.slice(vacias);
+  const max = Math.max(...medidas, 1), n = vals.length, w = 300 / n;
+  return `<svg viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true">${vals.map((y, i) => {
+    if (i < vacias) return `<rect x="${(i * w + w * .14).toFixed(1)}" y="70" width="${(w * .72).toFixed(1)}" height="2" rx="1" fill="#C9D1DA"/>`;
+    const h = Math.max(1.5, 68 * y / max);
+    return `<rect x="${(i * w + w * .14).toFixed(1)}" y="${(72 - h).toFixed(1)}" width="${(w * .72).toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${col}" fill-opacity="${ultimaParcial && i === n - 1 ? .35 : .85}"/>`;
+  }).join("")}</svg>`;
+}
+const fechaCorta = iso => new Date(iso + "T12:00:00").toLocaleDateString("es-PE", {day:"numeric", month:"short"});
+const pct = (a, b) => b > 0 ? Math.round(100 * (a - b) / b) : null;
+const signo = n => n == null ? "" : (n > 0 ? "+" : "") + n + " %";
+function abrir(id, desdeHash){
+  const t = T[id]; if (!t) return;
+  abierta = id;
+  ocultarGlobo();
+  document.querySelectorAll(".nodo").forEach(n => n.classList.toggle("activo", n.dataset.id === id));
+  const col = COLOR[t.mitad];
+  const fam = D.catalogo.familias[t.familia].nombre;
+  $("#det-migas").textContent = `${D.catalogo.mitades[t.mitad]} · ${fam}`;
+  // horizonte
+  let hzTxt;
+  const base = `${String(t.anios_base).replace(".", ",")} ${t.anios_base === 1 ? "año" : "años"}`;
+  const pm = Math.round(100 * (t.mercado ?? 0)), pe = Math.round(100 * (t.esperado ?? 0));
+  if (Math.abs(t.ajuste) < 0.05) hzTxt = t.n_mezcla < 8 ? `Estimación base: ${base}. Aún hay pocas señales para moverla.` : `Estimación base: ${base}; sus señales van en línea con ese plazo.`;
+  else if (t.ajuste < 0) hzTxt = `Base ${base}. Se acerca: ${pm} % de sus señales son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
+  else hzTxt = `Base ${base}. Se aleja: solo ${pm} % de sus señales son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
+  const d = deltaDe(t.id);
+  const comp = t.componentes || {};
+  const partes = [["interés público", comp.wiki], ["noticias", comp.volumen], ["ciencia", comp.papers], ["aceleración", comp.aceleracion]].filter(([, v]) => v != null);
+  const frases = partes.map(([k, v], i) => i ? `al ${v} % en ${k}` : `al ${v} % de las tendencias en ${k}`);
+  const impTxt = t.impulso == null || !frases.length ? "Todavía sin datos suficientes." :
+    `Supera ${frases.length > 1 ? frases.slice(0, -1).join(", ") + " y " + frases[frases.length - 1] : frases[0]}.`;
+  // gráficos
+  let gWiki = `<div class="grafico"><div class="g-tit">Interés público</div><div class="g-sub">Sin datos de Wikipedia</div></div>`;
+  if (t.wiki && t.wiki.vistas.some(v => v)){
+    const v = t.wiki.vistas.map(x => x ?? 0), n = v.length;
+    const u3 = v.slice(n - 3).reduce((a, b) => a + b, 0), p3 = v.slice(n - 6, n - 3).reduce((a, b) => a + b, 0);
+    gWiki = `<div class="grafico"><div class="g-tit">Interés público</div><div class="g-sub">Vistas mensuales en Wikipedia · ${signo(pct(u3, p3))} en 3 meses</div>${sparkArea(v, col)}<div class="g-pie"><span>${D.meses[0]}</span><span>${D.meses[D.meses.length - 1]}</span></div></div>`;
+  }
+  let gPap = `<div class="grafico"><div class="g-tit">Investigación</div><div class="g-sub">Artículos científicos (OpenAlex): se mide una vez al día; aún sin datos.</div></div>`;
+  if (t.papers && Object.keys(t.papers.anios || {}).length){
+    const ys = Object.keys(t.papers.anios).sort().slice(-8);
+    const vals = ys.map(y => t.papers.anios[y]);
+    const ultimo = +ys[ys.length - 1] === new Date(D.generado).getFullYear();
+    const yA = new Date(D.generado).getFullYear() - 1;
+    gPap = `<div class="grafico"><div class="g-tit">Investigación</div><div class="g-sub">Artículos por año · ${signo(pct(t.papers.reciente, t.papers.previo))} en ${yA} frente a ${yA - 1}</div>${barras(vals, "#7A4CC2", ultimo)}<div class="g-pie"><span>${ys[0]}</span><span>${ys[ys.length - 1]}${ultimo ? " (parcial)" : ""}</span></div></div>`;
+  }
+  const hist = D.estado.historia_dias ?? 0;
+  const vacias = Math.max(0, 12 - (Math.floor(hist / 7) + 1));
+  const desde = D.estado.inicio && vacias ? `midiendo desde el ${fechaCorta(D.estado.inicio)}` : "hace 12 semanas";
+  const gNot = `<div class="grafico"><div class="g-tit">Noticias</div><div class="g-sub">Señales por semana · ${t.n7} en los últimos 7 días</div>${barras(t.semanas, col, false, vacias)}<div class="g-pie"><span>${desde}</span><span>esta semana</span></div></div>`;
+  const sumaM = Object.values(t.mezcla || {}).reduce((a, b) => a + b, 0);
+  const wikiLink = t.wiki?.url_es || t.wiki?.url;
+  const qBusca = encodeURIComponent(t.en);
+  $("#det-cuerpo").innerHTML = `
+    <div class="det-titulo"><h2 id="det-nombre" style="color:${t.mitad === "tec" ? "var(--tec-ink)" : "var(--soc-ink)"}">${esc(t.nombre)}</h2><div class="en">${esc(t.en)}</div></div>
+    <div class="kpis">
+      <div class="kpi"><div class="k">Llega en</div><div class="v">${aniosTxt(t.anios)}</div><div class="x">${esc(hzTxt)}</div></div>
+      <div class="kpi"><div class="k">Impacto</div><div class="v">${impactoTxt(t.impacto)} <small>${t.impacto}/10</small></div><div class="x">Efecto esperado en la economía y la vida diaria.</div></div>
+      <div class="kpi"><div class="k">Impulso</div><div class="v">${t.impulso ?? "—"} <small>${nivelTxt[t.nivel] || ""}${d ? ` · ${d > 0 ? "▲" : "▼"} ${Math.abs(d)} en la semana` : ""}</small></div><div class="x">${esc(impTxt)}</div></div>
+    </div>
+    <div class="parr"><h3>Qué es</h3><p>${esc(t.que_es)}</p></div>
+    <div class="parr"><h3>Por qué importa</h3><p>${esc(t.por_que)}</p></div>
+    <div class="graficos">${gWiki}${gPap}${gNot}</div>
+    ${sumaM ? `<div class="parr"><h3>Qué tipo de señales tiene (60 días)</h3>${barraMezcla(t.mezcla, sumaM)}</div>` : ""}
+    <div class="parr"><h3>Últimas señales</h3>${t.senales.length ? "" : `<p class="aviso">Sin señales en las últimas semanas.</p>`}<div class="lista-sen" id="det-senales"></div></div>
+    <div class="parr"><h3>Dónde aplica</h3><div class="chips-det">${t.focos.map(f => `<span class="chip-s">${esc(D.catalogo.focos[f])}</span>`).join("")}${t.sectores.map(s => `<span class="chip-s">${esc(D.catalogo.sectores[s])}</span>`).join("")}</div></div>
+    <div class="enlaces">
+      ${wikiLink ? `<a class="boton" href="${esc(urlSegura(wikiLink))}" target="_blank" rel="noopener">Leer en Wikipedia ↗</a>` : ""}
+      <a class="boton" href="https://openalex.org/works?search=${qBusca}" target="_blank" rel="noopener">Buscar papers ↗</a>
+      <a class="boton" href="https://scholar.google.com/scholar?q=${qBusca}&as_ylo=${new Date().getFullYear() - 1}" target="_blank" rel="noopener">Google Scholar ↗</a>
+    </div>`;
+  const ls = $("#det-senales");
+  for (const s of t.senales) ls.appendChild(tarjetaNoticia(s, false));
+  const dlg = $("#detalle");
+  if (!dlg.open) dlg.showModal();
+  $("#det-scroll").scrollTop = 0;
+  if (!desdeHash) history.replaceState(null, "", "#t=" + id);
+}
+function cerrar(){
+  const dlg = $("#detalle");
+  if (dlg.open) dlg.close();
+}
+function vecina(paso){
+  const lst = D.tendencias.filter(t => coincide(t));
+  const base = lst.length ? lst : D.tendencias;
+  lst.sort((a, b) => (b.impulso ?? -1) - (a.impulso ?? -1));
+  const i = base.findIndex(t => t.id === abierta);
+  const j = (i + paso + base.length) % base.length;
+  abrir(base[j].id);
+}
+function prepararDetalle(){
+  const dlg = $("#detalle");
+  $("#det-cerrar").addEventListener("click", cerrar);
+  $("#det-ant").addEventListener("click", () => vecina(-1));
+  $("#det-sig").addEventListener("click", () => vecina(1));
+  $("#det-compartir").addEventListener("click", async () => {
+    const url = location.href.split("#")[0] + "#t=" + abierta;
+    try {
+      if (navigator.share && matchMedia("(pointer:coarse)").matches) await navigator.share({title:T[abierta].nombre, url});
+      else { await navigator.clipboard.writeText(url); const b = $("#det-compartir"); b.setAttribute("aria-label", "Enlace copiado"); b.style.borderColor = "var(--soc)"; setTimeout(() => { b.style.borderColor = ""; b.setAttribute("aria-label", "Copiar enlace"); }, 1400); }
+    } catch (e) {}
+  });
+  dlg.addEventListener("click", e => { if (e.target === dlg) cerrar(); });
+  dlg.addEventListener("close", () => {
+    abierta = null;
+    document.querySelectorAll(".nodo.activo").forEach(n => n.classList.remove("activo"));
+    history.replaceState(null, "", location.pathname + location.search);
+  });
+  dlg.addEventListener("keydown", e => {
+    if (e.target.closest("input,select,textarea")) return;
+    if (e.key === "ArrowRight") vecina(1);
+    if (e.key === "ArrowLeft") vecina(-1);
+  });
+}
+
+/* ---------- estado y pie ---------- */
+function dibujarEstado(){
+  const e = D.estado;
+  const horas = (Date.now() - new Date(D.generado).getTime()) / 3.6e6;
+  const luz = $("#estado .luz");
+  luz.classList.toggle("tarde", horas >= 8 && horas < 24);
+  luz.classList.toggle("vieja", horas >= 24);
+  $("#estado-txt").textContent = `Actualizado ${hace(D.generado)} · ${nf.format(e.senales_7d)} señales esta semana`;
+  $("#estado").title = `Generado: ${new Date(D.generado).toLocaleString("es-PE")}`;
+  $("#generado").textContent = "actualizado el " + new Date(D.generado).toLocaleString("es-PE", {day:"numeric", month:"long", hour:"2-digit", minute:"2-digit"});
+  $("#revisado").textContent = "catálogo revisado el " + new Date(e.revisado + "T12:00:00").toLocaleDateString("es-PE", {day:"numeric", month:"long", year:"numeric"});
+  $("#fuentes-txt").innerHTML = `${e.fuentes_ok} de ${e.fuentes_total} feeds de medios respondieron en la última corrida, más búsquedas de noticias por tendencia, vistas de Wikipedia y conteos de OpenAlex (medidos una vez al día${e.diario ? ", último: " + esc(e.diario) : ""}).` +
+    (e.caidas.length ? ` Con problemas ahora: ${e.caidas.map(esc).join(", ")}. Sus datos anteriores se conservan.` : "");
+}
+
+/* ---------- arranque ---------- */
+function iniciar(){
+  dibujarEstado();
+  dibujarFiltros();
+  dibujarTabsTipo();
+  dibujarLateral();
+  dibujarFuera();
+  prepararDetalle();
+  $("#orden").addEventListener("change", e => { ordenLista = e.target.value; dibujarTodas(); });
+  aplicarFiltros();
+  const listo = () => {
+    dibujarRadar();
+    aplicarFiltros();
+    const m = location.hash.match(/^#t=([\w-]+)/);
+    if (m && T[m[1]]) abrir(m[1], true);
+  };
+  const fuentes = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("600 14.5px 'DM Sans'"), document.fonts.load("700 19px Outfit")]) : Promise.resolve();
+  Promise.race([fuentes, new Promise(r => setTimeout(r, 1800))]).then(listo, listo);
+  setInterval(dibujarEstado, 60000);
+}
+iniciar();
+</script>
+</body>
+</html>
