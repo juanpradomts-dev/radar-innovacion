@@ -189,8 +189,17 @@ def _url_real(link: str) -> str:
 
 
 def bing_news(consulta: str) -> list[dict]:
-    datos = http_get(BING + urllib.parse.quote_plus(consulta), ua=UA_NAVEGADOR, intentos=2)
-    raiz = ET.fromstring(datos)
+    # desde IPs de GitHub, Bing a veces responde algo que no es RSS válido; se reintenta una vez
+    for intento in range(2):
+        datos = http_get(BING + urllib.parse.quote_plus(consulta), ua=UA_NAVEGADOR, intentos=2)
+        try:
+            raiz = ET.fromstring(datos)
+            break
+        except ET.ParseError as e:
+            if intento:
+                muestra = datos[:160].decode("utf-8", "replace").replace("\n", " ")
+                raise ValueError(f"respuesta no es RSS ({e}); empieza con: {muestra!r}") from None
+            time.sleep(4)
     out = []
     for it in raiz.findall(".//item"):
         titulo = (it.findtext("title") or "").strip()
