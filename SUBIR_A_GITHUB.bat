@@ -31,6 +31,11 @@ echo.
 echo   4/4  Lanzando la primera actualizacion...
 gh workflow run actualizar.yml -R %REPO%
 echo.
+echo   Actualizando el acceso directo del escritorio para que abra la pagina publicada...
+for /f "usebackq delims=" %%D in (`powershell -NoProfile -Command "[Environment]::GetFolderPath('Desktop')"`) do set ESCRITORIO=%%D
+> "%ESCRITORIO%\Radar de Innovacion.url" echo [InternetShortcut]
+>> "%ESCRITORIO%\Radar de Innovacion.url" echo URL=https://juanpradomts-dev.github.io/radar-innovacion/
+echo.
 echo   Listo. En unos 5 minutos queda en:
 echo   https://juanpradomts-dev.github.io/radar-innovacion/
 echo.
