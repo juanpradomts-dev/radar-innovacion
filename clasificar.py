@@ -72,7 +72,7 @@ def id_senal(url: str) -> str:
 _RUIDO_TITULO = [
     (re.compile(r"\bmarket (size|share|report|forecast|research|analysis|outlook|growth|trends?)\b|\bcagr\b|\bby 20[3-4]\d\b|\bkey players\b|\bindustry analysis\b"), "informe de mercado (spam)"),
     (re.compile(r"\bstocks? (to buy|price|rall\w+|soar\w*|jump\w*|fall\w*|plung\w+|surg\w+|slid\w+|tumbl\w+|down|up)\b|\bshares (rise|rose|fall|fell|jump\w*|soar\w*|plung\w+|drop\w*|surg\w+|tumbl\w+|slid\w+|gain\w*|climb\w*)\b|\bprice target\b|\b(buy|sell|hold) rating\b|\bdividends?\b|\betfs?\b|\b(nasdaq|nyse):|\bearnings (call|report|beat|miss)\b|\bq[1-4] (results|earnings)\b|\bto buy (now|today|right now)\b|\bundervalued\b|\bacciones de\b"), "bolsa y finanzas personales"),
-    (re.compile(r"\b(best|top) .{0,40}deals?\b|\d+% off\b|\bdiscount code\b|\bcoupons?\b|\bprime (big )?deal days\b|\bblack friday\b|\bcyber monday\b|\bon sale\b|\bofertas?\b|\bdescuento\b|\bchollo\b"), "ofertas"),
+    (re.compile(r"\b(best|top) .{0,40}deals?\b|\d+% off\b|\bdiscount code\b|\bcoupons?\b|\bprime (big )?deal days\b|\bblack friday\b|\bcyber monday\b|\bon sale\b|\bofertas?\b|\bdescuentos?\b|\bchollos?\b|\bremat(a|an|ando)\b|\brebaj\w+|\bprecio (minimo|historico|de locura)\b|\bliquidacion\b|\bcyber (days|wow)\b|\bpor menos de (s/|\$|us\$)? ?\d|\bunder \$\d"), "ofertas"),
     (re.compile(r"\bviral\b|\bhoroscope\b|\bwatch:|\bvideo:|\bphotos:|\bquiz\b|\bpodcast\b|\bnewsletter\b|\bweek in review\b|\bthis week in\b|\bdaily brief\b|\bpodcast:|\blive updates?\b|\bunboxing\b"), "entretenimiento o boletín"),
     (re.compile(r"\b(review|reseña|analisis):|\bhands[- ]on\b|\bhow to\b|\bcomo (elegir|configurar|activar)\b"), "reseña de producto o tutorial"),
     (re.compile(r"^the download:|^the batch:|^this week|\bweekly (roundup|recap)\b|\bmorning brief\b|^survey (sunday|says)\b|\bin brief:"), "entretenimiento o boletín"),
@@ -214,3 +214,49 @@ def parecidos(a: frozenset, b: frozenset, umbral: float = 0.6) -> bool:
         return True
     # titulares de la misma historia con distinta longitud ("X raises $7.6M" / "X closes oversubscribed $7.6M round")
     return inter >= 5 and inter / min(len(a), len(b)) >= 0.6
+
+
+# ---------------------------------------------------------------- cercanía (Perú → Latinoamérica → mundo)
+
+REGIONES = {"pe": "Perú", "la": "Latinoamérica", "mu": "Mundo"}
+
+_PERU = re.compile(
+    r"\b(peru|peruan[oa]s?|lima|limen[oa]s?|callao|arequipa|cusco|cuzco|trujillo|piura|chiclayo|iquitos|huancayo|tacna|puno|"
+    r"cajamarca|ayacucho|ancash|ucayali|loreto|madre de dios|moquegua|chancay|indecopi|sunat|minem|osinergmin|osiptel|"
+    r"concytec|proinversion|mincetur|minam|senamhi|bcrp|mef peru|mtc peru|pucp|unmsm|san marcos|utec|ulima|yape|plin|"
+    r"interbank|bcp|credicorp|alicorp|backus|petroperu|southern peru|antamina|las bambas|quellaveco|cerro verde|"
+    r"soles|s/ ?\d[\d.,]*|uit|afp|onp|essalud|minsa|midagri|mvcs|ceplan|pcm|reniec|sunafil|sedapal|pronabec|minedu|mtpe|digesa|sernanp|"
+    r"ositran|sunass|ingemmet|inacal|cofide|mypes?|nino costero|congreso de la republica|gobierno peruano|ejecutivo peruano)\b")
+_LATAM = re.compile(
+    r"\b(latinoamerica\w*|latam|america latina|latin america\w*|sudamerica\w*|south america\w*|centroamerica\w*|"
+    r"mexic\w+|colombi\w+|chile\w*|argentin\w+|brasil\w*|brazil\w*|ecuador\w*|bolivi\w+|uruguay\w*|paraguay\w*|venezol\w+|venezuela|"
+    r"costa rica|panama|guatemal\w+|hondur\w+|el salvador|nicaragu\w+|dominican\w*|puerto rico|cuba\w*|"
+    r"bogota|santiago de chile|buenos aires|sao paulo|ciudad de mexico|monterrey|medellin|quito|la paz|montevideo|"
+    r"mercado ?libre|nubank|rappi)\b")
+_MUNDO = re.compile(
+    r"\b(estados unidos|eeuu|ee\. ?uu\.?|united states|u\.s\.|usa|washington|silicon valley|california|nueva york|new york|texas|"
+    r"china|chin[oa]s?|chinese|beijing|pekin|shanghai|shenzhen|europa|europe\w*|union europea|uk|reino unido|britain|british|londres|london|"
+    r"alemania|german\w*|francia|france|french|espana|spain|italia|italy|japon|japan\w*|corea|korea\w*|india|indian|taiwan\w*|"
+    r"rusia|russia\w*|ucrania|ukrain\w*|israel\w*|canada|canadian|australia\w*|singapur|singapore|emiratos|uae|dubai|arabia saudita|saudi|"
+    r"openai|anthropic|google|alphabet|meta|facebook|apple|microsoft|amazon|nvidia|tesla|spacex|samsung|huawei|alibaba|tencent|byd|tsmc|"
+    r"intel|ibm|oracle|xai|deepseek|figure ai|waymo)\b")
+
+
+def region_de(titulo_norm: str, resumen_norm: str, region_fuente: str | None = None, local_por_defecto: bool = False) -> str:
+    """'pe', 'la' o 'mu'. Manda lo que dice la nota; la fuente solo decide cuando la nota no nombra ningún lugar.
+
+    - Nombra a Perú (o una ciudad, entidad o empresa peruana) → 'pe'.
+    - Si no, nombra un país o ciudad de Latinoamérica → 'la'.
+    - Si no nombra lugares ni empresas globales y viene de un medio de nicho local (minería, pymes,
+      sostenibilidad en Perú) → la región de la fuente. La prensa general no cuenta: también publica
+      noticias globales sin nombrar el país.
+    - En cualquier otro caso → 'mu'.
+    """
+    texto = titulo_norm + " " + resumen_norm[:400]
+    if _PERU.search(texto):
+        return "pe"
+    if _LATAM.search(texto):
+        return "la"
+    if local_por_defecto and region_fuente in ("pe", "la") and not _MUNDO.search(texto):
+        return region_fuente
+    return "mu"

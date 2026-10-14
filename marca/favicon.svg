@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs><linearGradient id="g" x1="0" x2="1"><stop offset=".5" stop-color="#0E8F66"/><stop offset=".5" stop-color="#1B6BD3"/></linearGradient></defs>
-  <circle cx="32" cy="32" r="30" fill="url(#g)"/>
-  <circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.4"/>
-  <circle cx="32" cy="32" r="11" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2.4"/>
-  <circle cx="32" cy="32" r="5" fill="#E5413A" stroke="#fff" stroke-width="2.2"/>
-  <circle cx="44" cy="20" r="3.8" fill="#fff"/>
-  <circle cx="18" cy="40" r="3.3" fill="#fff"/>
-  <circle cx="46" cy="42" r="2.8" fill="#fff"/>
+  <path d="M32 2a30 30 0 0 0 0 60Z" fill="#F56200"/>
+  <path d="M32 2a30 30 0 0 1 0 60Z" fill="#1D428A"/>
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2.4"/>
+  <circle cx="32" cy="32" r="10.5" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2.4"/>
+  <circle cx="32" cy="32" r="5.2" fill="#0D2960" stroke="#fff" stroke-width="2.4"/>
+  <circle cx="44" cy="19" r="3.8" fill="#fff"/>
+  <circle cx="19" cy="41" r="3.4" fill="#fff"/>
+  <circle cx="46" cy="43" r="2.9" fill="#fff"/>
 </svg>

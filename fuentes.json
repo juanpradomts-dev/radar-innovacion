@@ -233,19 +233,166 @@
       "nombre": "Xataka",
       "url": "https://feeds.weblogssl.com/xataka2",
       "nivel": 2,
-      "idioma": "es"
+      "idioma": "es",
+      "region": "mu"
     },
     {
       "nombre": "Hipertextual",
       "url": "https://hipertextual.com/feed",
       "nivel": 2,
-      "idioma": "es"
+      "idioma": "es",
+      "region": "mu"
     },
     {
       "nombre": "El País Tecnología",
       "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/tecnologia/portada",
       "nivel": 1,
-      "idioma": "es"
+      "idioma": "es",
+      "region": "mu"
+    },
+    {
+      "nombre": "Gestión",
+      "url": "https://gestion.pe/arcio/rss/",
+      "nivel": 1,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "El Comercio Economía",
+      "url": "https://elcomercio.pe/arcio/rss/category/economia/",
+      "nivel": 1,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "El Comercio Tecnología",
+      "url": "https://elcomercio.pe/arcio/rss/category/tecnologia/",
+      "nivel": 1,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "Andina",
+      "url": "https://andina.pe/agencia/rss/1.xml",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "La República Economía",
+      "url": "https://larepublica.pe/rss/economia.xml",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "RPP",
+      "url": "https://rpp.pe/rss",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "Infobae Perú",
+      "url": "https://www.infobae.com/arc/outboundfeeds/rss/category/peru/?outputType=xml",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "Semana Económica",
+      "url": "https://semanaeconomica.com/feed",
+      "nivel": 1,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "Energiminas",
+      "url": "https://energiminas.com/feed/",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": true
+    },
+    {
+      "nombre": "Rumbo Minero",
+      "url": "https://www.rumbominero.com/feed/",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": true
+    },
+    {
+      "nombre": "Stakeholders",
+      "url": "https://stakeholders.com.pe/feed/",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": true
+    },
+    {
+      "nombre": "PQS",
+      "url": "https://pqs.pe/feed/",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": true
+    },
+    {
+      "nombre": "Perú Retail",
+      "url": "https://www.peru-retail.com/feed/",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "pe",
+      "local": false
+    },
+    {
+      "nombre": "Bloomberg Línea",
+      "url": "https://www.bloomberglinea.com/arc/outboundfeeds/rss/?outputType=xml",
+      "nivel": 1,
+      "idioma": "es",
+      "region": "la",
+      "local": false
+    },
+    {
+      "nombre": "LatamList",
+      "url": "https://latamlist.com/feed/",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "la",
+      "local": false
+    },
+    {
+      "nombre": "DPL News",
+      "url": "https://dplnews.com/feed/",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "la",
+      "local": false
+    },
+    {
+      "nombre": "Xataka México",
+      "url": "https://www.xataka.com.mx/feedburner.xml",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "la",
+      "local": false
+    },
+    {
+      "nombre": "iProfesional Tecnología",
+      "url": "https://www.iprofesional.com/rss/tecnologia",
+      "nivel": 2,
+      "idioma": "es",
+      "region": "la",
+      "local": false
     }
   ],
   "medios_nivel1": [
@@ -280,7 +427,23 @@
     "Supply Chain Dive",
     "Canary Media",
     "SpaceNews",
-    "STAT"
+    "STAT",
+    "Gestión",
+    "El Comercio",
+    "Semana Económica",
+    "Andina",
+    "RPP",
+    "La República",
+    "Bloomberg Línea",
+    "Infobae",
+    "El Peruano",
+    "Perú21",
+    "Expansión",
+    "La Tercera",
+    "El Tiempo",
+    "Valor Económico",
+    "Clarín",
+    "La Nación"
   ],
   "medios_excluidos": [
     "Motley Fool",

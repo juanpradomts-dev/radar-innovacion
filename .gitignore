@@ -1,3 +1,6 @@
 __pycache__/
 site/
 *.tmp
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/

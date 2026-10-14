@@ -1,0 +1,694 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T04:34:08+00:00",
+  "title": "Design System: Radar de Innovación",
+  "extensions": {
+    "colorMeta": {
+      "azul": {
+        "role": "primary",
+        "displayName": "Azul UCSUR",
+        "canonical": "oklch(39.6% 0.128 261.9)",
+        "tonalRamp": [
+          "#000729",
+          "#001D5F",
+          "#183D84",
+          "#375EA9",
+          "#5781CE",
+          "#78A4F5",
+          "#ADCAFE",
+          "#E6EFFF"
+        ]
+      },
+      "azul-noche": {
+        "role": "primary",
+        "displayName": "Azul noche",
+        "canonical": "oklch(29.7% 0.104 262.0)",
+        "tonalRamp": [
+          "#000729",
+          "#052056",
+          "#223F78",
+          "#40609C",
+          "#6082C1",
+          "#81A5E6",
+          "#ADCAFE",
+          "#E7EFFE"
+        ]
+      },
+      "azul-dato": {
+        "role": "primary",
+        "displayName": "Azul dato",
+        "canonical": "oklch(46.9% 0.141 259.7)",
+        "tonalRamp": [
+          "#000925",
+          "#002157",
+          "#083C8B",
+          "#2C5EB0",
+          "#4D81D6",
+          "#6FA5FD",
+          "#AACBFF",
+          "#E6EFFF"
+        ]
+      },
+      "azul-suave": {
+        "role": "neutral",
+        "displayName": "Azul suave",
+        "canonical": "oklch(94.7% 0.015 260.7)",
+        "tonalRamp": [
+          "#080B12",
+          "#21252C",
+          "#3D424A",
+          "#5C616A",
+          "#7D838C",
+          "#A0A5AF",
+          "#C4C9D3",
+          "#E9EFF9"
+        ]
+      },
+      "azul-texto": {
+        "role": "neutral",
+        "displayName": "Azul texto sobre azul",
+        "canonical": "oklch(85.6% 0.039 264.3)",
+        "tonalRamp": [
+          "#040A1B",
+          "#1B2538",
+          "#384257",
+          "#566178",
+          "#77839A",
+          "#99A5BE",
+          "#BDC9E3",
+          "#E7EFFE"
+        ]
+      },
+      "naranja": {
+        "role": "secondary",
+        "displayName": "Naranja UCSUR",
+        "canonical": "oklch(67.5% 0.198 43.6)",
+        "tonalRamp": [
+          "#190400",
+          "#421400",
+          "#6F2901",
+          "#A03E01",
+          "#D55400",
+          "#FF7736",
+          "#FFB596",
+          "#FFE9E1"
+        ]
+      },
+      "naranja-texto": {
+        "role": "secondary",
+        "displayName": "Naranja texto",
+        "canonical": "oklch(54.8% 0.158 44.6)",
+        "tonalRamp": [
+          "#190500",
+          "#411500",
+          "#6E2A01",
+          "#9F3F00",
+          "#CC5C21",
+          "#F48049",
+          "#FEB696",
+          "#FEEAE1"
+        ]
+      },
+      "naranja-suave": {
+        "role": "secondary",
+        "displayName": "Naranja suave",
+        "canonical": "oklch(96.4% 0.022 58.8)",
+        "tonalRamp": [
+          "#120903",
+          "#2D231A",
+          "#4B3F37",
+          "#6B5E55",
+          "#8D7F76",
+          "#B0A298",
+          "#D5C6BB",
+          "#FAEBE0"
+        ]
+      },
+      "naranja-pista": {
+        "role": "secondary",
+        "displayName": "Naranja pista",
+        "canonical": "oklch(92.9% 0.043 57.1)",
+        "tonalRamp": [
+          "#160700",
+          "#351F0F",
+          "#543C2B",
+          "#755B49",
+          "#977C69",
+          "#BB9F8B",
+          "#E0C3AE",
+          "#FFEADC"
+        ]
+      },
+      "sobre-naranja": {
+        "role": "secondary",
+        "displayName": "Azul tinta sobre naranja",
+        "canonical": "oklch(25.0% 0.080 261.7)",
+        "tonalRamp": [
+          "#000729",
+          "#0E234B",
+          "#2A416C",
+          "#48618F",
+          "#6883B3",
+          "#89A6D8",
+          "#ADCAFE",
+          "#E7EFFE"
+        ]
+      },
+      "fondo": {
+        "role": "neutral",
+        "displayName": "Fondo azulado",
+        "canonical": "oklch(97.2% 0.007 260.7)",
+        "tonalRamp": [
+          "#090B0E",
+          "#232529",
+          "#404246",
+          "#5F6166",
+          "#808287",
+          "#A2A5AA",
+          "#C6C9CE",
+          "#ECEFF4"
+        ]
+      },
+      "tarjeta": {
+        "role": "neutral",
+        "displayName": "Blanco tarjeta",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "plano": {
+        "role": "neutral",
+        "displayName": "Plano",
+        "canonical": "oklch(97.9% 0.006 264.5)",
+        "tonalRamp": [
+          "#0A0B0E",
+          "#242528",
+          "#404245",
+          "#5F6165",
+          "#808286",
+          "#A3A5A9",
+          "#C7C9CD",
+          "#ECEEF2"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "oklch(25.2% 0.056 264.0)",
+        "tonalRamp": [
+          "#020922",
+          "#172440",
+          "#334260",
+          "#516182",
+          "#7182A5",
+          "#93A5C9",
+          "#B7CAEF",
+          "#E7EFFE"
+        ]
+      },
+      "tinta-2": {
+        "role": "neutral",
+        "displayName": "Tinta 2",
+        "canonical": "oklch(38.2% 0.050 261.8)",
+        "tonalRamp": [
+          "#020A20",
+          "#17253D",
+          "#33425D",
+          "#51627E",
+          "#7283A1",
+          "#94A6C5",
+          "#B7CAEB",
+          "#E6EFFE"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Apagado",
+        "canonical": "oklch(50.4% 0.044 260.6)",
+        "tonalRamp": [
+          "#020A1D",
+          "#18253A",
+          "#34425A",
+          "#53627B",
+          "#73839D",
+          "#95A6C1",
+          "#B9CAE7",
+          "#E6EFFE"
+        ]
+      },
+      "linea": {
+        "role": "neutral",
+        "displayName": "Línea",
+        "canonical": "oklch(91.4% 0.017 259.4)",
+        "tonalRamp": [
+          "#070B12",
+          "#20252D",
+          "#3D424B",
+          "#5C626B",
+          "#7C838D",
+          "#9FA5B0",
+          "#C3CAD4",
+          "#E8EFFA"
+        ]
+      },
+      "linea-2": {
+        "role": "neutral",
+        "displayName": "Línea 2",
+        "canonical": "oklch(95.0% 0.011 256.7)",
+        "tonalRamp": [
+          "#080B10",
+          "#22252A",
+          "#3E4248",
+          "#5D6267",
+          "#7E8389",
+          "#A1A5AC",
+          "#C5CAD0",
+          "#EAEFF6"
+        ]
+      },
+      "borde-hover": {
+        "role": "neutral",
+        "displayName": "Borde hover",
+        "canonical": "oklch(81.7% 0.029 258.4)",
+        "tonalRamp": [
+          "#050B17",
+          "#1C2533",
+          "#394351",
+          "#576272",
+          "#788394",
+          "#9AA6B7",
+          "#BECADC",
+          "#E5EFFE"
+        ]
+      },
+      "t-lanzamiento": {
+        "role": "tertiary",
+        "displayName": "Lanzamiento (aqua)",
+        "canonical": "oklch(66.9% 0.141 162.1)",
+        "tonalRamp": [
+          "#000F07",
+          "#012D1C",
+          "#004F34",
+          "#04734E",
+          "#019A69",
+          "#37C08A",
+          "#65E5AD",
+          "#C2FFDF"
+        ]
+      },
+      "t-inversion": {
+        "role": "tertiary",
+        "displayName": "Inversión (oro)",
+        "canonical": "oklch(76.4% 0.161 75.1)",
+        "tonalRamp": [
+          "#130900",
+          "#342000",
+          "#5A3B01",
+          "#835702",
+          "#AE7503",
+          "#DB9505",
+          "#FEBB53",
+          "#FEEBD2"
+        ]
+      },
+      "t-investigacion": {
+        "role": "tertiary",
+        "displayName": "Investigación (violeta)",
+        "canonical": "oklch(43.3% 0.167 283.6)",
+        "tonalRamp": [
+          "#0B002E",
+          "#24016B",
+          "#3D2895",
+          "#594CBB",
+          "#7870E1",
+          "#9A96FF",
+          "#C2C3FE",
+          "#ECEDFE"
+        ]
+      },
+      "t-regulacion": {
+        "role": "tertiary",
+        "displayName": "Regulación (magenta)",
+        "canonical": "oklch(71.6% 0.141 357.4)",
+        "tonalRamp": [
+          "#1D000B",
+          "#490025",
+          "#771042",
+          "#9C3762",
+          "#C35A83",
+          "#EA7DA6",
+          "#FEAEC9",
+          "#FFE7EE"
+        ]
+      },
+      "t-otro": {
+        "role": "tertiary",
+        "displayName": "Otro (gris)",
+        "canonical": "oklch(75.8% 0.027 261.1)",
+        "tonalRamp": [
+          "#050B16",
+          "#1E2532",
+          "#3A4251",
+          "#596271",
+          "#798393",
+          "#9CA6B6",
+          "#BFCADB",
+          "#E6EFFE"
+        ]
+      },
+      "a-actuar": {
+        "role": "tertiary",
+        "displayName": "Actuar ahora",
+        "canonical": "oklch(29.7% 0.104 262.0)",
+        "tonalRamp": [
+          "#000729",
+          "#052056",
+          "#223F78",
+          "#40609C",
+          "#6082C1",
+          "#81A5E6",
+          "#ADCAFE",
+          "#E7EFFE"
+        ]
+      },
+      "a-preparar": {
+        "role": "tertiary",
+        "displayName": "Prepararse",
+        "canonical": "oklch(39.6% 0.128 261.9)",
+        "tonalRamp": [
+          "#000729",
+          "#001D5F",
+          "#183D84",
+          "#375EA9",
+          "#5781CE",
+          "#78A4F5",
+          "#ADCAFE",
+          "#E6EFFF"
+        ]
+      },
+      "a-explorar": {
+        "role": "tertiary",
+        "displayName": "Explorar",
+        "canonical": "oklch(58.0% 0.104 263.5)",
+        "tonalRamp": [
+          "#000036",
+          "#081F56",
+          "#243F79",
+          "#425F9C",
+          "#6281C1",
+          "#83A4E7",
+          "#AEC9FE",
+          "#E7EFFE"
+        ]
+      },
+      "a-vigilar": {
+        "role": "tertiary",
+        "displayName": "Vigilar",
+        "canonical": "oklch(73.1% 0.068 264.8)",
+        "tonalRamp": [
+          "#010727",
+          "#142346",
+          "#304166",
+          "#4E6189",
+          "#6E82AC",
+          "#90A5D1",
+          "#B3C9F7",
+          "#E7EFFE"
+        ]
+      },
+      "bien": {
+        "role": "tertiary",
+        "displayName": "Sube",
+        "canonical": "oklch(56.1% 0.119 162.1)",
+        "tonalRamp": [
+          "#000F07",
+          "#002D1C",
+          "#034F34",
+          "#02744E",
+          "#28986C",
+          "#54BC8E",
+          "#7AE2B1",
+          "#C3FFE0"
+        ]
+      },
+      "mal": {
+        "role": "tertiary",
+        "displayName": "Baja",
+        "canonical": "oklch(54.4% 0.178 27.6)",
+        "tonalRamp": [
+          "#1F0000",
+          "#4D0002",
+          "#810107",
+          "#B0221F",
+          "#D84C42",
+          "#FE7466",
+          "#FFB3A9",
+          "#FEE9E6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título de la ficha de una tendencia."
+      },
+      "headline": {
+        "displayName": "Titular",
+        "purpose": "Nombre del sitio y encabezados de sección."
+      },
+      "title": {
+        "displayName": "Título",
+        "purpose": "Encabezados de tarjetas y paneles."
+      },
+      "numeral": {
+        "displayName": "Cifra",
+        "purpose": "KPI y cifras de la semana, con números tabulares."
+      },
+      "body": {
+        "displayName": "Texto",
+        "purpose": "Texto general."
+      },
+      "body-lectura": {
+        "displayName": "Lectura",
+        "purpose": "Párrafos de la ficha, máximo 72ch."
+      },
+      "label": {
+        "displayName": "Etiqueta",
+        "purpose": "Chips, etiquetas del radar, filas, metadatos."
+      }
+    },
+    "shadows": [
+      {
+        "name": "tarjeta",
+        "value": "0 1px 2px rgba(20,33,61,.05),0 8px 24px rgba(20,33,61,.07)",
+        "purpose": "Todas las tarjetas y secciones."
+      },
+      {
+        "name": "globo",
+        "value": "0 8px 28px rgba(13,41,96,.25)",
+        "purpose": "Ayuda flotante del radar."
+      },
+      {
+        "name": "ficha",
+        "value": "0 30px 80px rgba(13,41,96,.30)",
+        "purpose": "Diálogo de detalle sobre velo azul noche desenfocado."
+      },
+      {
+        "name": "pildora-radar",
+        "value": "drop-shadow(0 1px 1.5px rgba(20,33,61,.12))",
+        "purpose": "Etiquetas del SVG sobre las bandas."
+      }
+    ],
+    "motion": [
+      {
+        "name": "curva",
+        "value": "cubic-bezier(.16,.84,.24,1)",
+        "purpose": "Curva por defecto de anillos, ficha y flechas."
+      },
+      {
+        "name": "aguja",
+        "value": "1.5s cubic-bezier(.45,.05,.3,1)",
+        "purpose": "Barrido único del radar al cargar."
+      },
+      {
+        "name": "ficha",
+        "value": "0.34s",
+        "purpose": "Apertura de la ficha: fundido y subida de 14px."
+      },
+      {
+        "name": "estado",
+        "value": "0.15s",
+        "purpose": "Hover de chips, botones y filas."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "barra",
+        "value": "1240px"
+      },
+      {
+        "name": "lateral-abajo",
+        "value": "1180px"
+      },
+      {
+        "name": "decidir-una-columna",
+        "value": "1000px"
+      },
+      {
+        "name": "una-columna",
+        "value": "860px"
+      },
+      {
+        "name": "graficos",
+        "value": "760px"
+      },
+      {
+        "name": "movil",
+        "value": "640px"
+      },
+      {
+        "name": "movil-estrecho",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Chip de filtro",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Filtro de una opción por grupo; activo en azul, o en naranja si es de sociedad y negocio.",
+      "html": "<div style=\"display:flex;gap:6px;flex-wrap:wrap\"><button class=\"ds-chip\">Salud <span class=\"ds-n\">6</span></button><button class=\"ds-chip\" aria-pressed=\"true\">IA <span class=\"ds-n\">9</span></button><button class=\"ds-chip ds-soc\" aria-pressed=\"true\">Trabajo <span class=\"ds-n\">4</span></button></div>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--linea,#DCE3EE);background:#fff;border-radius:999px;padding:6px 11px;font:600 14px/1.2 'Source Sans 3',system-ui,sans-serif;color:var(--tinta,#14213D);min-height:34px;cursor:pointer;transition:background .15s,border-color .15s,color .15s} .ds-chip .ds-n{font-size:12.5px;color:var(--muted,#56657E);font-variant-numeric:tabular-nums} .ds-chip:hover{border-color:#B8C4D6} .ds-chip:focus-visible{outline:2px solid var(--naranja,#F56200);outline-offset:2px} .ds-chip[aria-pressed=\"true\"]{background:var(--azul,#1D428A);border-color:var(--azul,#1D428A);color:#fff} .ds-chip[aria-pressed=\"true\"] .ds-n{color:var(--azul-texto,#C3D0EA)} .ds-chip.ds-soc[aria-pressed=\"true\"]{background:var(--naranja,#F56200);border-color:var(--naranja,#F56200);color:var(--sobre-naranja,#0A1F47)} .ds-chip.ds-soc[aria-pressed=\"true\"] .ds-n{color:var(--sobre-naranja,#0A1F47)}"
+    },
+    {
+      "name": "Botón píldora",
+      "kind": "button",
+      "refersTo": "boton",
+      "description": "Acción secundaria: «Ver más», «Ver más de Perú».",
+      "html": "<button class=\"ds-boton\">Ver más de Perú</button>",
+      "css": ".ds-boton{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--linea,#DCE3EE);background:#fff;border-radius:999px;padding:9px 18px;font:600 15px/1.2 'Source Sans 3',system-ui,sans-serif;color:var(--tinta,#14213D);min-height:40px;cursor:pointer;transition:border-color .15s,background .15s} .ds-boton:hover{border-color:#B8C4D6;background:var(--fondo,#F3F6FB)} .ds-boton:focus-visible{outline:2px solid var(--naranja,#F56200);outline-offset:2px}"
+    },
+    {
+      "name": "Botón de ícono",
+      "kind": "button",
+      "refersTo": "boton-icono",
+      "description": "Círculo de 40px en la cabecera de la ficha (copiar enlace, cerrar).",
+      "html": "<button class=\"ds-icono-btn\" aria-label=\"Cerrar\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>",
+      "css": ".ds-icono-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--linea,#DCE3EE);background:#fff;display:inline-grid;place-items:center;cursor:pointer;color:var(--tinta,#14213D);transition:background .15s,border-color .15s} .ds-icono-btn:hover{background:var(--fondo,#F3F6FB);border-color:#B8C4D6} .ds-icono-btn:focus-visible{outline:2px solid var(--naranja,#F56200);outline-offset:2px}"
+    },
+    {
+      "name": "Segmento",
+      "kind": "chip",
+      "refersTo": "segmento-activo",
+      "description": "Elegir una vista dentro de una sección.",
+      "html": "<div style=\"display:flex;gap:6px\"><button class=\"ds-seg\" aria-pressed=\"true\">Todo</button><button class=\"ds-seg\">Inversiones</button></div>",
+      "css": ".ds-seg{border:1px solid var(--linea,#DCE3EE);background:#fff;border-radius:999px;padding:7px 13px;font:400 14px/1.2 'Source Sans 3',system-ui,sans-serif;min-height:36px;cursor:pointer;color:var(--tinta,#14213D);transition:background .15s,color .15s,border-color .15s} .ds-seg:hover{border-color:#B8C4D6} .ds-seg:focus-visible{outline:2px solid var(--naranja,#F56200);outline-offset:2px} .ds-seg[aria-pressed=\"true\"]{background:var(--azul,#1D428A);color:#fff;border-color:var(--azul,#1D428A)}"
+    },
+    {
+      "name": "Selector «¿Qué estudias?»",
+      "kind": "input",
+      "refersTo": "selector-carrera",
+      "description": "Primer filtro; único campo con borde azul.",
+      "html": "<label class=\"ds-carrera\"><span>¿Qué estudias?</span><select><option>Todas las carreras</option><option>Ingeniería Industrial</option></select></label>",
+      "css": ".ds-carrera{display:block;font-family:'Source Sans 3',system-ui,sans-serif} .ds-carrera span{display:block;font-weight:700;font-size:14px;color:var(--tinta-2,#34435E);margin-bottom:5px} .ds-carrera select{width:100%;appearance:none;border:1.5px solid var(--azul,#1D428A);border-radius:10px;padding:10px 36px 10px 12px;font:600 15px/1.3 'Source Sans 3',system-ui,sans-serif;color:var(--tinta,#14213D);background:#fff url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D428A' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\") no-repeat right 11px center/16px;cursor:pointer} .ds-carrera select:focus-visible{outline:2px solid var(--naranja,#F56200);outline-offset:2px}"
+    },
+    {
+      "name": "Buscador",
+      "kind": "input",
+      "refersTo": "buscador",
+      "description": "Buscar tendencias por nombre.",
+      "html": "<label class=\"ds-buscar\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg><input placeholder=\"Buscar tendencia\"></label>",
+      "css": ".ds-buscar{position:relative;display:block} .ds-buscar svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted,#56657E)} .ds-buscar input{width:100%;box-sizing:border-box;border:1px solid var(--linea,#DCE3EE);background:var(--fondo,#F3F6FB);border-radius:10px;padding:9px 12px 9px 36px;font:400 15px/1.3 'Source Sans 3',system-ui,sans-serif;color:var(--tinta,#14213D);outline:none;transition:border-color .15s,box-shadow .15s,background .15s} .ds-buscar input:focus{border-color:var(--azul,#1D428A);box-shadow:0 0 0 3px rgba(29,66,138,.14);background:#fff}"
+    },
+    {
+      "name": "Barra superior",
+      "kind": "nav",
+      "refersTo": "barra-superior",
+      "description": "Estructura azul con marca, navegación en píldoras y luz de estado.",
+      "html": "<header class=\"ds-barra\"><b>Radar de Innovación</b><nav><a href=\"#\">Radar</a><a href=\"#\">Para decidir</a><a href=\"#\">Lo último</a></nav><span class=\"ds-estado\"><i></i>Actualizado hace 1 h</span></header>",
+      "css": ".ds-barra{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--azul,#1D428A);color:#fff;padding:16px 20px;font-family:'Source Sans 3',system-ui,sans-serif} .ds-barra b{font:800 23px/1.1 Montserrat,system-ui,sans-serif;letter-spacing:-.01em} .ds-barra nav{display:flex;gap:2px} .ds-barra a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:7px 12px;border-radius:999px;transition:background .15s} .ds-barra a:hover{background:rgba(255,255,255,.12)} .ds-barra a:focus-visible{outline:2px solid var(--naranja,#F56200);outline-offset:2px} .ds-estado{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:999px;padding:7px 14px;font-size:14px} .ds-estado i{width:8px;height:8px;border-radius:50%;background:#3DDC97;box-shadow:0 0 0 3px rgba(61,220,151,.25)}"
+    },
+    {
+      "name": "Tarjeta con filas",
+      "kind": "card",
+      "refersTo": "caja",
+      "description": "Tarjeta del lateral: una sola sombra, filas separadas por fondo al pasar, medidor naranja de impulso.",
+      "html": "<section class=\"ds-caja\"><h2>Con más impulso</h2><button class=\"ds-fila\"><span class=\"ds-bola\"></span><span>IA física</span><span class=\"ds-med\"><i style=\"width:77%\"></i></span><b>77</b></button><button class=\"ds-fila\"><span class=\"ds-bola ds-soc\"></span><span>Economía circular</span><span class=\"ds-med\"><i style=\"width:64%\"></i></span><b>64</b></button></section>",
+      "css": ".ds-caja{background:#fff;border:1px solid var(--linea,#DCE3EE);border-radius:16px;box-shadow:0 1px 2px rgba(20,33,61,.05),0 8px 24px rgba(20,33,61,.07);padding:16px;font-family:'Source Sans 3',system-ui,sans-serif;color:var(--tinta,#14213D)} .ds-caja h2{font:700 17px/1.3 Montserrat,system-ui,sans-serif;margin:0 0 8px} .ds-fila{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:10px;width:100%;padding:8px 6px;border:0;border-radius:10px;background:none;text-align:left;font:600 15px/1.25 'Source Sans 3',system-ui,sans-serif;color:inherit;cursor:pointer;transition:background .15s} .ds-fila:hover{background:var(--fondo,#F3F6FB)} .ds-fila:focus-visible{outline:2px solid var(--naranja,#F56200);outline-offset:2px} .ds-fila b{font:700 14px Montserrat,system-ui,sans-serif;font-variant-numeric:tabular-nums} .ds-bola{width:11px;height:11px;border-radius:50%;background:var(--azul-dato,#2557A8);box-shadow:0 0 0 2px #fff} .ds-bola.ds-soc{background:var(--naranja,#F56200)} .ds-med{width:52px;height:6px;border-radius:99px;background:var(--naranja-pista,#FFE1CC);overflow:hidden} .ds-med i{display:block;height:100%;background:var(--naranja,#F56200);border-radius:99px}"
+    },
+    {
+      "name": "Columna de acción",
+      "kind": "custom",
+      "refersTo": "a-actuar",
+      "description": "Acción sugerida: cuadro de la escala azul + regla escrita con los números del código.",
+      "html": "<div class=\"ds-accion\"><h3><i style=\"background:#0D2960\"></i>Actuar ahora <span>14</span></h3><p>Llega en 3 años o menos y tiene impacto alto (8 o más de 10) o impulso de 60 o más.</p></div>",
+      "css": ".ds-accion{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--tinta,#14213D);max-width:300px} .ds-accion h3{display:flex;align-items:center;gap:8px;font:800 16px/1.2 Montserrat,system-ui,sans-serif;margin:0} .ds-accion h3 i{width:12px;height:12px;border-radius:3px;flex:none} .ds-accion h3 span{margin-left:auto;font:700 14px 'Source Sans 3',system-ui,sans-serif;color:var(--muted,#56657E);font-variant-numeric:tabular-nums} .ds-accion p{font-size:13.5px;color:var(--muted,#56657E);margin:4px 0 0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Radar Bicolor",
+    "overview": "**Creative North Star: \"El Radar Bicolor\"**\n\nEl sistema es un instrumento de lectura antes que una página de marketing. El radar ocupa el centro y sus dos mitades son a la vez el mapa y la marca. A la izquierda, en naranja UCSUR, va sociedad y negocio; a la derecha, en azul UCSUR, va tecnología. Todo lo demás (filtros, listas, tabla, fichas) es un soporte claro sobre un fondo azulado muy suave, con tarjetas blancas y líneas finas.\n\nLa densidad es de tablero: mucha información por pantalla, ordenada por líneas de 1 px y por fondos planos, no por cajas dentro de cajas. Montserrat pone la voz en los títulos y en las cifras. Source Sans 3 se encarga de leer. El movimiento es escaso y siempre responde a algo: una aguja barre el radar una vez al cargar, un anillo enciende el punto enlazado y la ficha se abre con un fundido corto.\n\nRechazos confirmados por el autor:\n- el panel gris con un solo acento;\n- el informe estático en PDF;\n- cualquier parecido con un sitio oficial (sin logo ni nombre de la universidad).",
+    "keyCharacteristics": [
+      "Bicolor con significado: el naranja es sociedad y negocio y el azul es tecnología, también fuera del radar.",
+      "Estructura en azul: barra superior, chips activos y escala de acciones.",
+      "Tarjetas blancas planas con una sola sombra suave; dentro, separación por líneas y fondos planos.",
+      "Cifras en Montserrat con números tabulares.",
+      "Color de dato en el punto, nunca en la letra."
+    ],
+    "rules": [
+      {
+        "name": "La regla de las dos mitades",
+        "body": "El naranja significa sociedad y negocio y el azul significa tecnología en todo el sitio. Un chip, una bola o un punto naranja nunca representa una tendencia de tecnología.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla del texto sobre naranja",
+        "body": "Sobre el naranja #F56200 el texto es azul tinta (sobre-naranja), nunca blanco. Para escribir en naranja sobre blanco se usa naranja-texto.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla del color en el punto",
+        "body": "Los colores de tipo de señal y de acción viven en puntos, cuadros y barras. La palabra que los acompaña va siempre en tinta.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla de las cifras",
+        "body": "Toda cifra que se compara (impulso, años, historias, KPI) usa números tabulares; las cifras protagonistas van en Montserrat.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla del piso de 12",
+        "body": "Ningún texto HTML baja de 12px. La marca de lugar usa 12px en negrita y los conteos de los chips, 12.5px.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla de una sola tarjeta",
+        "body": "Dentro de una tarjeta no se pone otra tarjeta con borde y sombra. Se separa con una línea (linea-2) o con un fondo plano.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** usar el naranja solo para sociedad y negocio, para el foco y para los acentos de íconos, y el azul para tecnología y estructura (la regla de las dos mitades).",
+      "**Do** escribir sobre naranja con sobre-naranja (#0A1F47) y escribir en naranja sobre blanco con naranja-texto (#B84A00).",
+      "**Do** mostrar las acciones con la escala de un solo tono azul (#0D2960, #1D428A, #5A79B8 y #93A8D4) y su regla escrita al lado.",
+      "**Do** dejar que los fundidos y los movimientos que responden a un clic corran para todos, y reservar `prefers-reduced-motion: no-preference` solo para los bucles y el desplazamiento suave.",
+      "**Do** dar a cada control táctil al menos 32px de alto (34px a los chips, 40px a los botones) y un foco naranja de 2px."
+    ],
+    "donts": [
+      "**Don't** poner logo, nombre ni escudo de la UCSUR: es un proyecto estudiantil firmado «Proyecto estudiantil · Juan Prado».",
+      "**Don't** poner texto blanco sobre el naranja #F56200.",
+      "**Don't** pintar texto con los colores de tipo de señal o de acción: van en el punto, la barra o el cuadro.",
+      "**Don't** anidar tarjetas con borde y sombra dentro de otra tarjeta.",
+      "**Don't** agregar sombras fuera del vocabulario de cuatro (tarjeta, globo, ficha y píldora del radar)."
+    ]
+  }
+}

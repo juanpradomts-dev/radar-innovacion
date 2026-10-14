@@ -3,333 +3,536 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Radar de Innovación</title>
-<meta name="description" content="Las tendencias que están cambiando el mundo, medidas cada pocas horas con noticias, ciencia e interés público.">
-<meta property="og:title" content="Radar de Innovación">
-<meta property="og:description" content="49 tendencias de tecnología, sociedad y negocio. Se actualiza solo con noticias, papers e interés público.">
+<title>Radar de Innovación · tendencias que cambian el mundo</title>
+<meta name="description" content="49 tendencias de tecnología, sociedad y negocio, con indicadores para decidir y prioridad a lo que pasa en Perú y Latinoamérica. Se actualiza solo cada 3 horas. Proyecto estudiantil.">
+<link rel="canonical" href="https://juanpradomts-dev.github.io/radar-innovacion/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="og.png">
-<meta name="theme-color" content="#F4F6F9">
+<meta property="og:locale" content="es_PE">
+<meta property="og:site_name" content="Radar de Innovación">
+<meta property="og:title" content="Radar de Innovación">
+<meta property="og:description" content="49 tendencias con indicadores para decidir, filtro por carrera y prioridad a Perú y Latinoamérica. Se actualiza solo.">
+<meta property="og:url" content="https://juanpradomts-dev.github.io/radar-innovacion/">
+<meta property="og:image" content="https://juanpradomts-dev.github.io/radar-innovacion/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Radar circular con una mitad naranja de sociedad y negocio y una mitad azul de tecnología">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Radar de Innovación">
+<meta name="twitter:description" content="49 tendencias que cambian el mundo, con indicadores para decidir.">
+<meta name="twitter:image" content="https://juanpradomts-dev.github.io/radar-innovacion/og.png">
+<meta name="theme-color" content="#1D428A">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icono-180.png" type="image/png" sizes="180x180">
 <link rel="apple-touch-icon" href="icono-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F4F6F9; --panel:#FFFFFF; --ink:#13202C; --ink2:#33414E; --muted:#5E6B78; --line:#E2E7ED; --line2:#EEF1F5;
-  --soc:#0E8F66; --soc-2:#1FAE7E; --soc-weak:#DCF2E8; --soc-ink:#0A6B4C;
-  --tec:#1B6BD3; --tec-2:#3B86E8; --tec-weak:#DCE8F9; --tec-ink:#14529F;
-  --rojo:#E5413A; --ambar:#E8930C; --ambar-weak:#FDF0D8;
-  --t-lanzamiento:#1B6BD3; --t-inversion:#C07A06; --t-investigacion:#7A4CC2; --t-regulacion:#4E5D6C; --t-otro:#7D8994;
-  --radio:16px; --sombra:0 1px 2px rgba(19,32,44,.05),0 6px 24px rgba(19,32,44,.06);
+  /* identidad UCSUR (cientifica.edu.pe): naranja #F56200 y azul #1D428A */
+  --azul:#1D428A; --azul-noche:#0D2960; --azul-dato:#2557A8; --azul-suave:#E8EEF8; --azul-texto:#C3D0EA;
+  --naranja:#F56200; --naranja-texto:#B84A00; --naranja-suave:#FFF0E5; --naranja-pista:#FFE1CC; --sobre-naranja:#0A1F47;
+  --fondo:#F3F6FB; --tarjeta:#FFFFFF; --tinta:#14213D; --tinta-2:#34435E; --muted:#56657E; --linea:#DCE3EE; --linea-2:#EAEFF6; --plano:#F6F8FC;
+  --t-lanzamiento:#1BAF7A; --t-inversion:#EDA100; --t-investigacion:#4A3AA7; --t-regulacion:#E87BA4; --t-otro:#A7B1C2;
+  /* acciones: escala ordinal de un solo tono (validada) */
+  --a-actuar:#0D2960; --a-preparar:#1D428A; --a-explorar:#5A79B8; --a-vigilar:#93A8D4;
+  --bien:#0F8A5F; --mal:#C2362F;
+  --radio:16px; --sombra:0 1px 2px rgba(20,33,61,.05),0 8px 24px rgba(20,33,61,.07);
   --curva:cubic-bezier(.16,.84,.24,1);
-  --f-tit:"Outfit",system-ui,sans-serif; --f-txt:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-tit:"Montserrat",system-ui,sans-serif; --f-txt:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --z-globo:40;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-txt);-webkit-font-smoothing:antialiased}
-a{color:inherit}
-button{font:inherit;color:inherit}
-h1,h2,h3{font-family:var(--f-tit);letter-spacing:-.01em;margin:0}
-.envoltura{max-width:1440px;margin:0 auto;padding:0 20px}
-@media (max-width:640px){.envoltura{padding:0 16px}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--fondo);color:var(--tinta);font:16px/1.5 var(--f-txt);-webkit-font-smoothing:antialiased;caret-color:var(--naranja)}
+::selection{background:#FFD9BF;color:var(--tinta)}
+a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
+button,input,select{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--f-tit);letter-spacing:-.01em;margin:0;text-wrap:balance}
+p{text-wrap:pretty}
+:focus-visible{outline:2px solid var(--naranja);outline-offset:2px;border-radius:6px}
+*{scrollbar-width:thin;scrollbar-color:#B8C4D6 transparent}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:#B8C4D6;border-radius:9px;border:2px solid var(--fondo)}
+.icono{width:1.1em;height:1.1em;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.15em}
+.envoltura{max-width:1480px;margin:0 auto;padding:0 20px}
+@media (max-width:640px){.envoltura{padding:0 14px}}
+.solo-movil{display:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.oculto{display:none!important}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
 
-/* ---------- cabecera ---------- */
-.cabecera{padding:22px 0 8px}
-.cab-fila{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.logo{width:44px;height:44px;flex:none}
-.cab-txt h1{font-size:28px;font-weight:700;line-height:1.1}
-.cab-txt p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:640px}
-.estado{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;color:var(--ink2);box-shadow:var(--sombra)}
-.estado .luz{width:8px;height:8px;border-radius:50%;background:var(--soc-2);box-shadow:0 0 0 3px rgba(31,174,126,.18)}
-.estado .luz.tarde{background:var(--ambar);box-shadow:0 0 0 3px rgba(232,147,12,.18)}
-.estado .luz.vieja{background:var(--rojo);box-shadow:0 0 0 3px rgba(229,65,58,.18)}
-@media (max-width:820px){.estado{margin-left:0}}
+/* ---------- barra superior (estructura en azul UCSUR) ---------- */
+.barra{background:var(--azul);color:#fff}
+.barra .envoltura{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px 18px;padding-top:16px;padding-bottom:16px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.marca svg{width:42px;height:42px;flex:none}
+.marca h1{font-size:23px;font-weight:800;line-height:1.1;color:#fff}
+.marca p{margin:2px 0 0;font-size:14.5px;color:var(--azul-texto);line-height:1.35;max-width:52ch}
+.nav{display:flex;gap:2px;justify-content:flex-end;flex-wrap:wrap}
+@media (max-width:640px){.nav .solo-ancho-nav{display:none}}
+.nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:7px 12px;border-radius:999px;transition:background .15s;white-space:nowrap}
+.nav a:hover{background:rgba(255,255,255,.12)}
+.estado{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:999px;padding:7px 14px;font-size:14px;color:#fff;white-space:nowrap;margin:0}
+.estado .luz{width:8px;height:8px;border-radius:50%;background:#3DDC97;box-shadow:0 0 0 3px rgba(61,220,151,.25)}
+.estado .luz.tarde{background:#FFC24D;box-shadow:0 0 0 3px rgba(255,194,77,.25)}
+.estado .luz.vieja{background:#FF7A70;box-shadow:0 0 0 3px rgba(255,122,112,.25)}
+@media (max-width:1240px){.barra .envoltura{grid-template-columns:1fr auto}.nav{grid-column:1/-1;justify-content:flex-start;margin-left:-12px}}
+@media (max-width:640px){.barra .envoltura{grid-template-columns:1fr;gap:6px;padding-top:12px;padding-bottom:12px}.marca svg{width:36px;height:36px}.marca h1{font-size:20px}.marca p{font-size:13.5px}
+  .nav{margin-left:-10px;gap:0}.nav a{font-size:14px;padding:6px 9px}.solo-ancho{display:none}.solo-movil{display:inline}.estado{justify-self:start;font-size:13px;padding:5px 12px;white-space:normal}}
 
-/* ---------- distribución ---------- */
-.tablero{display:grid;grid-template-columns:250px minmax(0,1fr) 290px;gap:18px;align-items:start;margin-top:14px}
-@media (max-width:1180px){.tablero{grid-template-columns:240px minmax(0,1fr)}.lateral{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}}
-@media (max-width:860px){.tablero{grid-template-columns:1fr}.filtros{order:2}.radar-caja{order:1}.lateral{order:3}}
-.caja{background:var(--panel);border:1px solid var(--line);border-radius:var(--radio);box-shadow:var(--sombra)}
+/* ---------- área de trabajo ---------- */
+.tablero{display:grid;grid-template-columns:270px minmax(0,1fr) 300px;gap:18px;align-items:start;margin-top:18px}
+@media (max-width:1180px){.tablero{grid-template-columns:260px minmax(0,1fr)}.lateral{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}}
+@media (max-width:860px){.tablero{grid-template-columns:1fr;gap:14px}.filtros{order:1}.radar-caja{order:2}.lateral{order:3}}
+.caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:var(--radio);box-shadow:var(--sombra)}
 
-/* ---------- filtros ---------- */
-.filtros{padding:16px 16px 12px;position:sticky;top:12px}
-@media (max-width:860px){.filtros{position:static}}
-.filtros h2{font-size:17px}
-.filtros .ayuda{font-size:13px;color:var(--muted);margin:2px 0 10px}
-.buscar{position:relative;margin-bottom:12px}
-.buscar input{width:100%;border:1px solid var(--line);background:#FAFBFC;border-radius:10px;padding:9px 12px 9px 34px;font:inherit;font-size:14px;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
-.buscar input:focus{border-color:var(--tec-2);box-shadow:0 0 0 3px rgba(59,134,232,.15);background:#fff}
-.buscar svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted)}
-.grupo{border-top:1px solid var(--line2);padding:10px 0 6px}
-.grupo summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);padding:2px 0 8px;user-select:none}
-.grupo summary::-webkit-details-marker{display:none}
-.grupo summary .flecha{transition:transform .3s var(--curva);color:var(--muted)}
-.grupo[open] summary .flecha{transform:rotate(180deg)}
+/* filtros */
+.filtros{padding:16px 16px 12px}
+.filtros h2,.bloque h2{font-size:17px;font-weight:700}
+.campo-carrera{display:block;margin:12px 0}
+.campo-carrera span{display:block;font-weight:700;font-size:14px;color:var(--tinta-2);margin-bottom:5px}
+.campo-carrera select{width:100%;appearance:none;border:1.5px solid var(--azul);border-radius:10px;padding:10px 36px 10px 12px;font-size:15px;font-weight:600;color:var(--tinta);cursor:pointer;
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D428A' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 11px center/16px}
+.campo-carrera select:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
+.mas-filtros>summary{display:none}
+@media (max-width:860px){.mas-filtros>summary{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:15px;color:var(--tinta-2);padding:8px 0;border-top:1px solid var(--linea-2)}
+  .mas-filtros>summary .icono{transition:transform .25s var(--curva);color:var(--muted)}.mas-filtros[open]>summary .icono{transform:rotate(180deg)}}
+.buscar{position:relative;display:block;margin:4px 0 12px}
+.buscar input{width:100%;border:1px solid var(--linea);background:var(--fondo);border-radius:10px;padding:9px 12px 9px 36px;font-size:15px;color:var(--tinta);outline:none;transition:border-color .15s,box-shadow .15s,background .15s}
+.buscar input::placeholder{color:#56657E}
+.buscar input:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(29,66,138,.14);background:#fff}
+.buscar .icono{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.grupo{border-top:1px solid var(--linea-2);padding:10px 0 6px}
+.grupo summary{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:14px;color:var(--tinta-2);padding:3px 0 9px;user-select:none}
+.grupo summary .icono{transition:transform .25s var(--curva);color:var(--muted)}
+.grupo[open] summary .icono{transform:rotate(180deg)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 10px;font-size:13px;cursor:pointer;transition:background .2s,border-color .2s,color .2s,opacity .2s;line-height:1.25;text-align:left}
-.chip .n{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
-.chip:hover{border-color:#C4CDD7}
-.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
-.chip[aria-pressed="true"] .n{color:#C9D3DD}
-.chip[disabled]{opacity:.38;cursor:default}
-.chip.f-soc[aria-pressed="true"]{background:var(--soc);border-color:var(--soc)}
-.chip.f-tec[aria-pressed="true"]{background:var(--tec);border-color:var(--tec)}
-.resumen-filtro{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted);border-top:1px solid var(--line2);padding-top:10px;margin-top:4px;min-height:34px}
-.btn-txt{background:none;border:0;padding:4px 2px;color:var(--tec);font-weight:600;cursor:pointer;font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--linea);background:#fff;border-radius:999px;padding:6px 11px;font-size:14px;cursor:pointer;transition:background .15s,border-color .15s,color .15s,opacity .15s;line-height:1.2;text-align:left;min-height:34px}
+.chip .n{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chip:hover{border-color:#B8C4D6}
+.chip[aria-pressed="true"]{background:var(--azul);border-color:var(--azul);color:#fff}
+.chip[aria-pressed="true"] .n{color:var(--azul-texto)}
+.chip.f-soc[aria-pressed="true"]{background:var(--naranja);border-color:var(--naranja);color:var(--sobre-naranja)}
+.chip.f-soc[aria-pressed="true"] .n{color:var(--sobre-naranja)}
+.chip[disabled]{opacity:.4;cursor:default}
+.resumen-filtro{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:14px;color:var(--muted);border-top:1px solid var(--linea-2);padding-top:10px;margin-top:4px;min-height:36px}
+.btn-txt{background:none;border:0;padding:4px 2px;color:var(--azul);font-weight:700;cursor:pointer;font-size:14px}
 .btn-txt:hover{text-decoration:underline}
 
-/* ---------- radar ---------- */
-.radar-caja{padding:14px 14px 10px;position:relative}
-.radar-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:2px 6px 6px}
-.radar-cab .pista{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
-.radar-cab .pista b{color:var(--ink2);font-weight:600}
-.mano{width:16px;height:16px;color:var(--tec)}
-.radar-svg{display:block;width:100%;height:auto;max-height:min(900px,calc(100vh - 120px));aspect-ratio:1/1;margin:0 auto;touch-action:manipulation;user-select:none}
+/* radar */
+.radar-caja{padding:14px 14px 10px;position:relative;scroll-margin-top:12px}
+.radar-cab{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;padding:2px 6px 4px}
+.pista{font-size:15px;color:var(--tinta-2);display:flex;align-items:center;gap:8px;margin:0}
+.pista b{color:var(--tinta)}
+.pista .icono{color:var(--naranja);width:20px;height:20px}
+.mitades{display:flex;gap:14px;font-size:14px;color:var(--tinta-2);margin:0;padding:0;list-style:none}
+.mitades li{display:inline-flex;align-items:center;gap:7px}
+.bola{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none;box-shadow:0 0 0 2px #fff}
+.bola.soc{background:var(--naranja)}.bola.tec{background:var(--azul-dato)}
+.radar-svg{display:block;width:100%;height:auto;max-height:min(920px,calc(100vh - 150px));aspect-ratio:1/1;margin:0 auto;touch-action:manipulation;user-select:none}
 @media (max-width:860px){.radar-svg{max-height:none}}
-.leyenda{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;font-size:12.5px;color:var(--muted);padding:6px 4px 2px}
-.leyenda span{display:inline-flex;align-items:center;gap:6px}
-.leyenda i{display:inline-block;border-radius:50%}
+.leyenda{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 20px;font-size:13.5px;color:var(--muted);padding:6px 4px 2px;margin:0;list-style:none}
+.leyenda li{display:inline-flex;align-items:center;gap:6px}
+.aviso{font-size:13.5px;color:var(--muted);margin:6px 0 0}
 
-.nodo{cursor:pointer;outline:none}
-.nodo .punto{transition:r .25s var(--curva)}
-.nodo .etq rect{fill:#fff;stroke:rgba(19,32,44,.10);stroke-width:1;transition:stroke .2s,fill .2s;filter:drop-shadow(0 1px 1.5px rgba(19,32,44,.10))}
-.nodo .etq text{font-family:var(--f-txt);font-size:14.5px;font-weight:600;fill:var(--ink)}
-.nodo:hover .etq rect,.nodo:focus-visible .etq rect,.nodo.activo .etq rect{stroke:currentColor;stroke-width:1.6}
-.nodo:focus-visible .punto{stroke:var(--ink);stroke-width:3}
-.nodo{transition:opacity .35s var(--curva)}
-.nodo.apagado{opacity:.13}
-.nodo.apagado .etq{display:none}
-.nodo .halo{fill:none;stroke-width:2;opacity:.45}
+.nodo{cursor:pointer;outline:none;transition:opacity .3s var(--curva)}
+.nodo .etq rect{fill:#fff;stroke:rgba(20,33,61,.12);stroke-width:1;transition:stroke .15s;filter:drop-shadow(0 1px 1.5px rgba(20,33,61,.12))}
+.nodo .etq text,.etq-movil text{font-family:var(--f-txt);font-size:15px;font-weight:600;fill:var(--tinta)}
+.etq-movil text{font-size:34px;font-weight:700}
+.nodo .guia{stroke:#8C98AD;stroke-width:1.2}
+.nodo:hover .etq rect,.nodo:focus-visible .etq rect,.nodo.activo .etq rect,.nodo.enlazado .etq rect{stroke:currentColor;stroke-width:1.8}
+.nodo:focus-visible .punto{stroke:var(--tinta);stroke-width:3}
+.nodo.apagado{opacity:.12}
+.nodo.apagado .etq,.nodo.apagado .guia{display:none}
+.nodo .halo{fill:none;stroke-width:2;opacity:.4}
+.nodo .anillo{fill:none;stroke-width:3;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.55);transition:opacity .22s var(--curva),transform .32s var(--curva)}
+.nodo.enlazado .anillo,.nodo.activo .anillo{opacity:1;transform:scale(1)}
+.nodo .marca-mov{stroke:#fff;stroke-width:1.2}
 .nodo.sin-etq .etq{display:none}
-.nodo.sin-etq:hover .etq,.nodo.sin-etq:focus-visible .etq,.nodo.sin-etq.activo .etq{display:inline}
-.compacto .nodo .etq{display:none}
-.nodo.entra{animation:aparecer .55s var(--curva) backwards}
+.nodo.sin-etq:hover .etq,.nodo.sin-etq:focus-visible .etq,.nodo.sin-etq.activo .etq,.nodo.sin-etq.enlazado .etq{display:inline}
+.etq-movil{display:none;pointer-events:none}
+.etq-movil rect{fill:#fff;stroke:rgba(20,33,61,.18);stroke-width:2}
+.compacto .etq-movil{display:inline}
+.compacto .nodo .etq,.compacto .nodo .guia{display:none!important}
+.compacto .solo-ancho-svg{display:none}
+.nodo.entra{animation:aparecer .5s var(--curva) backwards}
 @keyframes aparecer{from{opacity:0}to{opacity:1}}
-.barrido{transform-box:view-box;transform-origin:500px 500px;animation:barrer 1.5s cubic-bezier(.45,.05,.3,1) both}
+.aguja{transform-box:view-box;transform-origin:500px 500px;animation:barrer 1.5s cubic-bezier(.45,.05,.3,1) both}
 @keyframes barrer{from{transform:rotate(0deg);opacity:1}85%{opacity:1}to{transform:rotate(360deg);opacity:0}}
 @media (prefers-reduced-motion:no-preference){
-  .nodo.caliente .halo{animation:latir 2.6s ease-in-out infinite}
-  @keyframes latir{0%,100%{opacity:.45}50%{opacity:.08}}
-  .hoy-pulso{animation:pulso 2.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
-  @keyframes pulso{0%{transform:scale(1);opacity:.45}100%{transform:scale(3.2);opacity:0}}
+  .en-pantalla .nodo.caliente .halo{animation:latir 2.6s ease-in-out infinite}
+  @keyframes latir{0%,100%{opacity:.4}50%{opacity:.06}}
+  .en-pantalla .hoy-pulso{animation:pulso 2.8s ease-out infinite}
+  .hoy-pulso{transform-box:fill-box;transform-origin:center}
+  @keyframes pulso{0%{transform:scale(1);opacity:.5}100%{transform:scale(3.2);opacity:0}}
 }
-.globo{position:fixed;z-index:30;pointer-events:none;background:var(--ink);color:#fff;border-radius:10px;padding:8px 11px;font-size:13px;line-height:1.35;max-width:260px;box-shadow:0 8px 28px rgba(0,0,0,.18);opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s var(--curva)}
+.globo{position:fixed;z-index:var(--z-globo);pointer-events:none;background:var(--azul-noche);color:#fff;border-radius:10px;padding:8px 11px;font-size:14px;line-height:1.35;max-width:280px;box-shadow:0 8px 28px rgba(13,41,96,.25);opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s var(--curva)}
 .globo.ver{opacity:1;transform:none}
-.globo b{display:block;font-size:14px;margin-bottom:2px}
-.globo span{color:#C9D3DD}
+.globo b{display:block;font-size:15px;margin-bottom:1px}
+.globo span{color:var(--azul-texto)}
 
-/* ---------- lateral ---------- */
+/* lateral */
 .lateral{display:flex;flex-direction:column;gap:18px}
 .bloque{padding:16px}
-.bloque h2{font-size:17px;display:flex;align-items:center;gap:8px}
-.bloque .sub{font-size:13px;color:var(--muted);margin:2px 0 10px}
-.fila-t{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:8px 6px;border-radius:10px;cursor:pointer;border:0;background:none;width:100%;text-align:left;transition:background .2s}
-.fila-t:hover{background:#F3F6F9}
-.fila-t .bola{width:10px;height:10px;border-radius:50%}
-.fila-t .nom{font-weight:600;font-size:14px;line-height:1.25}
-.fila-t .det{font-size:12px;color:var(--muted)}
-.medidor{width:46px;height:6px;border-radius:99px;background:#EBEFF3;overflow:hidden}
-.medidor i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#F2B544,var(--ambar))}
-.imp-num{display:flex;align-items:center;gap:7px;font-size:13px;font-variant-numeric:tabular-nums}.imp-num b{min-width:20px;text-align:right}
-.delta{font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
-.delta.sube{color:var(--soc)}.delta.baja{color:var(--rojo)}
-.cambios-grid{display:grid;gap:10px}
-.cambio h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:var(--f-txt);font-weight:700;margin:4px 0 2px}
+.bloque h2{display:flex;align-items:center;gap:8px}
+.bloque h2 .icono{color:var(--naranja);width:20px;height:20px}
+.sub{font-size:14px;color:var(--muted);margin:3px 0 10px}
+.filas{list-style:none;margin:0;padding:0}
+.fila-t{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:8px 6px;border-radius:10px;cursor:pointer;border:0;background:none;width:100%;text-align:left;transition:background .15s}
+.fila-t:hover,.fila-t:focus-visible{background:var(--fondo)}
+.fila-t .nom{font-weight:600;font-size:15px;line-height:1.25}
+.fila-t .det{font-size:13.5px;color:var(--muted)}
+.imp-num{display:flex;align-items:center;gap:8px;font-size:14px;font-variant-numeric:tabular-nums}
+.imp-num b{min-width:22px;text-align:right;font-family:var(--f-tit);font-size:14px}
+.medidor{width:52px;height:6px;border-radius:99px;background:var(--naranja-pista);overflow:hidden;display:block;flex:none}
+.medidor i{display:block;height:100%;border-radius:99px;background:var(--naranja)}
+.delta{display:inline-flex;align-items:center;gap:2px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--tinta-2)}
+.delta svg{width:10px;height:10px}
+.delta.sube svg{fill:var(--bien)}.delta.baja svg{fill:var(--mal)}
+.cambios-grid{display:grid;gap:8px}
+.cambio h3{font-size:14px;font-family:var(--f-txt);font-weight:700;color:var(--tinta-2);margin:6px 0 0}
+.cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:2px 0 12px;padding:0;list-style:none}
+.cifras li{background:var(--plano);border-radius:10px;padding:8px 10px}
+.cifras b{display:block;font-family:var(--f-tit);font-size:19px;line-height:1.1}
+.cifras span{font-size:12.5px;color:var(--muted)}
 
-/* ---------- secciones ---------- */
-.seccion{margin-top:22px;padding:18px}
-.sec-cab{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.sec-cab h2{font-size:21px}
-.sec-cab p{margin:3px 0 0;color:var(--muted);font-size:14px}
-.pestanas{display:flex;flex-wrap:wrap;gap:6px}
-.pestana{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
-.pestana:hover{border-color:#C4CDD7}
-.pestana[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.noticias{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.noticia{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:12px;border:1px solid var(--line2);border-radius:14px;background:#fff;text-decoration:none;transition:border-color .2s,box-shadow .25s var(--curva),transform .25s var(--curva);min-width:0}
+/* secciones */
+.seccion{margin-top:22px;padding:20px;scroll-margin-top:12px}
+@media (max-width:640px){.seccion{padding:16px 14px}}
+.sec-cab{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.sec-cab h2{font-size:23px;font-weight:800}
+.sec-cab p{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:72ch}
+.segmentos{display:flex;flex-wrap:wrap;gap:6px}
+.segmento{border:1px solid var(--linea);background:#fff;border-radius:999px;padding:7px 13px;font-size:14px;cursor:pointer;transition:background .15s,color .15s,border-color .15s;min-height:36px}
+.segmento:hover{border-color:#B8C4D6}
+.segmento[aria-pressed="true"]{background:var(--azul);color:#fff;border-color:var(--azul)}
+
+/* para decidir */
+.acciones{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--linea-2);border-bottom:1px solid var(--linea-2)}
+@media (max-width:1000px){.acciones{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.acciones{grid-template-columns:1fr}}
+.accion-col{padding:14px 14px 12px;border-left:1px solid var(--linea-2)}
+.accion-col:first-child{border-left:0;padding-left:0}
+@media (max-width:1000px){.accion-col:nth-child(3){border-left:0;padding-left:0}.accion-col:nth-child(n+3){border-top:1px solid var(--linea-2)}}
+@media (max-width:560px){.accion-col{border-left:0;padding-left:0}.accion-col+.accion-col{border-top:1px solid var(--linea-2)}}
+.accion-col h3{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800}
+.accion-col h3 .n{font-family:var(--f-txt);font-weight:700;font-size:14px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.marca-accion{width:12px;height:12px;border-radius:3px;flex:none}
+.accion-col .regla{font-size:13.5px;color:var(--muted);margin:4px 0 8px;min-height:3em}
+@media (max-width:560px){.accion-col .regla{min-height:0}}
+.accion-col ol{list-style:none;margin:0;padding:0}
+.accion-col li button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;width:100%;padding:6px 6px;border-radius:8px;cursor:pointer;font-size:14.5px;line-height:1.25}
+.accion-col li button:hover{background:var(--fondo)}
+.accion-col li button:focus-visible{outline:2px solid var(--naranja);outline-offset:1px}
+.accion-col li .v{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.accion-col .mas-items{font-size:13.5px;color:var(--muted);margin:6px 6px 0}
+.decidir-fila{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;margin-top:22px}
+.decidir-fila.primera{grid-template-columns:repeat(2,minmax(0,1fr));margin:0 0 22px}
+@media (max-width:1000px){.decidir-fila,.decidir-fila.primera{grid-template-columns:1fr;gap:22px}}
+.panel h3{font-size:17px;font-weight:800}
+.panel .sub{margin-bottom:8px}
+.matriz{position:relative}
+.matriz svg{display:block;width:100%;height:auto;overflow:visible}
+.matriz .punto-m{cursor:pointer;transition:opacity .25s}
+.matriz .punto-m.apagado{opacity:.12}
+.barras-h{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.barras-h li button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr) 9.5em;gap:10px;align-items:center;width:100%;padding:5px 6px;border-radius:8px;cursor:pointer;font-size:14.5px}
+.barras-h li button:hover{background:var(--fondo)}
+.barras-h li button:focus-visible{outline:2px solid var(--naranja);outline-offset:1px}
+.barras-h .pista-b{height:12px;display:flex;gap:2px}
+.barras-h .pista-b i{display:block;height:100%;border-radius:0 4px 4px 0}
+.barras-h .v{font-size:13.5px;color:var(--tinta-2);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+@media (max-width:560px){.barras-h li button{grid-template-columns:1fr auto;grid-template-areas:"n v" "b b";row-gap:4px}.barras-h li button>span:nth-child(1){grid-area:n}.barras-h .pista-b{grid-area:b}.barras-h .v{grid-area:v}}
+.oportunidades{list-style:none;margin:0;padding:0}
+.oportunidades li button{all:unset;box-sizing:border-box;display:block;width:100%;padding:8px 6px;border-radius:8px;cursor:pointer;border-bottom:1px solid var(--linea-2)}
+.oportunidades li:last-child button{border-bottom:0}
+.oportunidades li button:hover{background:var(--fondo)}
+.oportunidades li button:focus-visible{outline:2px solid var(--naranja);outline-offset:1px}
+.oportunidades b{font-weight:700;font-size:15px}
+.oportunidades span{display:block;font-size:13.5px;color:var(--muted)}
+
+/* noticias (sin bordes propios: los separa una línea fina dentro de su sección) */
+.region-cab{display:flex;align-items:baseline;gap:10px;margin:18px 0 4px}
+.region-cab:first-of-type{margin-top:4px}
+.region-cab h3{font-size:18px;font-weight:800}
+.region-cab span{font-size:14px;color:var(--muted)}
+.noticias{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));column-gap:22px;margin:0;padding:0;list-style:none}
+.noticia{position:relative;display:grid;grid-template-columns:72px 1fr;gap:12px;padding:12px 8px;border-top:1px solid var(--linea-2);border-radius:10px;transition:background .15s,transform .25s var(--curva);min-width:0}
 .noticia.sin-img{grid-template-columns:1fr}
-@media (hover:hover) and (pointer:fine){.noticia:hover{border-color:#D3DAE2;box-shadow:0 8px 24px rgba(19,32,44,.08);transform:translateY(-2px)}}
-.noticia .img{width:76px;height:76px;border-radius:10px;object-fit:cover;background:#EEF2F6}
-.noticia .tit{font-weight:600;font-size:14.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
-.noticia .meta{font-size:12.5px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
-.noticia .res{font-size:13px;color:var(--ink2);margin-top:5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.tipo{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;letter-spacing:.02em}
-.tipo::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.tipo.lanzamiento{color:var(--t-lanzamiento)}.tipo.inversion{color:var(--t-inversion)}.tipo.investigacion{color:var(--t-investigacion)}.tipo.regulacion{color:var(--t-regulacion)}.tipo.otro{color:var(--t-otro)}
-.etiqueta-t{font-size:11.5px;font-weight:600;border-radius:6px;padding:1px 7px;border:0;cursor:pointer}
-.etiqueta-t.soc{background:var(--soc-weak);color:var(--soc-ink)}.etiqueta-t.tec{background:var(--tec-weak);color:var(--tec-ink)}
-.mas{display:flex;justify-content:center;margin-top:14px}
-.boton{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 18px;font-weight:600;font-size:14px;cursor:pointer;transition:border-color .2s,background .2s;text-decoration:none}
-.boton:hover{border-color:#C4CDD7;background:#FAFBFC}
-.vacio{padding:24px;text-align:center;color:var(--muted);font-size:14px;border:1px dashed var(--line);border-radius:14px}
+@media (hover:hover) and (pointer:fine){.noticia:hover{background:var(--plano);transform:translateY(-2px)}}
+.noticia .img{width:72px;height:72px;border-radius:10px;object-fit:cover}
+.noticia h4{font-family:var(--f-txt);font-size:15.5px;font-weight:600;line-height:1.35;letter-spacing:0;margin:0}
+.noticia h4 a{text-decoration:none;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.noticia h4 a::after{content:"";position:absolute;inset:0;border-radius:10px}
+.noticia h4 a:focus-visible{outline:none}
+.noticia:has(h4 a:focus-visible){outline:2px solid var(--naranja);outline-offset:2px}
+.noticia .meta{font-size:13.5px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.noticia .res{font-size:14px;color:var(--tinta-2);margin:5px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tipo{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--tinta-2)}
+.tipo i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.lugar{font-size:12px;font-weight:700;color:var(--tinta-2);background:var(--azul-suave);border-radius:5px;padding:1px 6px}
+.lugar.pe{background:var(--naranja-suave);color:var(--naranja-texto)}
+.etiquetas{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.etiqueta-t{position:relative;z-index:1;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;border-radius:999px;padding:5px 11px 5px 9px;min-height:32px;border:1px solid var(--linea);background:#fff;color:var(--tinta-2);cursor:pointer;transition:border-color .15s,background .15s}
+.etiqueta-t:hover{border-color:#B8C4D6;background:var(--fondo)}
+.etiqueta-t .bola{width:8px;height:8px;box-shadow:none}
+.mas{display:flex;justify-content:center;margin-top:10px}
+.boton{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--linea);background:#fff;border-radius:999px;padding:9px 18px;font-weight:600;font-size:15px;cursor:pointer;transition:border-color .15s,background .15s;text-decoration:none;color:var(--tinta);min-height:40px}
+.boton:hover{border-color:#B8C4D6;background:var(--fondo)}
+.boton .icono{color:var(--muted)}
+.vacio{padding:18px;text-align:center;color:var(--muted);font-size:15px;border:1px dashed var(--linea);border-radius:12px;list-style:none}
 
-.lista-t{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:8px}
-.tarjeta-t{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:11px 12px;border:1px solid var(--line2);border-radius:12px;background:#fff;cursor:pointer;text-align:left;width:100%;transition:border-color .2s,box-shadow .25s var(--curva),transform .25s var(--curva)}
-@media (hover:hover) and (pointer:fine){.tarjeta-t:hover{border-color:#D3DAE2;box-shadow:0 6px 18px rgba(19,32,44,.07);transform:translateY(-2px)}}
-.tarjeta-t .bola{width:12px;height:12px;border-radius:50%}
-.tarjeta-t .nom{font-weight:600;font-size:14.5px;line-height:1.3}
-.tarjeta-t .det{font-size:12.5px;color:var(--muted)}
-.tarjeta-t .der{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:12px;color:var(--muted)}
-select.orden{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font:inherit;font-size:13px;background:#fff;color:var(--ink)}
+/* tabla de tendencias */
+.tabla-env{overflow-x:auto}
+table.tabla{width:100%;border-collapse:collapse;font-size:15px}
+.tabla th{text-align:left;font-weight:700;font-size:13.5px;color:var(--tinta-2);background:var(--fondo);padding:0;white-space:nowrap}
+.tabla th:first-child{border-radius:10px 0 0 10px}.tabla th:last-child{border-radius:0 10px 10px 0}
+.tabla th.num,.tabla td.num{text-align:right}
+.tabla th button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:5px;width:100%;padding:10px 12px;cursor:pointer}
+.tabla th.num button{justify-content:flex-end}
+.tabla th button:focus-visible{outline:2px solid var(--naranja);outline-offset:-2px}
+.tabla th .icono{width:14px;height:14px;color:#8C98AD}
+.tabla th[aria-sort] .icono{color:var(--azul)}
+.tabla td{padding:9px 12px;border-bottom:1px solid var(--linea-2);vertical-align:middle;font-variant-numeric:tabular-nums}
+.tabla tbody tr{cursor:pointer;transition:background .12s}
+.tabla tbody tr:hover,.tabla tbody tr:focus-within{background:#F7F9FD}
+.tabla tbody tr:last-child td{border-bottom:0}
+.tabla .t-nom{display:flex;align-items:center;gap:10px}
+.tabla .t-nom button{all:unset;cursor:pointer;font-weight:600;line-height:1.3}
+.tabla .t-nom button:focus-visible{outline:2px solid var(--naranja);outline-offset:2px;border-radius:4px}
+.tabla .t-fam{display:block;color:var(--muted);font-size:13px;font-weight:400}
+.tabla .imp-celda{display:inline-flex;align-items:center;gap:8px;justify-content:flex-end}
+.insignia{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;white-space:nowrap;color:var(--tinta-2)}
+@media (max-width:860px){.tabla .col-impacto,.tabla .col-n30,.tabla .col-inv{display:none}}
+@media (max-width:640px){.tabla .col-anios,.tabla .col-cerca{display:none}.tabla td{padding:8px 7px}.tabla th button{padding:8px 7px;font-size:13px;white-space:normal}
+  .tabla th:not([aria-sort]) .icono{display:none}.tabla .imp-celda .medidor{display:none}.tabla .t-nom{gap:7px}.tabla .t-nom .bola{width:9px;height:9px}}
 
-/* ---------- pie ---------- */
-.pie{margin:26px 0 40px;font-size:13.5px;color:var(--muted)}
-.pie details{background:var(--panel);border:1px solid var(--line);border-radius:var(--radio);padding:14px 18px;margin-bottom:10px}
-.pie summary{cursor:pointer;font-weight:600;color:var(--ink2)}
-.pie h3{font-size:15px;color:var(--ink);margin:14px 0 4px}
-.pie ul{margin:6px 0;padding-left:20px}
-.pie li{margin:3px 0}
-.pie .fuentes-lista{columns:3 220px;font-size:12.5px;margin-top:8px}
-.pie .fuentes-lista div{break-inside:avoid;padding:1px 0}
-.pie .ok{color:var(--soc)}.pie .mal{color:var(--rojo)}
-.firma{text-align:center;margin-top:16px}
+/* pie */
+.pie{margin:26px 0 40px;font-size:15px;color:var(--muted)}
+.pie details{background:var(--tarjeta);border:1px solid var(--linea);border-radius:var(--radio);padding:16px 20px;margin-bottom:12px;scroll-margin-top:12px}
+.pie summary{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--tinta);font-family:var(--f-tit);font-size:17px}
+.pie summary .icono{color:var(--muted);transition:transform .25s var(--curva)}
+.pie details[open] summary .icono{transform:rotate(180deg)}
+.pie h3{font-size:16px;color:var(--tinta);margin:16px 0 4px}
+.pie ul{margin:6px 0;padding-left:20px;max-width:80ch}
+.pie li{margin:4px 0}
+.fuentes-lista{columns:3 220px;font-size:14px;margin-top:8px}
+.fuentes-lista div{break-inside:avoid;padding:1px 0;display:flex;gap:6px;align-items:center}
+.firma{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;text-align:center;margin-top:18px}
+.firma a{color:var(--azul);font-weight:600}
 
-/* ---------- detalle (modo enfoque) ---------- */
-dialog.detalle{border:0;padding:0;border-radius:22px;width:min(880px,calc(100vw - 24px));max-height:calc(100dvh - 32px);background:var(--panel);color:var(--ink);box-shadow:0 30px 80px rgba(10,20,30,.28);overflow:hidden}
-dialog.detalle::backdrop{background:rgba(16,26,36,.38);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-dialog.detalle[open]{animation:abrir .38s var(--curva)}
-dialog.detalle[open]::backdrop{animation:fondo .38s ease}
+/* ficha (modo enfoque) */
+dialog.detalle{border:0;padding:0;border-radius:22px;width:min(920px,calc(100vw - 24px));max-height:calc(100dvh - 32px);background:var(--tarjeta);color:var(--tinta);box-shadow:0 30px 80px rgba(13,41,96,.30);overflow:hidden}
+dialog.detalle::backdrop{background:rgba(13,41,96,.40);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+dialog.detalle[open]{animation:abrir .34s var(--curva)}
+dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
 @keyframes abrir{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
 @keyframes fondo{from{opacity:0}to{opacity:1}}
-.det-scroll{max-height:calc(100dvh - 32px);overflow:auto;scrollbar-width:thin;scrollbar-color:#CBD3DC transparent}
-.det-scroll::-webkit-scrollbar{width:8px}.det-scroll::-webkit-scrollbar-thumb{background:#CBD3DC;border-radius:8px}
-.det-cab{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:12px 14px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line2)}
-.det-cab .migas{font-size:12.5px;color:var(--muted);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.icono-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;display:inline-grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s;flex:none}
-.icono-btn:hover{background:#F3F6F9;border-color:#C4CDD7}
-.icono-btn svg{width:17px;height:17px}
-.det-cuerpo{padding:18px 24px 26px}
+.det-scroll{max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain}
+.det-cab{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:12px 14px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea-2)}
+.det-cab .espacio{flex:1}
+.icono-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);background:#fff;display:inline-grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s;flex:none;color:var(--tinta)}
+.icono-btn:hover{background:var(--fondo);border-color:#B8C4D6}
+.icono-btn.copiado{border-color:var(--bien);color:var(--bien)}
+.det-cuerpo{padding:18px 26px 28px}
 @media (max-width:640px){.det-cuerpo{padding:16px 16px 22px}}
-.det-titulo h2{font-size:28px;line-height:1.15}
-.det-titulo .en{color:var(--muted);font-size:14px;margin-top:2px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 6px}
+.det-titulo h2{font-size:30px;font-weight:800;line-height:1.12}
+.det-titulo .en{color:var(--muted);font-size:15px;margin:3px 0 0}
+.accion-ficha{display:flex;gap:12px;align-items:flex-start;margin:14px 0 4px;padding:12px 14px;border-radius:12px;background:var(--azul-suave)}
+.accion-ficha .marca-accion{margin-top:5px}
+.accion-ficha b{font-family:var(--f-tit);font-size:16px}
+.accion-ficha p{margin:2px 0 0;font-size:14.5px;color:var(--tinta-2)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 6px}
 @media (max-width:640px){.kpis{grid-template-columns:1fr}}
-.kpi{border:1px solid var(--line2);border-radius:14px;padding:12px 14px;background:#FBFCFD}
-.kpi .k{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--muted)}
-.kpi .v{font-family:var(--f-tit);font-size:24px;font-weight:700;margin-top:2px;display:flex;align-items:baseline;gap:8px}
-.kpi .v small{font-family:var(--f-txt);font-size:13px;font-weight:600;color:var(--muted)}
-.kpi .x{font-size:12.5px;color:var(--ink2);margin-top:3px;line-height:1.4}
-.parr{margin:14px 0 0}
-.parr h3{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-family:var(--f-txt);font-weight:700;margin-bottom:3px}
-.parr p{margin:0;font-size:15.5px;line-height:1.55}
+.kpi{border-radius:12px;padding:12px 14px;background:var(--plano)}
+.kpi .k{font-size:14px;font-weight:600;color:var(--muted)}
+.kpi .v{font-family:var(--f-tit);font-size:25px;font-weight:700;margin-top:2px;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px}
+.kpi .v small{font-family:var(--f-txt);font-size:14px;font-weight:600;color:var(--muted)}
+.kpi .x{font-size:14px;color:var(--tinta-2);margin:4px 0 0;line-height:1.4}
+.indicadores{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:0;margin:14px 0 0;padding:0;list-style:none;border-top:1px solid var(--linea-2);border-bottom:1px solid var(--linea-2)}
+.indicadores li{padding:10px 12px 10px 0}
+.indicadores dt,.indicadores .k{font-size:13px;color:var(--muted)}
+.indicadores b{display:block;font-family:var(--f-tit);font-size:19px;line-height:1.2}
+.indicadores span{font-size:13px;color:var(--tinta-2)}
+.parr{margin:18px 0 0}
+.parr h3{font-size:16px;font-weight:700;color:var(--tinta);margin-bottom:4px}
+.parr p{margin:0;font-size:16.5px;line-height:1.55;max-width:72ch}
 .graficos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
 @media (max-width:760px){.graficos{grid-template-columns:1fr}}
-.grafico{border:1px solid var(--line2);border-radius:14px;padding:12px 12px 8px}
-.grafico .g-tit{font-size:13px;font-weight:700}
-.grafico .g-sub{font-size:12px;color:var(--muted)}
-.grafico svg{display:block;width:100%;height:74px;margin-top:6px}
-.grafico .g-pie{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
-.mezcla-barra{display:flex;height:10px;border-radius:99px;overflow:hidden;background:#EEF1F5;margin:8px 0 6px}
-.mezcla-barra i{display:block;height:100%}
-.mezcla-ley{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)}
+.grafico{border-radius:12px;padding:12px 12px 8px;min-width:0;background:var(--plano)}
+.grafico h4{margin:0;font-size:15px;font-weight:700}
+.grafico .g-sub{font-size:13.5px;color:var(--muted);margin:2px 0 0}
+.grafico .lienzo{height:78px;margin-top:8px;position:relative}
+.grafico .lienzo svg{display:block;width:100%;height:78px;overflow:visible}
+.grafico .g-pie{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:3px}
+.mezcla-barra{display:flex;gap:2px;height:10px;margin:8px 0 7px}
+.mezcla-barra i{display:block;height:100%;border-radius:3px;min-width:3px}
+.mezcla-ley{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px;color:var(--tinta-2);margin:0;padding:0;list-style:none}
+.mezcla-ley li{display:inline-flex;align-items:center;gap:6px}
+.mezcla-ley i{width:8px;height:8px;border-radius:50%}
 .chips-det{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chip-s{font-size:12px;border-radius:999px;padding:3px 9px;background:#F0F3F6;color:var(--ink2)}
-.enlaces{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.lista-sen{display:grid;gap:8px;margin-top:8px}
+.chip-s{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;border-radius:999px;padding:3px 10px;background:var(--fondo);color:var(--tinta-2)}
+.enlaces{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .lista-sen .noticia{grid-template-columns:60px 1fr}
 .lista-sen .noticia.sin-img{grid-template-columns:1fr}
 .lista-sen .noticia .img{width:60px;height:60px}
-.oculto{display:none!important}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.aviso{font-size:12.5px;color:var(--muted);margin-top:8px}
+.lista-sen{display:grid;grid-template-columns:1fr}
+.det-region{font-size:14px;font-weight:700;color:var(--tinta-2);margin:12px 0 0;font-family:var(--f-txt)}
 </style>
 </head>
 <body>
-<div class="envoltura">
-  <header class="cabecera">
-    <div class="cab-fila">
-      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
-        <defs><linearGradient id="lg" x1="0" x2="1"><stop offset=".5" stop-color="#0E8F66"/><stop offset=".5" stop-color="#1B6BD3"/></linearGradient></defs>
-        <circle cx="32" cy="32" r="30" fill="url(#lg)"/>
-        <circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
-        <circle cx="32" cy="32" r="11" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
-        <circle cx="32" cy="32" r="4.5" fill="#E5413A" stroke="#fff" stroke-width="2"/>
-        <circle cx="44" cy="20" r="3.4" fill="#fff"/><circle cx="18" cy="40" r="3" fill="#fff"/><circle cx="46" cy="42" r="2.6" fill="#fff"/>
-      </svg>
-      <div class="cab-txt">
-        <h1>Radar de Innovación</h1>
-        <p>Las tendencias que están cambiando el mundo, medidas con noticias, ciencia e interés público. Se actualiza solo varias veces al día.</p>
-      </div>
-      <div class="estado" id="estado"><span class="luz"></span><span id="estado-txt">Cargando…</span></div>
-    </div>
-  </header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-buscar" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-dedo" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4.5A6.5 6.5 0 0 1 11.5 21h-.6a6 6 0 0 1-4.5-2L3.6 15.8a1.6 1.6 0 0 1 2.3-2.2L9 16"/></symbol>
+  <symbol id="i-impulso" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-semana" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-cambio" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+  <symbol id="i-externo" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-enlace" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-izq" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-der" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-abajo" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-orden" viewBox="0 0 24 24"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"/></symbol>
+  <symbol id="i-orden-asc" viewBox="0 0 24 24"><path d="m7 14 5-5 5 5"/></symbol>
+  <symbol id="i-orden-desc" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
+</svg>
 
+<header class="barra">
+  <div class="envoltura">
+    <a class="marca" href="#radar" aria-label="Radar de Innovación, ir al radar">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 2a30 30 0 0 0 0 60Z" fill="#F56200"/><path d="M32 2a30 30 0 0 1 0 60Z" fill="#fff"/>
+        <circle cx="32" cy="32" r="20" fill="none" stroke="#1D428A" stroke-opacity=".25" stroke-width="2"/>
+        <circle cx="32" cy="32" r="10.5" fill="none" stroke="#1D428A" stroke-opacity=".35" stroke-width="2"/>
+        <circle cx="32" cy="32" r="5" fill="#0D2960" stroke="#fff" stroke-width="2"/>
+        <circle cx="44" cy="19" r="3.6" fill="#2557A8"/><circle cx="19" cy="41" r="3.2" fill="#fff"/><circle cx="46" cy="43" r="2.8" fill="#2557A8"/><circle cx="20" cy="20" r="2.6" fill="#fff"/>
+      </svg>
+      <span><h1>Radar de Innovación</h1><p>Las tendencias que están cambiando el mundo, con indicadores para decidir y lo que pasa en Perú primero.</p></span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#radar" class="solo-ancho-nav">Radar</a><a href="#decidir">Para decidir</a><a href="#lo-ultimo">Lo último</a><a href="#todas">Todas<span class="solo-ancho"> las tendencias</span></a><a href="#como-se-mide" id="ir-metodo"><span class="solo-ancho">Cómo se mide</span><span class="solo-movil">Método</span></a>
+    </nav>
+    <p class="estado" id="estado"><span class="luz" aria-hidden="true"></span><span id="estado-txt">Cargando…</span></p>
+  </div>
+</header>
+
+<div class="envoltura">
   <main class="tablero">
-    <aside class="filtros caja" aria-label="Filtros">
-      <h2>Filtrar tendencias</h2>
-      <p class="ayuda">Toca una opción para resaltarla en el radar.</p>
-      <label class="buscar"><span class="sr">Buscar una tendencia</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="Buscar: robots, baterías, IA…" autocomplete="off">
-      </label>
-      <div id="grupos"></div>
-      <div class="resumen-filtro"><span id="cuenta-filtro"></span><button class="btn-txt oculto" id="limpiar" type="button">Quitar filtros</button></div>
+    <aside class="filtros caja" aria-labelledby="t-filtros">
+      <h2 id="t-filtros">Filtrar tendencias</h2>
+      <label class="campo-carrera"><span>¿Qué estudias?</span><select id="carrera"><option value="">Todas las carreras</option></select></label>
+      <details class="mas-filtros" id="mas-filtros" open>
+        <summary>Más filtros: sector, área, familia<svg class="icono" aria-hidden="true"><use href="#i-abajo"/></svg></summary>
+        <label class="buscar"><span class="sr">Buscar una tendencia</span>
+          <svg class="icono" aria-hidden="true"><use href="#i-buscar"/></svg>
+          <input id="q" type="search" placeholder="Buscar: robots, IA…" autocomplete="off">
+        </label>
+        <div id="grupos"></div>
+      </details>
+      <div class="resumen-filtro"><span id="cuenta-filtro" aria-live="polite"></span><button class="btn-txt oculto" id="limpiar" type="button">Quitar filtros</button></div>
     </aside>
 
-    <section class="radar-caja caja" aria-label="Radar de tendencias">
+    <section class="radar-caja caja" id="radar" aria-labelledby="t-radar">
+      <h2 id="t-radar" class="sr">Radar de tendencias</h2>
       <div class="radar-cab">
-        <div class="pista"><svg class="mano" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4.5A6.5 6.5 0 0 1 11.5 21h-.6a6 6 0 0 1-4.5-2L3.6 15.8a1.6 1.6 0 0 1 2.3-2.2L9 16"/></svg><span><b>Toca un punto</b> para ver qué está pasando en esa tendencia.</span></div>
+        <p class="pista"><svg class="icono" aria-hidden="true"><use href="#i-dedo"/></svg><span><b>Toca un punto</b> para ver qué está pasando en esa tendencia.</span></p>
+        <ul class="mitades" aria-label="Colores del radar">
+          <li><span class="bola soc"></span>Sociedad y negocio</li>
+          <li><span class="bola tec"></span>Tecnología</li>
+        </ul>
       </div>
-      <svg class="radar-svg" id="radar" viewBox="0 0 1000 1000" role="img" aria-labelledby="radar-tit">
-        <title id="radar-tit">Radar de tendencias: a la izquierda sociedad y negocio, a la derecha tecnología; más cerca del centro, se adopta antes; más arriba, más impacto.</title>
+      <svg class="radar-svg" id="lienzo-radar" viewBox="0 0 1000 1000" role="group" aria-labelledby="radar-desc">
+        <desc id="radar-desc">Radar de 49 tendencias. Mitad izquierda: sociedad y negocio. Mitad derecha: tecnología. Más cerca del centro, se adopta antes; más arriba, más impacto. Usa las flechas para recorrer los puntos y Enter para abrir una tendencia. La tabla «Todas las tendencias» tiene los mismos datos.</desc>
       </svg>
-      <p class="aviso oculto" id="pista-movil" style="text-align:center;margin:2px 0 4px">Los nombres están en la lista «Todas las tendencias», más abajo.</p>
-      <div class="leyenda" aria-hidden="true">
-        <span><i style="width:9px;height:9px;background:var(--rojo)"></i>Centro = hoy</span>
-        <span>Más cerca del centro = se adopta antes</span>
-        <span>Arriba = más impacto</span>
-        <span><i style="width:7px;height:7px;background:#8896A4"></i><i style="width:11px;height:11px;background:#8896A4"></i>Tamaño = impulso</span>
-      </div>
+      <p class="aviso oculto" id="pista-movil" style="text-align:center">Se ven los nombres de las 5 con más impulso; todas están en la tabla «Todas las tendencias».</p>
+      <ul class="leyenda" aria-label="Cómo leer el radar">
+        <li><span class="bola" style="background:var(--azul-noche)"></span>Centro = hoy</li>
+        <li>Más cerca del centro = se adopta antes</li>
+        <li>Arriba = más impacto</li>
+        <li><span class="bola" style="background:#9AA6BA;width:7px;height:7px"></span><span class="bola" style="background:#9AA6BA"></span>Tamaño = impulso</li>
+      </ul>
     </section>
 
     <aside class="lateral">
       <section class="bloque caja" aria-labelledby="t-impulso">
-        <h2 id="t-impulso">🔥 Con más impulso</h2>
-        <p class="sub">Lo que más está creciendo en noticias, ciencia e interés público.</p>
-        <div id="top-impulso"></div>
+        <h2 id="t-impulso"><svg class="icono" aria-hidden="true"><use href="#i-impulso"/></svg>Con más impulso</h2>
+        <p class="sub">Lo que más crece en noticias, ciencia e interés público.</p>
+        <ul class="filas" id="top-impulso"></ul>
       </section>
       <section class="bloque caja oculto" id="caja-cambios" aria-labelledby="t-cambios">
-        <h2 id="t-cambios">Cambios de la semana</h2>
+        <h2 id="t-cambios"><svg class="icono" aria-hidden="true"><use href="#i-cambio"/></svg>Cambios de la semana</h2>
         <p class="sub" id="cambios-sub"></p>
         <div class="cambios-grid" id="cambios"></div>
       </section>
       <section class="bloque caja" aria-labelledby="t-semana">
-        <h2 id="t-semana">Esta semana</h2>
-        <p class="sub" id="semana-sub"></p>
+        <h2 id="t-semana"><svg class="icono" aria-hidden="true"><use href="#i-semana"/></svg>Esta semana</h2>
+        <ul class="cifras" id="cifras-semana"></ul>
         <div id="semana-tipos"></div>
       </section>
     </aside>
   </main>
 
-  <section class="seccion caja" aria-labelledby="t-ultimo">
-    <div class="sec-cab">
-      <div><h2 id="t-ultimo">Lo último en el mundo</h2><p id="ultimo-sub">Señales recientes clasificadas por tendencia.</p></div>
-      <div class="pestanas" role="tablist" id="tabs-tipo"></div>
+  <section class="seccion caja" id="decidir" aria-labelledby="t-decidir">
+    <div class="sec-cab"><div><h2 id="t-decidir">Para decidir</h2><p id="decidir-sub"></p></div></div>
+    <div class="decidir-fila primera">
+      <div class="panel">
+        <h3>Cerca de ti</h3>
+        <p class="sub">Historias sobre Perú y Latinoamérica en los últimos 30 días (una historia cuenta una vez aunque la publiquen varios medios).</p>
+        <ul class="barras-h" id="cerca"></ul>
+      </div>
+      <div class="panel">
+        <h3>Oportunidades en Perú</h3>
+        <p class="sub">Crecen en el mundo y aquí casi no aparecen en las noticias: impulso de 65 o más, al menos 15 historias en 30 días y como mucho el 3 % sobre la región. Puede ser un espacio por explorar.</p>
+        <ul class="oportunidades" id="oportunidades"></ul>
+      </div>
     </div>
-    <div class="noticias" id="ultimas"></div>
-    <div class="mas"><button class="boton oculto" id="ver-mas" type="button">Ver más</button></div>
+    <h3 class="sr">Acción sugerida por tendencia</h3>
+    <div class="acciones" id="acciones"></div>
+    <div class="decidir-fila">
+      <div class="panel">
+        <h3>Matriz de decisión</h3>
+        <p class="sub">Cuándo llega cada tendencia frente a cuánto se está moviendo. El tamaño es el impacto. Toca un punto para ver su ficha.</p>
+        <div class="matriz" id="matriz"></div>
+      </div>
+      <div class="panel">
+        <h3>Dónde se invierte</h3>
+        <p class="sub">Historias de rondas de financiamiento, inversiones y compras en los últimos 30 días.</p>
+        <ul class="barras-h" id="inversion"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion caja" id="lo-ultimo" aria-labelledby="t-ultimo">
+    <div class="sec-cab">
+      <div><h2 id="t-ultimo">Lo último</h2><p id="ultimo-sub">Primero lo que pasa en Perú, luego en Latinoamérica y después en el mundo.</p></div>
+      <div class="segmentos" id="tipos-noticia" role="group" aria-label="Tipo de señal"></div>
+    </div>
+    <div id="ultimas"></div>
   </section>
 
   <section class="seccion caja" aria-labelledby="t-fuera" id="sec-fuera">
     <div class="sec-cab"><div><h2 id="t-fuera">Fuera del radar (por ahora)</h2><p>Novedades de las últimas dos semanas que todavía no encajan en ninguna tendencia. Así empiezan las tendencias nuevas.</p></div></div>
-    <div class="noticias" id="fuera"></div>
+    <ul class="noticias" id="fuera"></ul>
   </section>
 
-  <section class="seccion caja" aria-labelledby="t-todas">
-    <div class="sec-cab">
-      <div><h2 id="t-todas">Todas las tendencias</h2><p id="todas-sub"></p></div>
-      <label>Ordenar por <select class="orden" id="orden">
-        <option value="impulso">Impulso</option><option value="anios">Llega antes</option><option value="impacto">Impacto</option><option value="nombre">A–Z</option>
-      </select></label>
+  <section class="seccion caja" id="todas" aria-labelledby="t-todas">
+    <div class="sec-cab"><div><h2 id="t-todas">Todas las tendencias</h2><p id="todas-sub"></p></div></div>
+    <div class="tabla-env">
+      <table class="tabla">
+        <caption class="sr">Las 49 tendencias con su acción sugerida, horizonte, impacto, impulso y señales. Toca una fila para abrir su ficha.</caption>
+        <thead><tr id="cabecera-tabla"></tr></thead>
+        <tbody id="filas-tabla"></tbody>
+      </table>
     </div>
-    <div class="lista-t" id="todas"></div>
   </section>
 
   <footer class="pie">
-    <details>
-      <summary>¿Cómo se mide?</summary>
+    <details id="como-se-mide">
+      <summary>¿Cómo se mide?<svg class="icono" aria-hidden="true"><use href="#i-abajo"/></svg></summary>
       <h3>Dónde está cada punto</h3>
       <ul>
         <li><b>Distancia al centro:</b> años estimados hasta la adopción masiva. Parte de una evaluación base y se ajusta solo según el tipo de señales de los últimos 60 días: si una tendencia acumula más lanzamientos e inversiones de lo típico para su plazo, se acerca; si tiene menos (predomina la investigación), se aleja. Máximo ±30 %.</li>
@@ -339,62 +542,83 @@ dialog.detalle[open]::backdrop{animation:fondo .38s ease}
       <h3>Qué es el impulso</h3>
       <ul>
         <li>30 % <b>interés público</b>: vistas en Wikipedia, últimos 3 meses frente a los 3 anteriores.</li>
-        <li>20 % <b>ciencia</b>: artículos científicos en OpenAlex, últimos 12 meses frente a los 12 previos.</li>
+        <li>20 % <b>ciencia</b>: artículos científicos en OpenAlex, último año completo frente al anterior.</li>
         <li>30 % <b>volumen de noticias</b> de los últimos 14 días.</li>
-        <li>20 % <b>aceleración de noticias</b>: última semana frente a las 4 anteriores (se activa con 5 semanas de historia).</li>
+        <li>20 % <b>aceleración de noticias</b>: última semana frente a las 4 anteriores (se activa tras 5 semanas midiendo).</li>
+      </ul>
+      <h3>Acción sugerida</h3>
+      <ul id="reglas-accion"></ul>
+      <h3>Perú, Latinoamérica y el mundo</h3>
+      <ul>
+        <li>Una señal es de <b>Perú</b> si nombra al país, una de sus ciudades, entidades o empresas; de <b>Latinoamérica</b> si nombra otro país o ciudad de la región. La prensa peruana general no basta: también publica noticias globales.</li>
+        <li>Además de los medios internacionales, se leen 18 medios de Perú y la región y una búsqueda por tendencia en español centrada en Perú.</li>
+        <li><b>Una historia cuenta una vez:</b> si varios medios publican la misma noticia en pocos días, suma una sola señal en los conteos.</li>
+        <li><b>Oportunidad en Perú:</b> impulso de 65 o más, al menos 15 señales en 30 días y, como mucho, el 3 % (o una sola) sobre Perú o Latinoamérica.</li>
       </ul>
       <h3>Límites honestos</h3>
       <ul>
-        <li>Es vigilancia tecnológica, no una predicción. La posición base es una estimación editorial revisada a mano (<span id="revisado"></span>).</li>
-        <li>Predominan medios en inglés. La clasificación es automática por palabras clave: puede equivocarse con titulares ambiguos.</li>
-        <li>Se excluyen notas de bolsa, informes de mercado pagados, ofertas y reseñas de productos.</li>
+        <li>Es vigilancia tecnológica, no una predicción. La posición base y las carreras afines son una estimación editorial revisada a mano (<span id="revisado"></span>).</li>
+        <li>Predominan medios en inglés. La clasificación es automática por palabras clave y puede equivocarse con titulares ambiguos.</li>
+        <li>Se excluyen notas de bolsa, informes de mercado pagados, ofertas, reseñas de productos y boletines.</li>
       </ul>
       <h3>Fuentes</h3>
       <p id="fuentes-txt"></p>
-      <div class="fuentes-lista" id="fuentes-lista"></div>
     </details>
-    <p class="firma">Radar de Innovación · datos públicos: medios vía RSS, Bing News, Wikipedia (Wikimedia) y OpenAlex · <span id="generado"></span></p>
+    <p class="firma">
+      <span>Proyecto estudiantil · <a href="https://github.com/juanpradomts-dev" target="_blank" rel="noopener">Juan Prado</a></span>
+      <span><a href="https://github.com/juanpradomts-dev/radar-innovacion" target="_blank" rel="noopener">Código abierto</a></span>
+      <span id="generado"></span>
+    </p>
   </footer>
 </div>
 
 <dialog class="detalle" id="detalle" aria-labelledby="det-nombre">
   <div class="det-scroll" id="det-scroll">
     <div class="det-cab">
-      <button class="icono-btn" id="det-ant" type="button" aria-label="Tendencia anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></button>
-      <button class="icono-btn" id="det-sig" type="button" aria-label="Tendencia siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></button>
-      <span class="migas" id="det-migas"></span>
-      <button class="icono-btn" id="det-compartir" type="button" aria-label="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></button>
-      <button class="icono-btn" id="det-cerrar" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <button class="icono-btn" id="det-ant" type="button" aria-label="Tendencia anterior"><svg class="icono" aria-hidden="true"><use href="#i-izq"/></svg></button>
+      <button class="icono-btn" id="det-sig" type="button" aria-label="Tendencia siguiente"><svg class="icono" aria-hidden="true"><use href="#i-der"/></svg></button>
+      <span class="espacio"></span>
+      <button class="icono-btn" id="det-compartir" type="button" aria-label="Copiar enlace a esta tendencia"><svg class="icono" aria-hidden="true"><use href="#i-enlace"/></svg></button>
+      <button class="icono-btn" id="det-cerrar" type="button" aria-label="Cerrar"><svg class="icono" aria-hidden="true"><use href="#i-cerrar"/></svg></button>
     </div>
     <div class="det-cuerpo" id="det-cuerpo"></div>
   </div>
 </dialog>
-<div class="globo" id="globo" role="tooltip"></div>
+<div class="globo" id="globo" aria-hidden="true"></div>
 
 <script>
 "use strict";
 const D = /*__DATOS__*/null;
 const NS = "http://www.w3.org/2000/svg";
 const CX = 500, CY = 500, R = 440, R0 = 38;
-const TIPOS = {lanzamiento:"Lanzamiento", inversion:"Inversión", investigacion:"Investigación", regulacion:"Regulación", otro:"Noticia"};
-const COLOR = {soc:"#0E8F66", tec:"#1B6BD3"};
+const TIPOS = {lanzamiento:"Lanzamiento", inversion:"Inversión", investigacion:"Investigación", regulacion:"Regulación", otro:"Otra"};
+const TIPO_COLOR = {lanzamiento:"var(--t-lanzamiento)", inversion:"var(--t-inversion)", investigacion:"var(--t-investigacion)", regulacion:"var(--t-regulacion)", otro:"var(--t-otro)"};
+const ACC_COLOR = {actuar:"var(--a-actuar)", preparar:"var(--a-preparar)", explorar:"var(--a-explorar)", vigilar:"var(--a-vigilar)"};
+const ACC_ORDEN = ["actuar", "preparar", "explorar", "vigilar"];
+const ACC_REGLA = {actuar:"Llega en 3 años o menos y tiene impacto alto (8 o más de 10) o impulso de 60 o más.", preparar:"Llega en 6 años o menos y no cumple la regla de «Actuar ahora».", explorar:"Llega en más de 6 años y tiene impacto alto (8 o más) o impulso de 60 o más.", vigilar:"Llega en más de 6 años, con impacto menor a 8 e impulso menor a 60."};
+const COLOR = {soc:"#F56200", tec:"#2557A8"};
+const REG_NOMBRE = {pe:"Perú", la:"Latinoamérica", mu:"Mundo"};
 const $ = s => document.querySelector(s);
 const T = Object.fromEntries(D.tendencias.map(t => [t.id, t]));
-const filtros = {foco:null, familia:null, sector:null, q:""};
-let tipoNoticia = "todo", limiteNoticias = 12, ordenLista = "impulso", abierta = null;
+const filtros = {carrera:"", foco:null, familia:null, sector:null, q:""};
+const orden = {col:"accion", dir:1};
+let tipoNoticia = "todo", abierta = null, ordenRadar = [];
+const limiteRegion = {pe:6, la:6, mu:9};
 
 /* ---------- utilidades ---------- */
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const urlSegura = u => /^https?:\/\//i.test(u || "") ? u : "#";
 const nf = new Intl.NumberFormat("es-PE");
 const sinTildes = s => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const icono = (id, clase = "icono") => `<svg class="${clase}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+const nombreCorto = t => t.corto.replace(/\n/g, " ");
 function hace(iso){
   const s = (Date.now() - new Date(iso).getTime()) / 1000;
   if (s < 90) return "hace un momento";
-  if (s < 3600) return `hace ${Math.round(s/60)} min`;
-  if (s < 86400) return `hace ${Math.round(s/3600)} h`;
+  if (s < 3600) return `hace ${Math.round(s/60)} min`;
+  if (s < 86400) return `hace ${Math.round(s/3600)} h`;
   const d = Math.round(s/86400);
-  return d === 1 ? "ayer" : d < 30 ? `hace ${d} días` : new Date(iso).toLocaleDateString("es-PE", {day:"numeric", month:"short"});
+  return d === 1 ? "ayer" : d < 30 ? `hace ${d} días` : new Date(iso).toLocaleDateString("es-PE", {day:"numeric", month:"short"});
 }
 function aniosTxt(a){
   if (a < 1) return "menos de 1 año";
@@ -403,12 +627,25 @@ function aniosTxt(a){
 }
 const impactoTxt = i => i >= 8 ? "Alto" : i >= 5 ? "Medio" : "Moderado";
 const nivelTxt = {alto:"Alto", medio:"Medio", bajo:"Bajo", "sin datos":"Sin datos"};
+const accionNombre = a => D.catalogo.acciones[a][0];
+const marcaAccion = a => `<span class="marca-accion" style="background:${ACC_COLOR[a]}" aria-hidden="true"></span>`;
 function deltaDe(id){
   const c = D.cambios || {};
   for (const k of ["acelera","enfria"]) for (const x of (c[k] || [])) if (x.id === id) return x.delta;
   return null;
 }
+const deltaHtml = d => d ? `<span class="delta ${d > 0 ? "sube" : "baja"}"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="${d > 0 ? "M5 1 9.5 9h-9z" : "M5 9 .5 1h9z"}"/></svg>${d > 0 ? "+" : "−"}${Math.abs(d)}<span class="sr"> de impulso en la semana</span></span>` : "";
+// porcentajes que suman exactamente 100 (método del mayor resto)
+function porcentajes(valores){
+  const total = valores.reduce((a, b) => a + b, 0);
+  if (!total) return valores.map(() => 0);
+  const brutos = valores.map(v => 100 * v / total), base = brutos.map(Math.floor);
+  let falta = 100 - base.reduce((a, b) => a + b, 0);
+  brutos.map((v, i) => [v - base[i], i]).sort((a, b) => b[0] - a[0]).forEach(([, i]) => { if (falta > 0){ base[i]++; falta--; } });
+  return base;
+}
 function coincide(t, ignorar){
+  if (ignorar !== "carrera" && filtros.carrera && !t.carreras.includes(filtros.carrera)) return false;
   if (ignorar !== "foco" && filtros.foco && !t.focos.includes(filtros.foco)) return false;
   if (ignorar !== "familia" && filtros.familia && t.familia !== filtros.familia) return false;
   if (ignorar !== "sector" && filtros.sector && !t.sectores.includes(filtros.sector)) return false;
@@ -418,13 +655,21 @@ function coincide(t, ignorar){
   }
   return true;
 }
-const hayFiltro = () => !!(filtros.foco || filtros.familia || filtros.sector || filtros.q);
+const hayFiltro = () => !!(filtros.carrera || filtros.foco || filtros.familia || filtros.sector || filtros.q);
+const visibles = () => D.tendencias.filter(t => coincide(t));
 function el(tag, attrs = {}, padre){
   const e = document.createElementNS(NS, tag);
   for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
   if (padre) padre.appendChild(e);
   return e;
 }
+const polar = (r, grados) => { const a = grados * Math.PI / 180; return [CX + r * Math.sin(a), CY - r * Math.cos(a)]; };
+function arco(r, a0, a1, horario = true){
+  const [x0, y0] = polar(r, a0), [x1, y1] = polar(r, a1);
+  const grande = Math.abs(a1 - a0) > 180 ? 1 : 0;
+  return `M${x0.toFixed(2)},${y0.toFixed(2)} A${r},${r} 0 ${grande} ${horario ? 1 : 0} ${x1.toFixed(2)},${y1.toFixed(2)}`;
+}
+const solapa = (a, b, m = 3) => a.x0 < b.x1 + m && a.x1 + m > b.x0 && a.y0 < b.y1 + m && a.y1 + m > b.y0;
 
 /* ---------- radar: geometría ---------- */
 const rDe = a => R0 + (R - 30 - R0) * Math.pow(Math.min(Math.max(a, 0), 12) / 12, 0.62);
@@ -440,21 +685,20 @@ function angulos(){
   }
   return out;
 }
-function medidor(){
+function medidor(px = 15){
   const c = document.createElement("canvas").getContext("2d");
-  c.font = "600 14.5px 'DM Sans', system-ui, sans-serif";
+  c.font = `600 ${px}px 'Source Sans 3', system-ui, sans-serif`;
   return s => c.measureText(s).width;
 }
+const radioPunto = t => 6 + 5.5 * (t.impulso ?? 30) / 100;
+const dentroCirculo = (b, margen = 2) => [[b.x0,b.y0],[b.x1,b.y0],[b.x0,b.y1],[b.x1,b.y1]].every(([x, y]) => Math.hypot(x - CX, y - CY) <= R + margen);
 function colocar(prioridad = []){
-  const ancho = medidor();
+  const ancho = medidor(15);
   const ang = angulos();
-  const ocupados = [
-    {x0:CX-30, y0:CY-16, x1:CX+30, y1:CY+30},
-  ];
+  const ocupados = [{x0:CX-30, y0:CY-16, x1:CX+30, y1:CY+30}];
   for (const a of [5, 10]) for (const s of [-1, 1]) { const x = CX + s * rDe(a); ocupados.push({x0:x-20, y0:CY-14, x1:x+20, y1:CY+14}); }
-  ocupados.push({x0:CX+R-120, y0:CY-30, x1:CX+R, y1:CY-6}, {x0:CX-R, y0:CY-30, x1:CX-R+120, y1:CY-6});
-  const choca = b => ocupados.some(o => b.x0 < o.x1 + 3 && b.x1 + 3 > o.x0 && b.y0 < o.y1 + 3 && b.y1 + 3 > o.y0);
-  const dentro = b => [[b.x0,b.y0],[b.x1,b.y0],[b.x0,b.y1],[b.x1,b.y1]].every(([x, y]) => Math.hypot(x - CX, y - CY) <= R + 2);
+  ocupados.push({x0:CX+R-150, y0:CY-30, x1:CX+R, y1:CY-6}, {x0:CX-R, y0:CY-30, x1:CX-R+150, y1:CY-6});
+  const choca = b => ocupados.some(o => solapa(b, o));
   const res = {};
   const pri = new Map(prioridad.map((id, i) => [id, i]));
   const orden = [...D.tendencias].sort((a, b) => (pri.get(a.id) ?? 1e9) - (pri.get(b.id) ?? 1e9) || a.anios - b.anios || (b.impulso ?? 0) - (a.impulso ?? 0));
@@ -469,11 +713,12 @@ function colocar(prioridad = []){
     const x0 = derecha ? x + rp + 5 : x - rp - 5 - w;
     return {x0, y0:y - h / 2, x1:x0 + w, y1:y + h / 2};
   };
+  const pend = [];
   for (const t of orden){
     const lado = t.mitad === "tec" ? 1 : -1;
     const lineas = t.corto.split("\n");
     const w = Math.max(...lineas.map(ancho)) + 16;
-    const h = lineas.length === 1 ? 23 : 40;
+    const h = lineas.length === 1 ? 24 : 42;
     const rp = radioPunto(t);
     const r0 = rDe(t.anios), a0 = ang[t.id];
     const cands = [];
@@ -493,99 +738,100 @@ function colocar(prioridad = []){
       const etq = caja(c.modo, p.x, p.y, rp, w, h, lado);
       if (lado === 1 ? etq.x0 < CX + 4 : etq.x1 > CX - 4) continue;
       const pto = {x0:p.x - rp - 2, y0:p.y - rp - 2, x1:p.x + rp + 2, y1:p.y + rp + 2};
-      if (!dentro(etq) || choca(etq) || choca(pto)) continue;
-      elegido = {x:p.x, y:p.y, etq, w, h, lineas, modo:c.modo, conEtq:true};
+      if (!dentroCirculo(etq) || choca(etq) || choca(pto)) continue;
+      elegido = {x:p.x, y:p.y, etq, w, h, lineas, conEtq:true};
       ocupados.push(etq, pto);
       break;
     }
     if (!elegido){
-      // sin sitio para la etiqueta: el punto igual busca un hueco libre y la etiqueta aparece al pasar el mouse
       let p = posicion({dr:0, da:0}) || {x:CX + lado * r0 * Math.sin(a0), y:CY - r0 * Math.cos(a0)};
       for (const c of cands){
         if (c.modo !== "fuera") continue;
         const q = posicion(c);
         if (q && !choca({x0:q.x - rp - 3, y0:q.y - rp - 3, x1:q.x + rp + 3, y1:q.y + rp + 3})){ p = q; break; }
       }
-      elegido = {x:p.x, y:p.y, etq:caja("fuera", p.x, p.y, rp, w, h, lado), w, h, lineas, modo:"fuera", conEtq:false};
+      elegido = {x:p.x, y:p.y, etq:caja("fuera", p.x, p.y, rp, w, h, lado), w, h, lineas, conEtq:false, rp, lado};
       ocupados.push({x0:p.x - rp - 2, y0:p.y - rp - 2, x1:p.x + rp + 2, y1:p.y + rp + 2});
+      pend.push(t.id);
     }
     res[t.id] = elegido;
   }
+  // segunda pasada: la etiqueta se aleja del punto y una línea guía los une
+  for (const id of pend){
+    const p = res[id];
+    let mejor = null;
+    for (const dist of [36, 52, 70, 90, 115, 140]) for (let g = 0; g < 360; g += 20){
+      const a = g * Math.PI / 180, ax = p.x + dist * Math.cos(a), ay = p.y + dist * Math.sin(a);
+      const x0 = Math.cos(a) >= 0 ? ax : ax - p.w;
+      const etq = {x0, y0:ay - p.h / 2, x1:x0 + p.w, y1:ay + p.h / 2};
+      if (p.lado === 1 ? etq.x0 < CX + 4 : etq.x1 > CX - 4) continue;
+      if (!dentroCirculo(etq) || choca(etq)) continue;
+      const guia = {x0:Math.min(p.x, ax), y0:Math.min(p.y, ay), x1:Math.max(p.x, ax), y1:Math.max(p.y, ay)};
+      mejor = {etq, guia:[p.x, p.y, Math.cos(a) >= 0 ? etq.x0 : etq.x1, ay]};
+      break;
+    }
+    if (!mejor) continue;
+    Object.assign(p, {etq:mejor.etq, guia:mejor.guia, conEtq:true});
+    ocupados.push(mejor.etq);
+  }
   return res;
-}
-function radioPunto(t){
-  const v = t.impulso ?? 30;
-  return 6 + 5.5 * v / 100;
 }
 
 /* ---------- radar: dibujo ---------- */
 function dibujarFondo(svg){
   const defs = el("defs", {}, svg);
-  const g1 = el("radialGradient", {id:"gSoc", cx:"500", cy:"500", r:"440", gradientUnits:"userSpaceOnUse"}, defs);
-  el("stop", {offset:"0", "stop-color":"#BFE6D3"}, g1); el("stop", {offset:".55", "stop-color":"#DFF3E9"}, g1); el("stop", {offset:"1", "stop-color":"#F5FBF8"}, g1);
-  const g2 = el("radialGradient", {id:"gTec", cx:"500", cy:"500", r:"440", gradientUnits:"userSpaceOnUse"}, defs);
-  el("stop", {offset:"0", "stop-color":"#C3D9F6"}, g2); el("stop", {offset:".55", "stop-color":"#E0EBFA"}, g2); el("stop", {offset:"1", "stop-color":"#F4F8FE"}, g2);
-  const gb = el("linearGradient", {id:"gBanda", x1:"0", x2:"1", y1:"0", y2:"0"}, defs);
-  el("stop", {offset:"0", "stop-color":"#0E8F66"}, gb); el("stop", {offset:".5", "stop-color":"#1592A0"}, gb); el("stop", {offset:"1", "stop-color":"#1B6BD3"}, gb);
-  const gs = el("linearGradient", {id:"gBarrido", x1:"0", x2:"1", y1:"0", y2:"0"}, defs);
-  el("stop", {offset:"0", "stop-color":"#fff", "stop-opacity":"0"}, gs); el("stop", {offset:"1", "stop-color":"#fff", "stop-opacity":".75"}, gs);
-  // banda exterior
-  el("circle", {cx:CX, cy:CY, r:474, fill:"none", stroke:"url(#gBanda)", "stroke-width":44}, svg);
+  const grad = (id, stops) => { const g = el("radialGradient", {id, cx:CX, cy:CY, r:R, gradientUnits:"userSpaceOnUse"}, defs); stops.forEach(([o, c]) => el("stop", {offset:o, "stop-color":c}, g)); };
+  grad("gSoc", [["0", "#FFD4B5"], [".5", "#FFE8D8"], ["1", "#FFF7F1"]]);
+  grad("gTec", [["0", "#C7D6F0"], [".5", "#E2EAF8"], ["1", "#F5F8FD"]]);
+  const gs = el("linearGradient", {id:"gAguja", x1:"0", x2:"1", y1:"0", y2:"0"}, defs);
+  el("stop", {offset:"0", "stop-color":"#fff", "stop-opacity":"0"}, gs); el("stop", {offset:"1", "stop-color":"#fff", "stop-opacity":".8"}, gs);
+  // banda exterior: cuatro arcos con cortes blancos (impacto arriba y abajo, mitades a los lados)
+  const BANDA = [[-33, 33, "#0D2960"], [35, 145, "#1D428A"], [147, 213, "#0D2960"], [215, 325, "#F56200"]];
+  for (const [a0, a1, c] of BANDA) el("path", {d:arco(474, a0, a1), fill:"none", stroke:c, "stroke-width":44}, svg);
   el("circle", {cx:CX, cy:CY, r:R + 6, fill:"#fff"}, svg);
-  // mitades
   el("path", {d:`M${CX},${CY - R} A${R},${R} 0 0 0 ${CX},${CY + R} Z`, fill:"url(#gSoc)"}, svg);
   el("path", {d:`M${CX},${CY - R} A${R},${R} 0 0 1 ${CX},${CY + R} Z`, fill:"url(#gTec)"}, svg);
-  // anillos por año
   for (let a = 1; a <= 11; a++){
     const fuerte = a === 5 || a === 10;
-    el("circle", {cx:CX, cy:CY, r:rDe(a), fill:"none", stroke: fuerte ? "#5E7A8C" : "#FFFFFF", "stroke-opacity": fuerte ? .55 : .85, "stroke-width": fuerte ? 1.6 : 1.1}, svg);
+    el("circle", {cx:CX, cy:CY, r:rDe(a), fill:"none", stroke: fuerte ? "#6A7D9C" : "#FFFFFF", "stroke-opacity": fuerte ? .55 : .9, "stroke-width": fuerte ? 1.5 : 1.1}, svg);
   }
-  // ejes
-  el("line", {x1:CX - R, y1:CY, x2:CX + R, y2:CY, stroke:"#5E7A8C", "stroke-opacity":.5, "stroke-width":1.4}, svg);
-  el("line", {x1:CX, y1:CY - R, x2:CX, y2:CY + R, stroke:"#5E7A8C", "stroke-opacity":.35, "stroke-width":1.2, "stroke-dasharray":"4 6"}, svg);
+  el("line", {x1:CX - R, y1:CY, x2:CX + R, y2:CY, stroke:"#6A7D9C", "stroke-opacity":.5, "stroke-width":1.2}, svg);
+  el("line", {x1:CX, y1:CY - R, x2:CX, y2:CY + R, stroke:"#6A7D9C", "stroke-opacity":.35, "stroke-width":1}, svg);
   for (const a of [5, 10]) for (const s of [-1, 1]){
     const x = CX + s * rDe(a);
-    el("rect", {x:x - 15, y:CY - 11, width:30, height:22, rx:6, fill: a === 5 ? "#33546B" : "#5E7A8C"}, svg);
-    const tx = el("text", {x, y:CY + 5, "text-anchor":"middle", "font-size":13, "font-weight":700, fill:"#fff", "font-family":"DM Sans, sans-serif"}, svg);
+    const g = el("g", {class:"anio", "data-x":x}, svg);
+    el("rect", {x:x - 16, y:CY - 12, width:32, height:24, rx:7, fill: a === 5 ? "#1D428A" : "#56657E"}, g);
+    const tx = el("text", {x, y:CY + 5.5, "text-anchor":"middle", "font-size":14, "font-weight":700, fill:"#fff", "font-family":"Montserrat, sans-serif"}, g);
     tx.textContent = a;
   }
   for (const s of [-1, 1]){
-    const tx = el("text", {x:CX + s * (R - 14), y:CY - 14, "text-anchor": s > 0 ? "end" : "start", "font-size":12, "font-weight":700, "letter-spacing":".08em", fill:"#4A6375", "font-family":"DM Sans, sans-serif"}, svg);
+    const tx = el("text", {class:"solo-ancho-svg", x:CX + s * (R - 14), y:CY - 15, "text-anchor": s > 0 ? "end" : "start", "font-size":13, "font-weight":700, "letter-spacing":".04em", fill:"#3D4E6C", "font-family":"Source Sans 3, sans-serif"}, svg);
     tx.textContent = "AÑOS PARA LA ADOPCIÓN";
   }
-  // textos curvos de la banda
-  const arcos = [
-    ["aTop", `M${CX - 474 * Math.sin(.55)},${CY - 474 * Math.cos(.55)} A474,474 0 0 1 ${CX + 474 * Math.sin(.55)},${CY - 474 * Math.cos(.55)}`, "MÁS IMPACTO"],
-    ["aBot", `M${CX - 474 * Math.sin(.55)},${CY + 474 * Math.cos(.55)} A474,474 0 0 0 ${CX + 474 * Math.sin(.55)},${CY + 474 * Math.cos(.55)}`, "MENOS IMPACTO"],
-    ["aIzq", `M${CX - 474 * Math.cos(1.1)},${CY + 474 * Math.sin(1.1)} A474,474 0 0 1 ${CX - 474 * Math.cos(1.1)},${CY - 474 * Math.sin(1.1)}`, "SOCIEDAD Y NEGOCIO"],
-    ["aDer", `M${CX + 474 * Math.cos(1.1)},${CY - 474 * Math.sin(1.1)} A474,474 0 0 1 ${CX + 474 * Math.cos(1.1)},${CY + 474 * Math.sin(1.1)}`, "TECNOLOGÍA"],
+  const TEXTOS = [
+    ["aTop", arco(474, -30, 30), "MÁS IMPACTO", "#fff"],
+    ["aBot", arco(474, 210, 150, false), "MENOS IMPACTO", "#fff"],
+    ["aIzq", arco(474, 230, 310), "SOCIEDAD Y NEGOCIO", "#0A1F47"],
+    ["aDer", arco(474, 50, 130), "TECNOLOGÍA", "#fff"],
   ];
-  for (const [id, d, txt] of arcos){
+  for (const [id, d, txt, color] of TEXTOS){
     el("path", {id, d, fill:"none"}, defs);
-    const t = el("text", {"font-size":19, "font-weight":700, "letter-spacing":".16em", fill:"#fff", "font-family":"Outfit, sans-serif", dy:6.5}, svg);
+    const t = el("text", {class:"txt-banda", "font-size":19, "font-weight":800, "letter-spacing":".12em", fill:color, "font-family":"Montserrat, sans-serif", dy:6.8}, svg);
     const tp = el("textPath", {href:"#" + id, startOffset:"50%", "text-anchor":"middle"}, t);
     tp.textContent = txt;
   }
-  // flechas pequeñas en la banda
-  for (const g of [20, 70, 110, 160, 200, 250, 290, 340]){
-    const a = g * Math.PI / 180, x = CX + 474 * Math.sin(a), y = CY - 474 * Math.cos(a);
-    el("circle", {cx:x, cy:y, r:2.4, fill:"#fff", "fill-opacity":.7}, svg);
-  }
 }
 function dibujarRadar(){
-  const svg = $("#radar");
+  const svg = $("#lienzo-radar");
   dibujarFondo(svg);
-  const capaNodos = el("g", {id:"nodos"}, svg);
-  // centro
-  el("circle", {class:"hoy-pulso", cx:CX, cy:CY, r:9, fill:"#E5413A", "fill-opacity":.45}, svg);
-  el("circle", {cx:CX, cy:CY, r:9, fill:"#E5413A", stroke:"#fff", "stroke-width":3}, svg);
-  const hoy = el("text", {x:CX, y:CY + 26, "text-anchor":"middle", "font-size":12, "font-weight":700, "letter-spacing":".1em", fill:"#9B2C26", "font-family":"DM Sans, sans-serif"}, svg);
+  const capa = el("g", {id:"nodos"}, svg);
+  el("circle", {class:"hoy-pulso", cx:CX, cy:CY, r:9, fill:"#F56200", "fill-opacity":.5}, svg);
+  el("circle", {cx:CX, cy:CY, r:9.5, fill:"#0D2960", stroke:"#fff", "stroke-width":3}, svg);
+  const hoy = el("text", {id:"txt-hoy", x:CX, y:CY + 27, "text-anchor":"middle", "font-size":13, "font-weight":800, "letter-spacing":".08em", fill:"#0D2960", "font-family":"Montserrat, sans-serif"}, svg);
   hoy.textContent = "HOY";
-  // barrido inicial (una sola vuelta)
-  const barr = el("path", {class:"barrido", d:`M${CX},${CY} L${CX},${CY - R} A${R},${R} 0 0 1 ${CX + R * Math.sin(.5)},${CY - R * Math.cos(.5)} Z`, fill:"url(#gBarrido)", "pointer-events":"none"}, svg);
-  barr.addEventListener("animationend", () => barr.remove());
+  const aguja = el("path", {class:"aguja", d:`M${CX},${CY} L${CX},${CY - R} A${R},${R} 0 0 1 ${CX + R * Math.sin(.5)},${CY - R * Math.cos(.5)} Z`, fill:"url(#gAguja)", "pointer-events":"none"}, svg);
+  aguja.addEventListener("animationend", () => aguja.remove());
 
-  // si alguna tendencia se queda sin etiqueta, se reintenta colocándola primero (hasta 4 veces)
   let pos = colocar(), prioridad = [];
   const faltan = p => Object.keys(p).filter(id => !p[id].conEtq);
   for (let i = 0; i < 4 && faltan(pos).length; i++){
@@ -593,68 +839,164 @@ function dibujarRadar(){
     const alt = colocar(prioridad);
     if (faltan(alt).length < faltan(pos).length) pos = alt;
   }
-  const calientes = new Set([...D.tendencias].filter(t => t.impulso != null).sort((a, b) => b.impulso - a.impulso).slice(0, 5).map(t => t.id));
+  if (faltan(pos).length) console.warn("Radar: tendencias sin etiqueta fija:", faltan(pos));
+  const porImpulso = [...D.tendencias].filter(t => t.impulso != null).sort((a, b) => b.impulso - a.impulso);
+  const calientes = new Set(porImpulso.slice(0, 5).map(t => t.id));
+  const reloj = id => { const p = pos[id]; const a = Math.atan2(p.x - CX, -(p.y - CY)); return (a + 2 * Math.PI) % (2 * Math.PI); };
+  ordenRadar = D.tendencias.map(t => t.id).sort((a, b) => reloj(a) - reloj(b));
   for (const t of D.tendencias){
     const p = pos[t.id];
     const col = COLOR[t.mitad];
     const rp = radioPunto(t);
-    const g = el("g", {class:"nodo entra" + (p.conEtq ? "" : " sin-etq") + (calientes.has(t.id) ? " caliente" : ""), "data-id":t.id, tabindex:0, role:"button",
-      "aria-label":`${t.nombre}: ${aniosTxt(t.anios)} para la adopción, impacto ${impactoTxt(t.impacto).toLowerCase()}, impulso ${t.impulso ?? "sin datos"}`, style:`color:${col}`}, capaNodos);
-    const angReloj = Math.atan2(p.x - CX, -(p.y - CY));
-    const frac = ((angReloj + 2 * Math.PI) % (2 * Math.PI)) / (2 * Math.PI);
-    g.style.animationDelay = (0.1 + frac * 1.25).toFixed(2) + "s";
+    const g = el("g", {class:"nodo entra" + (p.conEtq ? "" : " sin-etq") + (calientes.has(t.id) ? " caliente" : ""), "data-id":t.id, tabindex:-1, role:"button",
+      "aria-label":`${t.nombre}: ${aniosTxt(t.anios)} para la adopción, impacto ${impactoTxt(t.impacto).toLowerCase()}, impulso ${t.impulso ?? "sin datos"}, acción sugerida: ${accionNombre(t.accion).toLowerCase()}`, style:`color:${col}`}, capa);
+    g.style.animationDelay = (0.1 + reloj(t.id) / (2 * Math.PI) * 1.25).toFixed(2) + "s";
+    g.addEventListener("animationend", e => { if (e.animationName === "aparecer") g.classList.remove("entra"); });
+    if (p.guia) el("line", {class:"guia", x1:p.guia[0], y1:p.guia[1], x2:p.guia[2], y2:p.guia[3]}, g);
     if (calientes.has(t.id)) el("circle", {class:"halo", cx:p.x, cy:p.y, r:rp + 6, stroke:col}, g);
-    el("circle", {class:"toque", cx:p.x, cy:p.y, r:Math.max(rp + 10, 20), fill:"transparent"}, g);
+    el("circle", {class:"anillo", cx:p.x, cy:p.y, r:rp + 9, stroke:col}, g);
+    el("circle", {cx:p.x, cy:p.y, r:20, fill:"transparent"}, g);
     el("circle", {class:"punto", cx:p.x, cy:p.y, r:rp, fill:col, stroke:"#fff", "stroke-width":2.2, "data-r":rp}, g);
+    // movimiento de la semana como marca fija (se ve aunque Windows no muestre animaciones)
+    const d = deltaDe(t.id);
+    if (d){
+      const mx = p.x + rp * .8, my = p.y - rp * .8;
+      el("path", {class:"marca-mov", d: d > 0 ? `M${mx},${my - 6}l5,8h-10z` : `M${mx},${my + 4}l5,-8h-10z`, fill: d > 0 ? "#0F8A5F" : "#C2362F"}, g);
+    }
     const etq = el("g", {class:"etq"}, g);
     el("rect", {x:p.etq.x0, y:p.etq.y0, width:p.w, height:p.h, rx:7}, etq);
-    const tx = el("text", {x:p.etq.x0 + 8, y:p.etq.y0 + (p.lineas.length === 1 ? 16 : 16)}, etq);
-    p.lineas.forEach((l, i) => { const s = el("tspan", {x:p.etq.x0 + 8, dy: i ? 17 : 0}, tx); s.textContent = l; });
-    g.addEventListener("click", () => abrir(t.id));
-    g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrir(t.id); } });
+    const tx = el("text", {x:p.etq.x0 + 8, y:p.etq.y0 + 16.5}, etq);
+    p.lineas.forEach((l, i) => { const s = el("tspan", {x:p.etq.x0 + 8, dy: i ? 18 : 0}, tx); s.textContent = l; });
+    g.addEventListener("click", () => { if (!svg.classList.contains("compacto")) abrir(t.id); });
+    g.addEventListener("keydown", e => teclaNodo(e, t.id));
     g.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") globo(t, g); });
     g.addEventListener("pointerleave", () => ocultarGlobo());
     g.addEventListener("focus", () => globo(t, g));
     g.addEventListener("blur", () => ocultarGlobo());
   }
+  capa.querySelector(`[data-id="${ordenRadar[0]}"]`).setAttribute("tabindex", 0);
+  etiquetasMovil(svg, pos, porImpulso.slice(0, 5));
+  // en el celular: se abre el punto más cercano al dedo (hasta ~24 px), no hace falta acertarle al punto
+  svg.addEventListener("click", e => {
+    if (!svg.classList.contains("compacto")) return;
+    const r = svg.getBoundingClientRect(), escala = 1000 / r.width;
+    const x = (e.clientX - r.left) * escala, y = (e.clientY - r.top) * escala;
+    let mejor = null, dist = 24 * escala;
+    for (const t of D.tendencias){
+      if (!coincide(t)) continue;
+      const p = pos[t.id], dd = Math.hypot(p.x - x, p.y - y);
+      if (dd < dist){ dist = dd; mejor = t.id; }
+    }
+    if (mejor) abrir(mejor);
+  });
   const ajustar = () => {
     const compacto = svg.getBoundingClientRect().width < 560;
     svg.classList.toggle("compacto", compacto);
     svg.querySelectorAll(".punto").forEach(c => c.setAttribute("r", (+c.dataset.r) * (compacto ? 1.7 : 1)));
-    // en el celular la zona que responde al dedo es más grande que el punto (≈ 24 px)
-    svg.querySelectorAll(".toque").forEach(c => c.setAttribute("r", compacto ? 34 : 20));
+    // textos legibles en el celular: la banda y el centro crecen; los números de años, también
+    svg.querySelectorAll(".txt-banda").forEach(t => t.setAttribute("font-size", compacto ? 30 : 19));
+    $("#txt-hoy").setAttribute("font-size", compacto ? 30 : 13);
+    $("#txt-hoy").setAttribute("y", CY + (compacto ? 42 : 27));
+    svg.querySelectorAll(".anio").forEach(g => g.setAttribute("transform", compacto ? `translate(${+g.dataset.x * -0.9} ${CY * -0.9}) scale(1.9)` : ""));
     $("#pista-movil").classList.toggle("oculto", !compacto);
   };
   ajustar();
   new ResizeObserver(ajustar).observe(svg);
+  new IntersectionObserver(([e]) => svg.classList.toggle("en-pantalla", e.isIntersecting)).observe(svg);
+}
+// en el celular las etiquetas normales serían ilegibles: se nombran solo las 5 con más impulso, con letra grande
+function etiquetasMovil(svg, pos, top){
+  const ancho = medidor(34);
+  const capa = el("g", {class:"etq-movil", "aria-hidden":"true"}, svg);
+  const puntos = D.tendencias.map(t => { const p = pos[t.id], r = radioPunto(t) * 1.7 + 3; return {id:t.id, x0:p.x - r, y0:p.y - r, x1:p.x + r, y1:p.y + r}; });
+  const etiquetas = [{x0:CX - 70, y0:CY - 24, x1:CX + 70, y1:CY + 64}];
+  for (const t of top){
+    const p = pos[t.id], rp = radioPunto(t) * 1.7, txt = nombreCorto(t);
+    const w = ancho(txt) + 24, h = 52;
+    // entre todas las posiciones válidas, la que tape menos puntos (nunca otra etiqueta ni su propio punto)
+    let mejor = null;
+    for (const sep of [8, 40, 80]) for (const [dx, dy] of [[1, 0], [-1, 0], [0, -1], [0, 1], [1, -1], [-1, -1], [1, 1], [-1, 1]]){
+      const x0 = dx > 0 ? p.x + rp + sep : dx < 0 ? p.x - rp - sep - w : p.x - w / 2;
+      const y0 = dy < 0 ? p.y - rp - sep - h : dy > 0 ? p.y + rp + sep : p.y - h / 2;
+      const b = {x0, y0, x1:x0 + w, y1:y0 + h};
+      if (!dentroCirculo(b, -4) || etiquetas.some(o => solapa(b, o, 6))) continue;
+      const tapa = puntos.filter(o => solapa(b, o, 0));
+      if (tapa.some(o => o.id === t.id)) continue;
+      const costo = tapa.length * 10 + sep / 8;
+      if (!mejor || costo < mejor.costo) mejor = {b, costo, sep, dx, dy};
+    }
+    if (!mejor) continue;
+    const b = mejor.b;
+    etiquetas.push(b);
+    if (mejor.sep > 8){
+      const ax = Math.min(Math.max(p.x, b.x0), b.x1), ay = Math.min(Math.max(p.y, b.y0), b.y1);
+      el("line", {x1:p.x, y1:p.y, x2:ax, y2:ay, stroke:"#34435E", "stroke-width":3}, capa);
+    }
+    el("rect", {x:b.x0, y:b.y0, width:w, height:h, rx:12}, capa);
+    const tx = el("text", {x:b.x0 + 12, y:b.y0 + 36, "font-size":34}, capa);
+    tx.textContent = txt;
+  }
+}
+function teclaNodo(e, id){
+  const i = ordenRadar.indexOf(id);
+  let j = null;
+  if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrir(id); return; }
+  if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % ordenRadar.length;
+  if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + ordenRadar.length) % ordenRadar.length;
+  if (e.key === "Home") j = 0;
+  if (e.key === "End") j = ordenRadar.length - 1;
+  if (j === null) return;
+  e.preventDefault();
+  const capa = $("#nodos");
+  capa.querySelectorAll(".nodo").forEach(n => n.setAttribute("tabindex", -1));
+  const sig = capa.querySelector(`[data-id="${ordenRadar[j]}"]`);
+  sig.setAttribute("tabindex", 0);
+  sig.focus();
 }
 function globo(t, g){
-  const b = $("#globo");
   const d = deltaDe(t.id);
-  b.innerHTML = `<b>${esc(t.nombre)}</b><span>${aniosTxt(t.anios)} · impacto ${impactoTxt(t.impacto).toLowerCase()} · impulso ${t.impulso ?? "—"}${d ? ` (${d > 0 ? "+" : ""}${d})` : ""}</span>`;
+  $("#globo").innerHTML = `<b>${esc(t.nombre)}</b><span>${accionNombre(t.accion)} · ${aniosTxt(t.anios)} · impulso ${t.impulso ?? "—"}${d ? ` (${d > 0 ? "+" : "−"}${Math.abs(d)})` : ""}</span>`;
   const r = g.querySelector(".punto").getBoundingClientRect();
+  posicionarGlobo(r.left + r.width / 2, r.top, r.bottom);
+}
+function posicionarGlobo(cx, arriba, abajo){
+  const b = $("#globo");
   b.classList.add("ver");
   const bw = b.offsetWidth, bh = b.offsetHeight;
-  let x = r.left + r.width / 2 - bw / 2, y = r.top - bh - 10;
-  if (y < 8) y = r.bottom + 10;
+  let x = cx - bw / 2, y = arriba - bh - 10;
+  if (y < 8) y = abajo + 10;
   x = Math.max(8, Math.min(innerWidth - bw - 8, x));
   b.style.left = x + "px"; b.style.top = y + "px";
 }
 const ocultarGlobo = () => $("#globo").classList.remove("ver");
+// resaltado enlazado: al pasar por una fila o etiqueta, su punto se enciende en el radar
+function enlazar(elemento, id){
+  const on = () => { const n = document.querySelector(`.nodo[data-id="${id}"]`); if (n){ n.classList.add("enlazado"); n.parentNode.appendChild(n); } };
+  const off = () => document.querySelector(`.nodo[data-id="${id}"]`)?.classList.remove("enlazado");
+  elemento.addEventListener("pointerenter", on);
+  elemento.addEventListener("pointerleave", off);
+  elemento.addEventListener("focusin", on);
+  elemento.addEventListener("focusout", off);
+}
 
 /* ---------- filtros ---------- */
 function dibujarFiltros(){
+  const sel = $("#carrera");
+  for (const [id, nombre] of Object.entries(D.catalogo.carreras)){
+    const o = document.createElement("option"); o.value = id; o.dataset.nombre = nombre; o.textContent = nombre; sel.appendChild(o);
+  }
+  sel.addEventListener("change", () => { filtros.carrera = sel.value; aplicarFiltros(); });
   const grupos = [
-    ["foco", "Áreas de impacto", D.catalogo.focos, t => t.focos],
-    ["familia", "Familias", Object.fromEntries(Object.entries(D.catalogo.familias).map(([k, v]) => [k, v.nombre])), t => [t.familia]],
-    ["sector", "Sectores", D.catalogo.sectores, t => t.sectores],
+    ["sector", "Sectores", D.catalogo.sectores, true],
+    ["foco", "Áreas de impacto", D.catalogo.focos, false],
+    ["familia", "Familias", Object.fromEntries(Object.entries(D.catalogo.familias).map(([k, v]) => [k, v.nombre])), false],
   ];
   const cont = $("#grupos");
   cont.innerHTML = "";
-  for (const [clave, titulo, opciones, valores] of grupos){
+  for (const [clave, titulo, opciones, abierto] of grupos){
     const det = document.createElement("details");
-    det.className = "grupo"; det.open = clave === "foco";
-    det.innerHTML = `<summary>${titulo}<svg class="flecha" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></summary><div class="chips"></div>`;
+    det.className = "grupo"; det.open = abierto;
+    det.innerHTML = `<summary>${titulo}${icono("abajo")}</summary><div class="chips" role="group" aria-label="${titulo}"></div>`;
     const chips = det.querySelector(".chips");
     for (const [id, nombre] of Object.entries(opciones)){
       const b = document.createElement("button");
@@ -665,15 +1007,23 @@ function dibujarFiltros(){
       b.addEventListener("click", () => { filtros[clave] = filtros[clave] === id ? null : id; aplicarFiltros(); });
       chips.appendChild(b);
     }
-    det._valores = valores;
     cont.appendChild(det);
   }
   let tmr;
   $("#q").addEventListener("input", e => { clearTimeout(tmr); tmr = setTimeout(() => { filtros.q = sinTildes(e.target.value.trim()); aplicarFiltros(); }, 120); });
-  $("#limpiar").addEventListener("click", () => { filtros.foco = filtros.familia = filtros.sector = null; filtros.q = ""; $("#q").value = ""; aplicarFiltros(); });
+  $("#limpiar").addEventListener("click", () => { filtros.foco = filtros.familia = filtros.sector = null; filtros.carrera = ""; filtros.q = ""; $("#q").value = ""; $("#carrera").value = ""; aplicarFiltros(); });
+  // en el celular los filtros extra empiezan plegados, encima del radar
+  const mas = $("#mas-filtros"), mq = matchMedia("(max-width:860px)");
+  const sync = () => { mas.open = !mq.matches; };
+  sync(); mq.addEventListener("change", sync);
 }
 function aplicarFiltros(){
-  // conteo de cada opción = lo que se verá al tocarla (con los demás filtros como están)
+  // el número de cada opción es lo que se verá al elegirla, con los demás filtros como están
+  for (const o of $("#carrera").options){
+    if (!o.value) continue;
+    const n = D.tendencias.filter(t => coincide(t, "carrera") && t.carreras.includes(o.value)).length;
+    o.textContent = `${o.dataset.nombre} (${n})`;
+  }
   document.querySelectorAll(".chip").forEach(b => {
     const g = b.dataset.grupo, id = b.dataset.id;
     const n = D.tendencias.filter(t => coincide(t, g) && (g === "foco" ? t.focos.includes(id) : g === "familia" ? t.familia === id : t.sectores.includes(id))).length;
@@ -682,30 +1032,41 @@ function aplicarFiltros(){
     b.setAttribute("aria-pressed", activo);
     b.disabled = !activo && n === 0;
   });
-  const visibles = D.tendencias.filter(t => coincide(t));
-  const ids = new Set(visibles.map(t => t.id));
+  const vis = visibles();
+  const ids = new Set(vis.map(t => t.id));
   document.querySelectorAll(".nodo").forEach(n => n.classList.toggle("apagado", !ids.has(n.dataset.id)));
-  $("#cuenta-filtro").textContent = hayFiltro() ? `Mostrando ${visibles.length} de ${D.tendencias.length}` : `${D.tendencias.length} tendencias`;
+  document.querySelectorAll(".punto-m").forEach(n => n.classList.toggle("apagado", !ids.has(n.dataset.id)));
+  $("#cuenta-filtro").textContent = hayFiltro() ? `Mostrando ${vis.length} de ${D.tendencias.length}` : `${D.tendencias.length} tendencias`;
   $("#limpiar").classList.toggle("oculto", !hayFiltro());
-  limiteNoticias = 12;
+  limiteRegion.pe = 6; limiteRegion.la = 6; limiteRegion.mu = 9;
+  dibujarDecidir();
   dibujarNoticias();
-  dibujarTodas();
+  dibujarTabla();
+}
+function textoFiltros(){
+  const partes = [];
+  if (filtros.carrera) partes.push(D.catalogo.carreras[filtros.carrera]);
+  if (filtros.sector) partes.push(D.catalogo.sectores[filtros.sector]);
+  if (filtros.foco) partes.push(D.catalogo.focos[filtros.foco]);
+  if (filtros.familia) partes.push(D.catalogo.familias[filtros.familia].nombre);
+  if (filtros.q) partes.push(`«${filtros.q}»`);
+  return partes.join(" · ");
 }
 
 /* ---------- lateral ---------- */
 function filaTendencia(t, extra){
-  const b = document.createElement("button");
-  b.type = "button"; b.className = "fila-t";
-  b.innerHTML = `<span class="bola" style="background:${COLOR[t.mitad]}"></span><span><span class="nom">${esc(t.corto.replace(/\n/g, " "))}</span><br><span class="det">${extra}</span></span>` +
-    `<span class="imp-num"><span class="medidor" title="Impulso ${t.impulso ?? "—"} de 100"><i style="width:${t.impulso ?? 0}%"></i></span><b>${t.impulso ?? "—"}</b></span>`;
+  const li = document.createElement("li");
+  li.innerHTML = `<button type="button" class="fila-t"><span class="bola ${t.mitad}"></span><span><span class="nom">${esc(nombreCorto(t))}</span><br><span class="det">${extra}</span></span>` +
+    `<span class="imp-num"><span class="medidor" aria-hidden="true"><i style="width:${t.impulso ?? 0}%"></i></span><b><span class="sr">Impulso </span>${t.impulso ?? "—"}</b></span></button>`;
+  const b = li.firstChild;
   b.addEventListener("click", () => abrir(t.id));
-  return b;
+  enlazar(b, t.id);
+  return li;
 }
 function dibujarLateral(){
   const top = [...D.tendencias].filter(t => t.impulso != null).sort((a, b) => b.impulso - a.impulso).slice(0, 6);
   const c = $("#top-impulso"); c.innerHTML = "";
   for (const t of top) c.appendChild(filaTendencia(t, `${t.n7} señales esta semana`));
-
   const cam = D.cambios || {};
   const grupos = [["acelera","Acelera", x => `+${x.delta} de impulso`], ["enfria","Se enfría", x => `${x.delta} de impulso`],
                   ["acerca","Se acerca", x => `${String(x.delta).replace(".", ",")} años`], ["aleja","Se aleja", x => `+${String(x.delta).replace(".", ",")} años`]];
@@ -718,108 +1079,315 @@ function dibujarLateral(){
       const lst = (cam[k] || []).filter(x => T[x.id]).slice(0, 3);
       if (!lst.length) continue;
       const div = document.createElement("div"); div.className = "cambio";
-      div.innerHTML = `<h3>${tit}</h3>`;
-      for (const x of lst) div.appendChild(filaTendencia(T[x.id], fmt(x)));
+      div.innerHTML = `<h3>${tit}</h3><ul class="filas"></ul>`;
+      for (const x of lst) div.querySelector("ul").appendChild(filaTendencia(T[x.id], fmt(x)));
       cc.appendChild(div);
     }
   }
   const e = D.estado;
-  $("#semana-sub").textContent = `${nf.format(e.senales_7d)} señales de ${nf.format(e.medios_7d)} medios en los últimos 7 días.`;
+  $("#cifras-semana").innerHTML = `<li><b>${nf.format(e.senales_7d)}</b><span>señales</span></li><li><b>${nf.format(e.pe_7d || 0)}</b><span>sobre Perú</span></li><li><b>${nf.format(e.la_7d || 0)}</b><span>Latinoamérica</span></li>`;
   const tot = {lanzamiento:0, inversion:0, investigacion:0, regulacion:0, otro:0};
   for (const t of D.tendencias) for (const k in tot) tot[k] += (t.mezcla?.[k] || 0);
-  const suma = Object.values(tot).reduce((a, b) => a + b, 0) || 1;
-  $("#semana-tipos").innerHTML = `<div class="sub" style="margin:0">Tipo de señal (60 días)</div>` + barraMezcla(tot, suma);
+  $("#semana-tipos").innerHTML = `<p class="sub" style="margin:0">Tipo de señal en los últimos 60 días · ${nf.format(e.medios_7d)} medios esta semana</p>` + barraMezcla(tot);
 }
-function barraMezcla(m, suma){
-  const ks = ["lanzamiento","inversion","investigacion","regulacion","otro"];
-  return `<div class="mezcla-barra">${ks.map(k => `<i style="width:${100 * (m[k] || 0) / suma}%;background:var(--t-${k})" title="${TIPOS[k]}: ${m[k] || 0}"></i>`).join("")}</div>` +
-    `<div class="mezcla-ley">${ks.filter(k => m[k]).map(k => `<span class="tipo ${k}">${TIPOS[k]} ${Math.round(100 * m[k] / suma)} %</span>`).join("")}</div>`;
+function barraMezcla(m){
+  const ks = ["lanzamiento","inversion","investigacion","regulacion","otro"].filter(k => m[k]);
+  const pc = porcentajes(ks.map(k => m[k]));
+  return `<div class="mezcla-barra" role="img" aria-label="${ks.map((k, i) => `${TIPOS[k]} ${pc[i]} %`).join(", ")}">${ks.map(k => `<i style="flex:${m[k]};background:${TIPO_COLOR[k]}"></i>`).join("")}</div>` +
+    `<ul class="mezcla-ley">${ks.map((k, i) => `<li><i style="background:${TIPO_COLOR[k]}"></i>${TIPOS[k]} ${pc[i]} %</li>`).join("")}</ul>`;
+}
+
+/* ---------- para decidir ---------- */
+function dibujarDecidir(){
+  const vis = visibles();
+  const filtro = textoFiltros();
+  $("#decidir-sub").textContent = (filtro ? `Con tu selección (${filtro}). ` : "") +
+    "Qué hacer con cada tendencia, cuándo llega, dónde hay movimiento en Perú y dónde está entrando el dinero. Indicadores de los últimos 30 días.";
+  // tablero de acciones
+  const cont = $("#acciones"); cont.innerHTML = "";
+  for (const a of ACC_ORDEN){
+    const lst = vis.filter(t => t.accion === a).sort((x, y) => (y.impulso ?? -1) - (x.impulso ?? -1));
+    const col = document.createElement("div"); col.className = "accion-col";
+    col.innerHTML = `<h3>${marcaAccion(a)}${accionNombre(a)}<span class="n">${lst.length}</span></h3><p class="regla">${ACC_REGLA[a]}</p><ol></ol>` +
+      (lst.length > 7 ? `<p class="mas-items">y ${lst.length - 7} más en la tabla.</p>` : "") + (lst.length ? "" : `<p class="mas-items">Ninguna con tu selección.</p>`);
+    const ol = col.querySelector("ol");
+    for (const t of lst.slice(0, 7)){
+      const li = document.createElement("li");
+      li.innerHTML = `<button type="button"><span class="bola ${t.mitad}"></span><span>${esc(nombreCorto(t))}</span><span class="v">${aniosTxt(t.anios)} · impulso ${t.impulso ?? "—"}</span></button>`;
+      li.firstChild.addEventListener("click", () => abrir(t.id));
+      enlazar(li.firstChild, t.id);
+      ol.appendChild(li);
+    }
+    cont.appendChild(col);
+  }
+  dibujarMatriz(vis);
+  // cerca de ti
+  const cerca = vis.filter(t => t.pe30 + t.la30 > 0).sort((a, b) => (b.pe30 + b.la30) - (a.pe30 + a.la30) || b.pe30 - a.pe30).slice(0, 8);
+  barrasH($("#cerca"), cerca, t => t.pe30 + t.la30, "var(--azul)", t => `${t.pe30} Perú · ${t.la30} región`,
+    "Todavía no hay historias sobre Perú o Latinoamérica para esta selección.");
+  // dónde se invierte
+  const inv = vis.filter(t => t.inv30 > 0).sort((a, b) => b.inv30 - a.inv30).slice(0, 8);
+  barrasH($("#inversion"), inv, t => t.inv30, "var(--t-inversion)", t => `${t.inv30} ${t.inv30 === 1 ? "historia" : "historias"}`,
+    "Sin historias de inversión en los últimos 30 días para esta selección.");
+  // oportunidades
+  const op = vis.filter(t => t.oportunidad).sort((a, b) => (b.impulso ?? 0) - (a.impulso ?? 0));
+  const ul = $("#oportunidades"); ul.innerHTML = "";
+  if (!op.length) ul.innerHTML = `<li class="vacio">Por ahora no hay brechas claras: lo que crece en el mundo también se mueve aquí.</li>`;
+  for (const t of op.slice(0, 6)){
+    const li = document.createElement("li");
+    li.innerHTML = `<button type="button"><b>${esc(t.nombre)}</b><span>Impulso ${t.impulso} · ${t.n30} historias en el mundo y ${t.pe30 + t.la30} sobre Perú o la región (30 días)</span></button>`;
+    li.firstChild.addEventListener("click", () => abrir(t.id));
+    enlazar(li.firstChild, t.id);
+    ul.appendChild(li);
+  }
+}
+function barrasH(ul, lst, valor, color, etiqueta, vacio){
+  ul.innerHTML = "";
+  if (!lst.length){ ul.innerHTML = `<li class="vacio">${vacio}</li>`; return; }
+  const max = Math.max(...lst.map(valor), 1);
+  for (const t of lst){
+    const li = document.createElement("li");
+    li.innerHTML = `<button type="button"><span>${esc(nombreCorto(t))}</span><span class="pista-b" aria-hidden="true"><i style="width:${(100 * valor(t) / max).toFixed(1)}%;background:${color}"></i></span><span class="v">${etiqueta(t)}</span></button>`;
+    li.firstChild.addEventListener("click", () => abrir(t.id));
+    enlazar(li.firstChild, t.id);
+    ul.appendChild(li);
+  }
+}
+// el área del punto (no el radio) es proporcional al impacto
+const radioM = t => 2.6 * Math.sqrt(t.impacto) + 1;
+function dibujarMatriz(vis){
+  const cont = $("#matriz");
+  const W = Math.max(300, cont.clientWidth || 640), H = Math.round(Math.min(380, Math.max(260, W * .55)));
+  const m = {i:44, d:14, a:28, b:36};
+  const x = a => m.i + (W - m.i - m.d) * Math.min(a, 12) / 12, y = v => H - m.b - (H - m.a - m.b) * v / 100;
+  const ids = new Set(vis.map(t => t.id));
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Matriz de decisión: años para la adopción frente a impulso">`;
+  // bandas de plazo y sus nombres
+  const bandas = [[0, 3, "Corto plazo", "#EEF3FB"], [3, 6, "Mediano plazo", "#F6F8FC"], [6, 12, "Largo plazo", "#FFFFFF"]];
+  const medirB = medidor(12.5);
+  for (const [a0, a1, txt, f] of bandas){
+    s += `<rect x="${x(a0)}" y="${m.a}" width="${x(a1) - x(a0)}" height="${H - m.a - m.b}" fill="${f}"/>`;
+    // si el nombre no cabe en su banda, se usa la forma corta
+    const corto = {"Corto plazo":"≤ 3 años", "Mediano plazo":"3–6", "Largo plazo":"6+ años"}[txt];
+    const nombre = medirB(txt) + 10 < x(a1) - x(a0) ? txt : (medirB(corto) + 6 < x(a1) - x(a0) ? corto : "");
+    if (nombre) s += `<text x="${(x(a0) + x(a1)) / 2}" y="${m.a - 9}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#34435E" font-family="Source Sans 3, sans-serif">${nombre}</text>`;
+  }
+  for (const v of [0, 25, 50, 75, 100]){
+    s += `<line x1="${m.i}" x2="${W - m.d}" y1="${y(v)}" y2="${y(v)}" stroke="#DCE3EE" stroke-width="1"/>`;
+    s += `<text x="${m.i - 8}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="#56657E" font-family="Source Sans 3, sans-serif">${v}</text>`;
+  }
+  for (const a of [0, 3, 6, 9, 12]) s += `<text x="${x(a)}" y="${H - m.b + 18}" text-anchor="middle" font-size="12" fill="#56657E" font-family="Source Sans 3, sans-serif">${a}${a === 12 ? "+" : ""}</text>`;
+  s += `<text x="${(m.i + W - m.d) / 2}" y="${H - 4}" text-anchor="middle" font-size="12.5" fill="#34435E" font-weight="600" font-family="Source Sans 3, sans-serif">Años para la adopción</text>`;
+  s += `<text transform="translate(12 ${(m.a + H - m.b) / 2}) rotate(-90)" text-anchor="middle" font-size="12.5" fill="#34435E" font-weight="600" font-family="Source Sans 3, sans-serif">Impulso</text>`;
+  const orden = [...D.tendencias].sort((a, b) => a.impacto - b.impacto);
+  for (const t of orden){
+    if (t.impulso == null) continue;
+    const r = radioM(t);
+    s += `<circle class="punto-m${ids.has(t.id) ? "" : " apagado"}" data-id="${t.id}" cx="${x(t.anios).toFixed(1)}" cy="${y(t.impulso).toFixed(1)}" r="${r.toFixed(1)}" fill="${COLOR[t.mitad]}" stroke="#fff" stroke-width="2"/>`;
+  }
+  // nombres solo para las más destacadas de la selección, sin encimarse
+  // las etiquetas esquivan otras etiquetas y cualquier punto que no sea el suyo
+  const cajas = [];
+  const puntosM = D.tendencias.filter(t => t.impulso != null).map(t => { const r = radioM(t) + 1; return {id:t.id, x0:x(t.anios) - r, y0:y(t.impulso) - r, x1:x(t.anios) + r, y1:y(t.impulso) + r}; });
+  const medir = medidor(13);
+  for (const t of vis.filter(t => t.impulso != null).sort((a, b) => b.impulso - a.impulso).slice(0, 8)){
+    const txt = nombreCorto(t), w = medir(txt) + 4, cx = x(t.anios), cy = y(t.impulso), r = radioM(t);
+    for (const [dx, ancla] of [[r + 5, "start"], [-(r + 5), "end"]]){
+      const x0 = ancla === "start" ? cx + dx : cx + dx - w;
+      const b = {x0, y0:cy - 9, x1:x0 + w, y1:cy + 7};
+      if (b.x0 < m.i || b.x1 > W - m.d || cajas.some(o => solapa(b, o, 2)) || puntosM.some(o => o.id !== t.id && solapa(b, o, 1))) continue;
+      cajas.push(b);
+      s += `<text x="${(cx + dx).toFixed(1)}" y="${(cy + 4).toFixed(1)}" text-anchor="${ancla}" font-size="13" font-weight="600" fill="#14213D" font-family="Source Sans 3, sans-serif" paint-order="stroke" stroke="#fff" stroke-width="3" pointer-events="none">${esc(txt)}</text>`;
+      break;
+    }
+  }
+  cont.innerHTML = s + `</svg>`;
+  const svg = cont.firstChild;
+  svg.addEventListener("pointermove", e => {
+    const c = e.target.closest(".punto-m"); if (!c || c.classList.contains("apagado")){ ocultarGlobo(); return; }
+    const t = T[c.dataset.id];
+    $("#globo").innerHTML = `<b>${esc(t.nombre)}</b><span>${accionNombre(t.accion)} · ${aniosTxt(t.anios)} · impulso ${t.impulso} · impacto ${t.impacto}/10</span>`;
+    const r = c.getBoundingClientRect();
+    posicionarGlobo(r.left + r.width / 2, r.top, r.bottom);
+  });
+  svg.addEventListener("pointerleave", ocultarGlobo);
+  // tocar abre el punto visible más cercano (hasta ~24 px), así no hace falta acertarle a un punto chico
+  svg.addEventListener("click", e => {
+    const r = svg.getBoundingClientRect(), k = W / r.width;
+    const px = (e.clientX - r.left) * k, py = (e.clientY - r.top) * k;
+    let mejor = null, dist = 24 * k;
+    for (const t of vis){
+      if (t.impulso == null) continue;
+      const dd = Math.hypot(x(t.anios) - px, y(t.impulso) - py) - radioM(t);
+      if (dd < dist){ dist = dd; mejor = t.id; }
+    }
+    if (mejor) abrir(mejor);
+  });
 }
 
 /* ---------- noticias ---------- */
 function tarjetaNoticia(s, conTend = true, conResumen = false){
-  const a = document.createElement("a");
-  a.className = "noticia" + (s.i ? "" : " sin-img");
-  a.href = urlSegura(s.u); a.target = "_blank"; a.rel = "noopener noreferrer";
+  const li = document.createElement("li");
+  li.className = "noticia" + (s.i ? "" : " sin-img");
   const tends = conTend ? (s.tend || []).filter(id => T[id]).slice(0, 2) : [];
-  const otras = s.n > 1 ? ` · <span title="${esc((s.otras || []).join(", "))}">+${s.n - 1} medio${s.n > 2 ? "s" : ""}</span>` : "";
-  a.innerHTML = (s.i ? `<img class="img" src="${esc(urlSegura(s.i))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.noticia').classList.add('sin-img');this.remove()">` : "") +
-    `<div style="min-width:0"><div class="tit">${esc(s.t)}</div>` +
-    (conResumen && s.r ? `<div class="res">${esc(s.r)}</div>` : "") +
-    `<div class="meta"><span class="tipo ${esc(s.tipo)}">${TIPOS[s.tipo] || "Noticia"}</span><span>${esc(s.f)}${otras}</span><span>${hace(s.d)}</span>` +
-    tends.map(id => `<span class="etiqueta-t ${T[id].mitad}" data-t="${id}" role="button" tabindex="0">${esc(T[id].nombre)}</span>`).join("") + `</div></div>`;
-  a.querySelectorAll(".etiqueta-t").forEach(x => {
-    const ir = e => { e.preventDefault(); e.stopPropagation(); abrir(x.dataset.t); };
-    x.addEventListener("click", ir);
-    x.addEventListener("keydown", e => { if (e.key === "Enter") ir(e); });
-  });
-  return a;
+  const otras = s.n > 1 ? ` <span title="${esc((s.otras || []).join(", "))}">+${s.n - 1} medio${s.n > 2 ? "s" : ""}</span>` : "";
+  const lugar = s.reg && s.reg !== "mu" ? `<span class="lugar ${s.reg}">${REG_NOMBRE[s.reg]}</span>` : "";
+  li.innerHTML = (s.i ? `<img class="img" src="${esc(urlSegura(s.i))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.noticia').classList.add('sin-img');this.remove()">` : "") +
+    `<div style="min-width:0"><h4><a href="${esc(urlSegura(s.u))}" target="_blank" rel="noopener noreferrer">${esc(s.t)}</a></h4>` +
+    (conResumen && s.r ? `<p class="res">${esc(s.r)}</p>` : "") +
+    `<div class="meta">${lugar}<span class="tipo"><i style="background:${TIPO_COLOR[s.tipo] || TIPO_COLOR.otro}"></i>${TIPOS[s.tipo] || "Otra"}</span><span>${esc(s.f)}${otras}</span><span>${hace(s.d)}</span></div>` +
+    (tends.length ? `<div class="etiquetas">${tends.map(id => `<button type="button" class="etiqueta-t" data-t="${id}"><span class="bola ${T[id].mitad}"></span>${esc(nombreCorto(T[id]))}</button>`).join("")}</div>` : "") + `</div>`;
+  li.querySelectorAll(".etiqueta-t").forEach(x => { x.addEventListener("click", () => abrir(x.dataset.t)); enlazar(x, x.dataset.t); });
+  return li;
 }
-function dibujarTabsTipo(){
-  const c = $("#tabs-tipo");
+function dibujarTiposNoticia(){
+  const c = $("#tipos-noticia");
   for (const [k, n] of [["todo","Todo"], ["lanzamiento","Lanzamientos"], ["inversion","Inversión"], ["investigacion","Investigación"], ["regulacion","Regulación"]]){
     const b = document.createElement("button");
-    b.type = "button"; b.className = "pestana"; b.role = "tab"; b.dataset.k = k; b.textContent = n;
-    b.setAttribute("aria-selected", k === tipoNoticia);
-    b.addEventListener("click", () => { tipoNoticia = k; limiteNoticias = 12; c.querySelectorAll(".pestana").forEach(x => x.setAttribute("aria-selected", x.dataset.k === k)); dibujarNoticias(); });
+    b.type = "button"; b.className = "segmento"; b.dataset.k = k; b.textContent = n;
+    b.setAttribute("aria-pressed", k === tipoNoticia);
+    b.addEventListener("click", () => { tipoNoticia = k; c.querySelectorAll(".segmento").forEach(x => x.setAttribute("aria-pressed", x.dataset.k === k)); dibujarNoticias(); });
     c.appendChild(b);
   }
-  $("#ver-mas").addEventListener("click", () => { limiteNoticias += 12; dibujarNoticias(); });
 }
 function dibujarNoticias(){
-  const ids = new Set(D.tendencias.filter(t => coincide(t)).map(t => t.id));
+  const ids = new Set(visibles().map(t => t.id));
   const lst = D.ultimas.filter(s => (tipoNoticia === "todo" || s.tipo === tipoNoticia) && (!hayFiltro() || (s.tend || []).some(id => ids.has(id))));
   const c = $("#ultimas"); c.innerHTML = "";
-  if (!lst.length) c.innerHTML = `<div class="vacio">No hay señales recientes con esta combinación.${hayFiltro() ? ' <button class="btn-txt" type="button" id="vacio-limpiar">Ver todas las tendencias</button>' : ""}</div>`;
-  for (const s of lst.slice(0, limiteNoticias)) c.appendChild(tarjetaNoticia(s));
-  $("#vacio-limpiar")?.addEventListener("click", () => $("#limpiar").click());
-  $("#ver-mas").classList.toggle("oculto", lst.length <= limiteNoticias);
-  $("#ultimo-sub").textContent = hayFiltro() ? `Señales de las ${ids.size} tendencias filtradas.` : "Señales recientes de todo el radar, clasificadas por tendencia.";
+  const filtro = textoFiltros();
+  $("#ultimo-sub").textContent = (filtro ? `Con tu selección (${filtro}). ` : "") + "Primero lo que pasa en Perú, luego en Latinoamérica y después en el mundo.";
+  if (!lst.length){
+    c.innerHTML = `<p class="vacio">No hay señales recientes con esta combinación.${hayFiltro() ? ' <button class="btn-txt" type="button" id="vacio-limpiar">Ver todas las tendencias</button>' : ""}</p>`;
+    $("#vacio-limpiar")?.addEventListener("click", () => $("#limpiar").click());
+    return;
+  }
+  for (const reg of ["pe", "la", "mu"]){
+    const grupo = lst.filter(s => (s.reg || "mu") === reg);
+    const cab = document.createElement("div"); cab.className = "region-cab";
+    const titulo = {pe:"En Perú", la:"En Latinoamérica", mu:"En el mundo"}[reg];
+    cab.innerHTML = `<h3>${titulo}</h3><span>${grupo.length ? `${grupo.length} ${grupo.length === 1 ? "señal" : "señales"}` : "sin señales recientes"}</span>`;
+    c.appendChild(cab);
+    if (!grupo.length) continue;
+    const ul = document.createElement("ul"); ul.className = "noticias";
+    for (const s of grupo.slice(0, limiteRegion[reg])) ul.appendChild(tarjetaNoticia(s));
+    c.appendChild(ul);
+    if (grupo.length > limiteRegion[reg]){
+      const mas = document.createElement("div"); mas.className = "mas";
+      mas.innerHTML = `<button class="boton" type="button">${{pe:"Ver más de Perú", la:"Ver más de Latinoamérica", mu:"Ver más del mundo"}[reg]}</button>`;
+      mas.firstChild.addEventListener("click", () => { limiteRegion[reg] += 9; dibujarNoticias(); });
+      c.appendChild(mas);
+    }
+  }
 }
 function dibujarFuera(){
   const c = $("#fuera"); c.innerHTML = "";
   if (!D.fuera.length){ $("#sec-fuera").classList.add("oculto"); return; }
   for (const s of D.fuera.slice(0, 9)) c.appendChild(tarjetaNoticia(s, false, true));
 }
-function dibujarTodas(){
-  const lst = D.tendencias.filter(t => coincide(t));
-  const ord = {impulso:(a, b) => (b.impulso ?? -1) - (a.impulso ?? -1), anios:(a, b) => a.anios - b.anios, impacto:(a, b) => b.impacto - a.impacto || a.anios - b.anios, nombre:(a, b) => a.nombre.localeCompare(b.nombre, "es")}[ordenLista];
-  lst.sort(ord);
-  const c = $("#todas"); c.innerHTML = "";
-  $("#todas-sub").textContent = hayFiltro() ? `${lst.length} de ${D.tendencias.length} tendencias con los filtros actuales.` : `${D.tendencias.length} tendencias: ${D.tendencias.filter(t => t.mitad === "tec").length} de tecnología y ${D.tendencias.filter(t => t.mitad === "soc").length} de sociedad y negocio.`;
-  for (const t of lst){
-    const b = document.createElement("button");
-    b.type = "button"; b.className = "tarjeta-t";
-    const d = deltaDe(t.id);
-    b.innerHTML = `<span class="bola" style="background:${COLOR[t.mitad]}"></span><span><span class="nom">${esc(t.nombre)}</span><br><span class="det">${esc(D.catalogo.familias[t.familia].nombre)} · ${aniosTxt(t.anios)}</span></span>` +
-      `<span class="der"><span class="medidor"><i style="width:${t.impulso ?? 0}%"></i></span><span>impulso ${t.impulso ?? "—"}${d ? ` <b class="delta ${d > 0 ? "sube" : "baja"}">${d > 0 ? "▲" : "▼"}${Math.abs(d)}</b>` : ""}</span></span>`;
-    b.addEventListener("click", () => abrir(t.id));
-    c.appendChild(b);
+
+/* ---------- tabla ---------- */
+const COLUMNAS = [
+  {id:"nombre", txt:"Tendencia", clase:"", valor:t => t.nombre},
+  {id:"accion", txt:"Acción sugerida", clase:"", valor:t => ACC_ORDEN.indexOf(t.accion) * 1000 - (t.impulso ?? 0)},
+  {id:"anios", txt:"Llega en", clase:"num col-anios", valor:t => t.anios},
+  {id:"impacto", txt:"Impacto", clase:"num col-impacto", valor:t => t.impacto},
+  {id:"impulso", txt:"Impulso", clase:"num", valor:t => t.impulso ?? -1},
+  {id:"n30", txt:"Señales 30 d", clase:"num col-n30", valor:t => t.n30},
+  {id:"cerca", txt:"Perú y región", clase:"num col-cerca", valor:t => t.pe30 + t.la30},
+  {id:"inv", txt:"Inversión 30 d", clase:"num col-inv", valor:t => t.inv30},
+];
+function dibujarCabecera(){
+  const tr = $("#cabecera-tabla"); tr.innerHTML = "";
+  for (const c of COLUMNAS){
+    const th = document.createElement("th");
+    th.scope = "col"; th.className = c.clase;
+    if (orden.col === c.id) th.setAttribute("aria-sort", orden.dir > 0 ? "ascending" : "descending");
+    const ic = orden.col === c.id ? (orden.dir > 0 ? "orden-asc" : "orden-desc") : "orden";
+    th.innerHTML = `<button type="button">${c.txt}${icono(ic)}</button>`;
+    th.querySelector("button").addEventListener("click", () => {
+      if (orden.col === c.id) orden.dir *= -1;
+      else { orden.col = c.id; orden.dir = ["nombre", "accion", "anios"].includes(c.id) ? 1 : -1; }
+      dibujarTabla();
+    });
+    tr.appendChild(th);
   }
-  if (!lst.length) c.innerHTML = `<div class="vacio">Ninguna tendencia coincide. <button class="btn-txt" type="button" onclick="document.getElementById('limpiar').click()">Quitar filtros</button></div>`;
+}
+function dibujarTabla(){
+  dibujarCabecera();
+  const col = COLUMNAS.find(c => c.id === orden.col);
+  const lst = visibles().sort((a, b) => {
+    const va = col.valor(a), vb = col.valor(b);
+    const r = typeof va === "string" ? va.localeCompare(vb, "es") : va - vb;
+    return r * orden.dir || a.nombre.localeCompare(b.nombre, "es");
+  });
+  const tb = $("#filas-tabla"); tb.innerHTML = "";
+  const filtro = textoFiltros();
+  $("#todas-sub").textContent = (filtro ? `${lst.length} de ${D.tendencias.length} tendencias con tu selección (${filtro}). ` :
+    `${D.tendencias.length} tendencias: ${D.tendencias.filter(t => t.mitad === "tec").length} de tecnología y ${D.tendencias.filter(t => t.mitad === "soc").length} de sociedad y negocio. `) +
+    "Toca una fila para abrir su ficha; toca un encabezado para ordenar.";
+  if (!lst.length){ tb.innerHTML = `<tr><td colspan="${COLUMNAS.length}"><div class="vacio">Ninguna tendencia coincide. <button class="btn-txt" type="button" id="tabla-limpiar">Quitar filtros</button></div></td></tr>`; $("#tabla-limpiar").addEventListener("click", () => $("#limpiar").click()); return; }
+  for (const t of lst){
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td><span class="t-nom"><span class="bola ${t.mitad}"></span><span><button type="button">${esc(t.nombre)}</button><span class="t-fam">${esc(D.catalogo.familias[t.familia].nombre)}</span></span></span></td>` +
+      `<td><span class="insignia">${marcaAccion(t.accion)}${accionNombre(t.accion)}</span></td>` +
+      `<td class="num col-anios">${aniosTxt(t.anios)}</td>` +
+      `<td class="num col-impacto">${impactoTxt(t.impacto)} (${t.impacto})</td>` +
+      `<td class="num"><span class="imp-celda">${deltaHtml(deltaDe(t.id))}<span class="medidor" aria-hidden="true"><i style="width:${t.impulso ?? 0}%"></i></span><b>${t.impulso ?? "—"}</b></span></td>` +
+      `<td class="num col-n30">${t.n30}</td>` +
+      `<td class="num col-cerca">${t.pe30 + t.la30}${t.pe30 ? ` <span class="t-fam" style="display:inline">(${t.pe30} Perú)</span>` : ""}</td>` +
+      `<td class="num col-inv">${t.inv30}</td>`;
+    tr.addEventListener("click", () => abrir(t.id));
+    enlazar(tr, t.id);
+    tb.appendChild(tr);
+  }
 }
 
-/* ---------- detalle ---------- */
-function sparkArea(vals, col){
-  const v = vals.map(x => x ?? 0);
-  const max = Math.max(...v, 1), n = v.length;
-  const pts = v.map((y, i) => [i * 300 / (n - 1), 70 - 64 * y / max]);
-  const linea = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join("");
-  return `<svg viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true"><path d="${linea}L300,74L0,74Z" fill="${col}" fill-opacity=".14"/><path d="${linea}" fill="none" stroke="${col}" stroke-width="2.2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+/* ---------- ficha ---------- */
+// gráficos chicos dibujados al ancho real (sin deformar las esquinas) y con su valor al pasar el mouse
+function pintarGrafico(cont){
+  const datos = JSON.parse(cont.dataset.valores), etiquetas = JSON.parse(cont.dataset.etiquetas);
+  const tipo = cont.dataset.tipo, col = cont.dataset.color, vacias = +(cont.dataset.vacias || 0), parcial = cont.dataset.parcial === "1";
+  const W = Math.max(120, cont.clientWidth), H = 78, n = datos.length;
+  const max = Math.max(...datos.slice(vacias).map(v => v ?? 0), 1);
+  let marcas = "", zonas = "";
+  if (tipo === "area"){
+    const pts = datos.map((y, i) => [i * W / (n - 1), H - 4 - (H - 10) * (y ?? 0) / max]);
+    const linea = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join("");
+    const [ux, uy] = pts[n - 1];
+    marcas = `<line x1="0" y1="${H - .5}" x2="${W}" y2="${H - .5}" stroke="#DCE3EE"/><path d="${linea}L${W},${H}L0,${H}Z" fill="${col}" fill-opacity=".10"/>` +
+      `<path d="${linea}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` +
+      `<circle cx="${ux}" cy="${uy}" r="4" fill="${col}" stroke="#fff" stroke-width="2"/>`;
+    const paso = W / (n - 1);
+    zonas = datos.map((y, i) => `<rect x="${Math.max(0, i * paso - paso / 2)}" y="0" width="${paso}" height="${H}" fill="transparent" data-tt="${esc(etiquetas[i])}: ${y == null ? "sin datos" : nf.format(y) + " vistas"}" data-x="${i * paso}"/>`).join("");
+  } else {
+    const ranura = W / n, ancho = Math.min(24, ranura * .7);
+    datos.forEach((y, i) => {
+      const x = i * ranura + (ranura - ancho) / 2;
+      if (i < vacias){ marcas += `<rect x="${x}" y="${H - 2}" width="${ancho}" height="2" rx="1" fill="#C9D1DA"/>`; }
+      else {
+        const h = Math.max(2, (H - 6) * (y ?? 0) / max), r = Math.min(4, h, ancho / 2), y0 = H - h;
+        marcas += `<path d="M${x},${H}V${y0 + r}Q${x},${y0} ${x + r},${y0}H${x + ancho - r}Q${x + ancho},${y0} ${x + ancho},${y0 + r}V${H}Z" fill="${col}" fill-opacity="${parcial && i === n - 1 ? .4 : 1}"/>`;
+      }
+      zonas += `<rect x="${i * ranura}" y="0" width="${ranura}" height="${H}" fill="transparent" data-tt="${esc(etiquetas[i])}: ${i < vacias ? "el radar aún no medía" : nf.format(y ?? 0) + (cont.dataset.unidad ? " " + cont.dataset.unidad : "")}" data-x="${i * ranura + ranura / 2}"/>`;
+    });
+    marcas = `<line x1="0" y1="${H - .5}" x2="${W}" y2="${H - .5}" stroke="#DCE3EE"/>` + marcas;
+  }
+  cont.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(cont.dataset.resumen)}">${marcas}<line class="cruz" x1="0" x2="0" y1="0" y2="${H}" stroke="#8C98AD" stroke-width="1" opacity="0"/>${zonas}</svg>`;
+  const svg = cont.firstChild, cruz = svg.querySelector(".cruz");
+  svg.addEventListener("pointermove", e => {
+    const z = e.target.closest("[data-tt]"); if (!z) return;
+    $("#globo").innerHTML = `<span style="color:#fff">${z.dataset.tt}</span>`;
+    const r = svg.getBoundingClientRect();
+    if (tipo === "area"){ cruz.setAttribute("x1", z.dataset.x); cruz.setAttribute("x2", z.dataset.x); cruz.setAttribute("opacity", 1); }
+    posicionarGlobo(r.left + (+z.dataset.x) * r.width / W, r.top, r.bottom);
+  });
+  svg.addEventListener("pointerleave", () => { ocultarGlobo(); cruz.setAttribute("opacity", 0); });
 }
-function barras(vals, col, ultimaParcial, vacias = 0){
-  // "vacias": barras iniciales de semanas en que el radar aún no medía (se dibujan como marcas grises)
-  const medidas = vals.slice(vacias);
-  const max = Math.max(...medidas, 1), n = vals.length, w = 300 / n;
-  return `<svg viewBox="0 0 300 74" preserveAspectRatio="none" aria-hidden="true">${vals.map((y, i) => {
-    if (i < vacias) return `<rect x="${(i * w + w * .14).toFixed(1)}" y="70" width="${(w * .72).toFixed(1)}" height="2" rx="1" fill="#C9D1DA"/>`;
-    const h = Math.max(1.5, 68 * y / max);
-    return `<rect x="${(i * w + w * .14).toFixed(1)}" y="${(72 - h).toFixed(1)}" width="${(w * .72).toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${col}" fill-opacity="${ultimaParcial && i === n - 1 ? .35 : .85}"/>`;
-  }).join("")}</svg>`;
-}
-const fechaCorta = iso => new Date(iso + "T12:00:00").toLocaleDateString("es-PE", {day:"numeric", month:"short"});
+const lienzo = (o) => `<div class="lienzo" data-tipo="${o.tipo}" data-color="${o.color}" data-valores='${JSON.stringify(o.valores)}' data-etiquetas='${esc(JSON.stringify(o.etiquetas))}' data-vacias="${o.vacias || 0}" data-parcial="${o.parcial ? 1 : 0}" data-unidad="${esc(o.unidad || "")}" data-resumen="${esc(o.resumen)}"></div>`;
 const pct = (a, b) => b > 0 ? Math.round(100 * (a - b) / b) : null;
-const signo = n => n == null ? "" : (n > 0 ? "+" : "") + n + " %";
+const signo = n => n == null ? "—" : (n > 0 ? "+" : n < 0 ? "−" : "") + Math.abs(n) + " %";
+const fechaCorta = iso => new Date(iso + "T12:00:00").toLocaleDateString("es-PE", {day:"numeric", month:"short"});
+const mesTxt = ym => { const [y, m] = ym.split("-"); return new Date(+y, +m - 1, 15).toLocaleDateString("es-PE", {month:"short", year:"numeric"}); };
 function abrir(id, desdeHash){
   const t = T[id]; if (!t) return;
   abierta = id;
@@ -827,78 +1395,106 @@ function abrir(id, desdeHash){
   document.querySelectorAll(".nodo").forEach(n => n.classList.toggle("activo", n.dataset.id === id));
   const col = COLOR[t.mitad];
   const fam = D.catalogo.familias[t.familia].nombre;
-  $("#det-migas").textContent = `${D.catalogo.mitades[t.mitad]} · ${fam}`;
-  // horizonte
-  let hzTxt;
-  const base = `${String(t.anios_base).replace(".", ",")} ${t.anios_base === 1 ? "año" : "años"}`;
+  const base = `${String(t.anios_base).replace(".", ",")} ${t.anios_base === 1 ? "año" : "años"}`;
   const pm = Math.round(100 * (t.mercado ?? 0)), pe = Math.round(100 * (t.esperado ?? 0));
+  let hzTxt;
   if (Math.abs(t.ajuste) < 0.05) hzTxt = t.n_mezcla < 8 ? `Estimación base: ${base}. Aún hay pocas señales para moverla.` : `Estimación base: ${base}; sus señales van en línea con ese plazo.`;
-  else if (t.ajuste < 0) hzTxt = `Base ${base}. Se acerca: ${pm} % de sus señales son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
-  else hzTxt = `Base ${base}. Se aleja: solo ${pm} % de sus señales son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
+  else if (t.ajuste < 0) hzTxt = `Base ${base}. Se acerca: en 60 días, de sus lanzamientos, inversiones e investigaciones, ${pm} % son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
+  else hzTxt = `Base ${base}. Se aleja: en 60 días, de sus lanzamientos, inversiones e investigaciones, solo ${pm} % son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
   const d = deltaDe(t.id);
   const comp = t.componentes || {};
   const partes = [["interés público", comp.wiki], ["noticias", comp.volumen], ["ciencia", comp.papers], ["aceleración", comp.aceleracion]].filter(([, v]) => v != null);
-  const frases = partes.map(([k, v], i) => i ? `al ${v} % en ${k}` : `al ${v} % de las tendencias en ${k}`);
+  const frases = partes.map(([k, v], i) => i ? `al ${v} % en ${k}` : `al ${v} % de las tendencias en ${k}`);
   const impTxt = t.impulso == null || !frases.length ? "Todavía sin datos suficientes." :
     `Supera ${frases.length > 1 ? frases.slice(0, -1).join(", ") + " y " + frases[frases.length - 1] : frases[0]}.`;
+  // indicadores para decidir
+  let wikiPct = null;
+  if (t.wiki){ const v = t.wiki.vistas.map(x => x ?? 0), n = v.length; wikiPct = pct(v.slice(n - 3).reduce((a, b) => a + b, 0), v.slice(n - 6, n - 3).reduce((a, b) => a + b, 0)); }
+  const papPct = t.papers ? pct(t.papers.reciente, t.papers.previo) : null;
+  const cerca = t.pe30 + t.la30, pctCerca = t.n30 ? Math.round(100 * cerca / t.n30) : 0;
+  const pctDe = n => t.n30 ? Math.round(100 * n / t.n30) : 0;
+  const indicadores = [
+    ["Historias en 30 días", nf.format(t.n30), `${t.n7} en los últimos 7 días`],
+    ["Sobre Perú y Latinoamérica", nf.format(cerca), `${t.pe30} de Perú · ${pctCerca} % de las historias`],
+    ["Inversiones (30 días)", nf.format(t.inv30), `${pctDe(t.inv30)} % de las historias`],
+    ["Lanzamientos (30 días)", nf.format(t.lanz30), `${pctDe(t.lanz30)} % de las historias`],
+    ["Investigación (30 días)", nf.format(t.inves30), `${pctDe(t.inves30)} % de las historias`],
+    ["Interés público", wikiPct == null ? "sin datos aún" : signo(wikiPct), "vistas en Wikipedia, últimos 3 meses"],
+    ["Ciencia", papPct == null ? "sin datos aún" : signo(papPct), "artículos científicos, último año completo"],
+  ];
   // gráficos
-  let gWiki = `<div class="grafico"><div class="g-tit">Interés público</div><div class="g-sub">Sin datos de Wikipedia</div></div>`;
+  let gWiki = `<div class="grafico"><h4>Interés público</h4><p class="g-sub">Sin datos de Wikipedia.</p></div>`;
   if (t.wiki && t.wiki.vistas.some(v => v)){
-    const v = t.wiki.vistas.map(x => x ?? 0), n = v.length;
-    const u3 = v.slice(n - 3).reduce((a, b) => a + b, 0), p3 = v.slice(n - 6, n - 3).reduce((a, b) => a + b, 0);
-    gWiki = `<div class="grafico"><div class="g-tit">Interés público</div><div class="g-sub">Vistas mensuales en Wikipedia · ${signo(pct(u3, p3))} en 3 meses</div>${sparkArea(v, col)}<div class="g-pie"><span>${D.meses[0]}</span><span>${D.meses[D.meses.length - 1]}</span></div></div>`;
+    const v = t.wiki.vistas, n = v.length;
+    gWiki = `<div class="grafico"><h4>Interés público</h4><p class="g-sub">Vistas mensuales en Wikipedia · ${signo(wikiPct)} en 3 meses</p>` +
+      lienzo({tipo:"area", color:col, valores:v, etiquetas:D.meses.map(mesTxt), resumen:`Vistas mensuales en Wikipedia de ${mesTxt(D.meses[0])} a ${mesTxt(D.meses[n - 1])}; último mes ${nf.format(v[n - 1] ?? 0)}`}) +
+      `<div class="g-pie"><span>${mesTxt(D.meses[0])}</span><span>${mesTxt(D.meses[n - 1])}</span></div></div>`;
   }
-  let gPap = `<div class="grafico"><div class="g-tit">Investigación</div><div class="g-sub">Artículos científicos (OpenAlex): se mide una vez al día; aún sin datos.</div></div>`;
+  let gPap = `<div class="grafico"><h4>Investigación</h4><p class="g-sub">Artículos científicos (OpenAlex): se mide una vez al día y aún no hay datos.</p></div>`;
   if (t.papers && Object.keys(t.papers.anios || {}).length){
     const ys = Object.keys(t.papers.anios).sort().slice(-8);
     const vals = ys.map(y => t.papers.anios[y]);
-    const ultimo = +ys[ys.length - 1] === new Date(D.generado).getFullYear();
-    const yA = new Date(D.generado).getFullYear() - 1;
-    gPap = `<div class="grafico"><div class="g-tit">Investigación</div><div class="g-sub">Artículos por año · ${signo(pct(t.papers.reciente, t.papers.previo))} en ${yA} frente a ${yA - 1}</div>${barras(vals, "#7A4CC2", ultimo)}<div class="g-pie"><span>${ys[0]}</span><span>${ys[ys.length - 1]}${ultimo ? " (parcial)" : ""}</span></div></div>`;
+    const anioAct = new Date(D.generado).getFullYear();
+    const ultimo = +ys[ys.length - 1] === anioAct;
+    gPap = `<div class="grafico"><h4>Investigación</h4><p class="g-sub">Artículos por año · ${signo(papPct)} en ${anioAct - 1} frente a ${anioAct - 2}</p>` +
+      lienzo({tipo:"barras", color:"#4A3AA7", valores:vals, etiquetas:ys.map(y => y + (+y === anioAct ? " (parcial)" : "")), parcial:ultimo, unidad:"artículos", resumen:`Artículos científicos por año de ${ys[0]} a ${ys[ys.length - 1]}`}) +
+      `<div class="g-pie"><span>${ys[0]}</span><span>${ys[ys.length - 1]}${ultimo ? " (parcial)" : ""}</span></div></div>`;
   }
   const hist = D.estado.historia_dias ?? 0;
   const vacias = Math.max(0, 12 - (Math.floor(hist / 7) + 1));
   const desde = D.estado.inicio && vacias ? `midiendo desde el ${fechaCorta(D.estado.inicio)}` : "hace 12 semanas";
-  const gNot = `<div class="grafico"><div class="g-tit">Noticias</div><div class="g-sub">Señales por semana · ${t.n7} en los últimos 7 días</div>${barras(t.semanas, col, false, vacias)}<div class="g-pie"><span>${desde}</span><span>esta semana</span></div></div>`;
+  const etiqSem = t.semanas.map((_, i) => i === 11 ? "Esta semana" : `Hace ${11 - i} semana${11 - i > 1 ? "s" : ""}`);
+  const gNot = `<div class="grafico"><h4>Noticias</h4><p class="g-sub">Señales por semana · ${t.n7} en los últimos 7 días</p>` +
+    lienzo({tipo:"barras", color:col, valores:t.semanas, etiquetas:etiqSem, vacias, unidad:"señales", resumen:`Señales por semana en las últimas 12 semanas; esta semana ${t.n7}`}) +
+    `<div class="g-pie"><span>${desde}</span><span>esta semana</span></div></div>`;
   const sumaM = Object.values(t.mezcla || {}).reduce((a, b) => a + b, 0);
   const wikiLink = t.wiki?.url_es || t.wiki?.url;
   const qBusca = encodeURIComponent(t.en);
+  const [accTit, accTxt] = D.catalogo.acciones[t.accion];
   $("#det-cuerpo").innerHTML = `
-    <div class="det-titulo"><h2 id="det-nombre" style="color:${t.mitad === "tec" ? "var(--tec-ink)" : "var(--soc-ink)"}">${esc(t.nombre)}</h2><div class="en">${esc(t.en)}</div></div>
+    <div class="det-titulo"><h2 id="det-nombre">${esc(t.nombre)}</h2><p class="en">${esc(t.en)}</p>
+      <div class="chips-det"><span class="chip-s"><span class="bola ${t.mitad}"></span>${esc(D.catalogo.mitades[t.mitad])}</span><span class="chip-s">${esc(fam)}</span></div></div>
+    <div class="accion-ficha">${marcaAccion(t.accion)}<div><b>Acción sugerida: ${esc(accTit)}</b><p>${esc(accTxt)}${t.oportunidad ? " Además, es una oportunidad en Perú: crece en el mundo y aquí casi no se mueve." : ""}</p></div></div>
     <div class="kpis">
-      <div class="kpi"><div class="k">Llega en</div><div class="v">${aniosTxt(t.anios)}</div><div class="x">${esc(hzTxt)}</div></div>
-      <div class="kpi"><div class="k">Impacto</div><div class="v">${impactoTxt(t.impacto)} <small>${t.impacto}/10</small></div><div class="x">Efecto esperado en la economía y la vida diaria.</div></div>
-      <div class="kpi"><div class="k">Impulso</div><div class="v">${t.impulso ?? "—"} <small>${nivelTxt[t.nivel] || ""}${d ? ` · ${d > 0 ? "▲" : "▼"} ${Math.abs(d)} en la semana` : ""}</small></div><div class="x">${esc(impTxt)}</div></div>
+      <div class="kpi"><div class="k">Llega en</div><div class="v">${aniosTxt(t.anios)}</div><p class="x">${esc(hzTxt)}</p></div>
+      <div class="kpi"><div class="k">Impacto</div><div class="v">${impactoTxt(t.impacto)} <small>${t.impacto} de 10</small></div><p class="x">Efecto esperado en la economía y la vida diaria.</p></div>
+      <div class="kpi"><div class="k">Impulso</div><div class="v">${t.impulso ?? "—"} <small>${nivelTxt[t.nivel] || ""}</small>${deltaHtml(d)}</div><p class="x">${esc(impTxt)}</p></div>
     </div>
+    <ul class="indicadores">${indicadores.map(([k, v, x]) => `<li><span class="k">${k}</span><b>${v}</b><span>${x}</span></li>`).join("")}</ul>
     <div class="parr"><h3>Qué es</h3><p>${esc(t.que_es)}</p></div>
     <div class="parr"><h3>Por qué importa</h3><p>${esc(t.por_que)}</p></div>
+    <div class="parr"><h3>Para qué carreras</h3><div class="chips-det">${t.carreras.map(c => `<span class="chip-s">${esc(D.catalogo.carreras[c])}</span>`).join("")}</div></div>
     <div class="graficos">${gWiki}${gPap}${gNot}</div>
-    ${sumaM ? `<div class="parr"><h3>Qué tipo de señales tiene (60 días)</h3>${barraMezcla(t.mezcla, sumaM)}</div>` : ""}
-    <div class="parr"><h3>Últimas señales</h3>${t.senales.length ? "" : `<p class="aviso">Sin señales en las últimas semanas.</p>`}<div class="lista-sen" id="det-senales"></div></div>
+    ${sumaM ? `<div class="parr"><h3>Qué tipo de señales tiene (60 días)</h3>${barraMezcla(t.mezcla)}</div>` : ""}
+    <div class="parr"><h3>Últimas señales</h3>${t.senales.length ? "" : `<p class="aviso">Sin señales en las últimas semanas.</p>`}<div id="det-senales"></div></div>
     <div class="parr"><h3>Dónde aplica</h3><div class="chips-det">${t.focos.map(f => `<span class="chip-s">${esc(D.catalogo.focos[f])}</span>`).join("")}${t.sectores.map(s => `<span class="chip-s">${esc(D.catalogo.sectores[s])}</span>`).join("")}</div></div>
     <div class="enlaces">
-      ${wikiLink ? `<a class="boton" href="${esc(urlSegura(wikiLink))}" target="_blank" rel="noopener">Leer en Wikipedia ↗</a>` : ""}
-      <a class="boton" href="https://openalex.org/works?search=${qBusca}" target="_blank" rel="noopener">Buscar papers ↗</a>
-      <a class="boton" href="https://scholar.google.com/scholar?q=${qBusca}&as_ylo=${new Date().getFullYear() - 1}" target="_blank" rel="noopener">Google Scholar ↗</a>
+      ${wikiLink ? `<a class="boton" href="${esc(urlSegura(wikiLink))}" target="_blank" rel="noopener">Leer en Wikipedia${icono("externo")}</a>` : ""}
+      <a class="boton" href="https://openalex.org/works?search=${qBusca}" target="_blank" rel="noopener">Buscar artículos en OpenAlex${icono("externo")}</a>
+      <a class="boton" href="https://scholar.google.com/scholar?q=${qBusca}&as_ylo=${new Date(D.generado).getFullYear() - 1}" target="_blank" rel="noopener">Google Scholar${icono("externo")}</a>
     </div>`;
   const ls = $("#det-senales");
-  for (const s of t.senales) ls.appendChild(tarjetaNoticia(s, false));
+  for (const reg of ["pe", "la", "mu"]){
+    const grupo = t.senales.filter(s => (s.reg || "mu") === reg);
+    if (!grupo.length) continue;
+    const h = document.createElement("h4"); h.className = "det-region"; h.textContent = {pe:"En Perú", la:"En Latinoamérica", mu:"En el mundo"}[reg]; ls.appendChild(h);
+    const ul = document.createElement("ul"); ul.className = "noticias lista-sen";
+    for (const s of grupo) ul.appendChild(tarjetaNoticia(s, false));
+    ls.appendChild(ul);
+  }
   const dlg = $("#detalle");
   if (!dlg.open) dlg.showModal();
   $("#det-scroll").scrollTop = 0;
+  $("#det-cerrar").focus({preventScroll:true});
+  // se dibujan ya: leer el ancho fuerza el cálculo de la caja (rAF no corre en pestañas ocultas)
+  document.querySelectorAll("#det-cuerpo .lienzo").forEach(pintarGrafico);
   if (!desdeHash) history.replaceState(null, "", "#t=" + id);
 }
-function cerrar(){
-  const dlg = $("#detalle");
-  if (dlg.open) dlg.close();
-}
+function cerrar(){ const dlg = $("#detalle"); if (dlg.open) dlg.close(); }
 function vecina(paso){
-  const lst = D.tendencias.filter(t => coincide(t));
-  const base = lst.length ? lst : D.tendencias;
-  lst.sort((a, b) => (b.impulso ?? -1) - (a.impulso ?? -1));
+  const base = (visibles().length ? visibles() : [...D.tendencias]).sort((a, b) => (b.impulso ?? -1) - (a.impulso ?? -1));
   const i = base.findIndex(t => t.id === abierta);
-  const j = (i + paso + base.length) % base.length;
-  abrir(base[j].id);
+  abrir(base[(i + paso + base.length) % base.length].id);
 }
 function prepararDetalle(){
   const dlg = $("#detalle");
@@ -907,14 +1503,16 @@ function prepararDetalle(){
   $("#det-sig").addEventListener("click", () => vecina(1));
   $("#det-compartir").addEventListener("click", async () => {
     const url = location.href.split("#")[0] + "#t=" + abierta;
+    const b = $("#det-compartir");
     try {
       if (navigator.share && matchMedia("(pointer:coarse)").matches) await navigator.share({title:T[abierta].nombre, url});
-      else { await navigator.clipboard.writeText(url); const b = $("#det-compartir"); b.setAttribute("aria-label", "Enlace copiado"); b.style.borderColor = "var(--soc)"; setTimeout(() => { b.style.borderColor = ""; b.setAttribute("aria-label", "Copiar enlace"); }, 1400); }
+      else { await navigator.clipboard.writeText(url); b.classList.add("copiado"); b.setAttribute("aria-label", "Enlace copiado"); setTimeout(() => { b.classList.remove("copiado"); b.setAttribute("aria-label", "Copiar enlace a esta tendencia"); }, 1500); }
     } catch (e) {}
   });
   dlg.addEventListener("click", e => { if (e.target === dlg) cerrar(); });
   dlg.addEventListener("close", () => {
     abierta = null;
+    ocultarGlobo();
     document.querySelectorAll(".nodo.activo").forEach(n => n.classList.remove("activo"));
     history.replaceState(null, "", location.pathname + location.search);
   });
@@ -933,30 +1531,37 @@ function dibujarEstado(){
   luz.classList.toggle("tarde", horas >= 8 && horas < 24);
   luz.classList.toggle("vieja", horas >= 24);
   $("#estado-txt").textContent = `Actualizado ${hace(D.generado)} · ${nf.format(e.senales_7d)} señales esta semana`;
-  $("#estado").title = `Generado: ${new Date(D.generado).toLocaleString("es-PE")}`;
-  $("#generado").textContent = "actualizado el " + new Date(D.generado).toLocaleString("es-PE", {day:"numeric", month:"long", hour:"2-digit", minute:"2-digit"});
+  $("#estado").title = `Generado: ${new Date(D.generado).toLocaleString("es-PE")}. Se actualiza cada 3 horas.`;
+  $("#generado").textContent = "Datos del " + new Date(D.generado).toLocaleString("es-PE", {day:"numeric", month:"long", hour:"2-digit", minute:"2-digit"});
   $("#revisado").textContent = "catálogo revisado el " + new Date(e.revisado + "T12:00:00").toLocaleDateString("es-PE", {day:"numeric", month:"long", year:"numeric"});
-  $("#fuentes-txt").innerHTML = `${e.fuentes_ok} de ${e.fuentes_total} feeds de medios respondieron en la última corrida, más búsquedas de noticias por tendencia, vistas de Wikipedia y conteos de OpenAlex (medidos una vez al día${e.diario ? ", último: " + esc(e.diario) : ""}).` +
+  $("#fuentes-txt").innerHTML = `${e.fuentes_ok} de ${e.fuentes_total} feeds de medios respondieron en la última corrida, más búsquedas de noticias por tendencia (en inglés y en español para Perú), vistas de Wikipedia y conteos de OpenAlex (medidos una vez al día${e.diario ? "; último: " + esc(e.diario) : ""}).` +
     (e.caidas.length ? ` Con problemas ahora: ${e.caidas.map(esc).join(", ")}. Sus datos anteriores se conservan.` : "");
+}
+function dibujarReglas(){
+  $("#reglas-accion").innerHTML = ACC_ORDEN.map(a => `<li><b>${accionNombre(a)}:</b> ${ACC_REGLA[a]} ${esc(D.catalogo.acciones[a][1])}</li>`).join("");
 }
 
 /* ---------- arranque ---------- */
 function iniciar(){
   dibujarEstado();
+  dibujarReglas();
   dibujarFiltros();
-  dibujarTabsTipo();
+  dibujarTiposNoticia();
   dibujarLateral();
   dibujarFuera();
   prepararDetalle();
-  $("#orden").addEventListener("change", e => { ordenLista = e.target.value; dibujarTodas(); });
   aplicarFiltros();
+  $("#ir-metodo").addEventListener("click", () => { $("#como-se-mide").open = true; });
+  let anchoMatriz = $("#matriz").clientWidth;
+  new ResizeObserver(() => { const w = $("#matriz").clientWidth; if (Math.abs(w - anchoMatriz) > 8){ anchoMatriz = w; dibujarMatriz(visibles()); } }).observe($("#matriz"));
   const listo = () => {
     dibujarRadar();
     aplicarFiltros();
     const m = location.hash.match(/^#t=([\w-]+)/);
     if (m && T[m[1]]) abrir(m[1], true);
+    if (location.hash === "#como-se-mide") $("#como-se-mide").open = true;
   };
-  const fuentes = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("600 14.5px 'DM Sans'"), document.fonts.load("700 19px Outfit")]) : Promise.resolve();
+  const fuentes = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("600 15px 'Source Sans 3'"), document.fonts.load("800 19px Montserrat")]) : Promise.resolve();
   Promise.race([fuentes, new Promise(r => setTimeout(r, 1800))]).then(listo, listo);
   setInterval(dibujarEstado, 60000);
 }

@@ -39,6 +39,7 @@ RETENCION_CONTEOS = 400     # días de conteos diarios por tendencia
 MAX_POR_TENDENCIA = 30
 MAX_ULTIMAS = 120
 MAX_FUERA = 40
+CERCANIA = {"pe": 0, "la": 1, "mu": 2}
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -93,7 +94,8 @@ def recolectar_rss(feeds: list[dict], estado_fuentes: dict) -> list[dict]:
                 ef["ok"] = F.ahora().isoformat(timespec="minutes")
                 ef["n"] = len(items)
             for it in items:
-                it.update(origen="rss", nivel=feed.get("nivel", 2), idioma=feed.get("idioma", "en"))
+                it.update(origen="rss", nivel=feed.get("nivel", 2), idioma=feed.get("idioma", "en"),
+                          region_fuente=feed.get("region"), local=feed.get("local", False))
             out.extend(items)
     return out
 
@@ -107,19 +109,20 @@ def recolectar_bing(tendencias: list[dict], estado_fuentes: dict, nivel1: list[s
     nivel1_norm = [n.lower() for n in nivel1]
     out, fallos, total = [], 0, 0
     for t in tendencias:
-        for q in t["bing"]:
+        consultas = [(q, False) for q in t["bing"]] + ([(t["local"], True)] if t.get("local") else [])
+        for q, local in consultas:
             if total:
                 time.sleep(1.0)
             total += 1
             try:
-                items = F.bing_news(q)
+                items = F.bing_news(q, local=local)
             except Exception as e:
                 fallos += 1
                 log(f"  ✗ Bing «{q}»: {type(e).__name__}: {str(e)[:80]}")
                 continue
             for it in items:
                 f = (it.get("fuente") or "").lower()
-                it.update(origen="bing", consulta_de=t["id"], idioma="en",
+                it.update(origen="bing", consulta_de=t["id"], idioma="es" if local else "en", region_fuente="pe" if local else None,
                           nivel=1 if any(n in f for n in nivel1_norm) else 3)
             out.extend(items)
     if fallos == total:
@@ -140,6 +143,7 @@ def puntaje(s: dict, ahora: datetime) -> float:
     base += {"lanzamiento": 1.0, "inversion": 1.0, "investigacion": 1.0, "regulacion": 0.5}.get(s.get("tipo"), 0.0)
     base += 0.5 if s.get("nov") else 0.0
     base += 0.5 * min(s.get("n", 1) - 1, 4)
+    base += {"pe": 1.5, "la": 0.8}.get(s.get("reg"), 0.0)  # prioridad a lo cercano
     edad = max(0.0, (ahora - datetime.fromisoformat(s["d"])).total_seconds() / 86400)
     return base * math.exp(-edad / 10)
 
@@ -155,8 +159,10 @@ def agregar_agrupando(lista: list[dict], s: dict) -> bool:
             otras = e.setdefault("otras", [])
             if s["f"] != e["f"] and s["f"] not in otras and len(otras) < 5:
                 otras.append(s["f"])
+            if CERCANIA.get(s.get("reg"), 2) < CERCANIA.get(e.get("reg"), 2):
+                e["reg"] = s["reg"]
             if s.get("nivel", 3) < e.get("nivel", 3):  # gana el medio de mayor nivel
-                for k in ("id", "t", "u", "f", "d", "r", "i", "nivel", "tipo"):
+                for k in ("id", "t", "u", "f", "d", "r", "i", "nivel", "tipo") if CERCANIA.get(s.get("reg"), 2) <= CERCANIA.get(e.get("reg"), 2) else ():
                     if k in s:
                         e[k] = s[k]
                 if s["f"] in otras:
@@ -174,6 +180,8 @@ def procesar(items: list[dict], cat: dict, conf: dict, estado: dict, senales: di
     for ids in vistos_dict.values():
         vistos.update(ids.split())
     conteos = estado.setdefault("conteos", {})
+    conteos_reg = estado.setdefault("conteos_reg", {})
+    huellas = estado.setdefault("huellas", {})
     por_t = senales.setdefault("por_tendencia", {})
     ultimas = senales.setdefault("ultimas", [])
     fuera = senales.setdefault("fuera", [])
@@ -207,16 +215,27 @@ def procesar(items: list[dict], cat: dict, conf: dict, estado: dict, senales: di
         nuevos_hoy.append(sid)
         stats["nuevas"] += 1
         tipo = C.tipo_de(tn, rn)
+        reg = C.region_de(tn, rn, it.get("region_fuente"), it.get("local", False))
         s = {"id": sid, "t": it["titulo"], "u": it["url"], "f": it.get("fuente") or "", "d": fecha.astimezone(timezone.utc).isoformat(timespec="minutes"),
              "r": it.get("resumen", "")[:240], "i": it.get("imagen"), "tipo": tipo, "nov": novedad,
-             "nivel": it.get("nivel", 3), "o": it["origen"], "tend": [tid for tid, _ in tend], "n": 1}
+             "nivel": it.get("nivel", 3), "o": it["origen"], "tend": [tid for tid, _ in tend], "n": 1, "reg": reg}
         if not s["i"]:
             s.pop("i")
         dia = fecha.astimezone(timezone.utc).date().isoformat()
+        h = C.huella(tn)
+        cercanos = [(fecha.astimezone(timezone.utc).date() + timedelta(days=k)).isoformat() for k in range(-3, 4)]
         for tid, _ in tend:
+            agregar_agrupando(por_t.setdefault(tid, []), dict(s))
+            # la misma historia contada por varios medios en pocos días suma una sola vez
+            if any(C.parecidos(h, frozenset(x.split())) for d in cercanos for x in huellas.get(d, {}).get(tid, [])):
+                stats["misma_historia"] = stats.get("misma_historia", 0) + 1
+                continue
+            huellas.setdefault(dia, {}).setdefault(tid, []).append(" ".join(sorted(h)))
             fila = conteos.setdefault(dia, {}).setdefault(tid, [0] * len(M.TIPOS_ORDEN))
             fila[M.TIPOS_ORDEN.index(tipo)] += 1
-            agregar_agrupando(por_t.setdefault(tid, []), dict(s))
+            if reg != "mu":
+                filar = conteos_reg.setdefault(dia, {}).setdefault(tid, [0, 0])
+                filar[0 if reg == "pe" else 1] += 1
         if tend and (s["nivel"] <= 2 or tipo != "otro"):
             agregar_agrupando(ultimas, dict(s))
         if not tend and novedad:
@@ -230,12 +249,19 @@ def procesar(items: list[dict], cat: dict, conf: dict, estado: dict, senales: di
     corte_conteos = (ahora.date() - timedelta(days=RETENCION_CONTEOS)).isoformat()
     for d in [d for d in conteos if d < corte_conteos]:
         del conteos[d]
+    for d in [d for d in conteos_reg if d < corte_conteos]:
+        del conteos_reg[d]
+    corte_huellas = (ahora.date() - timedelta(days=RETENCION_SENAL)).isoformat()
+    for d in [d for d in huellas if d < corte_huellas]:
+        del huellas[d]
     lim_iso = limite.isoformat(timespec="minutes")
     for tid in list(por_t):
         lst = [s for s in por_t[tid] if s["d"] >= lim_iso]
         lst.sort(key=lambda s: -puntaje(s, ahora))
         por_t[tid] = lst[:MAX_POR_TENDENCIA]
-    senales["ultimas"] = sorted([s for s in ultimas if s["d"] >= lim_iso], key=lambda s: s["d"], reverse=True)[:MAX_ULTIMAS]
+    vigentes = sorted([s for s in ultimas if s["d"] >= lim_iso], key=lambda s: s["d"], reverse=True)
+    senales["ultimas"] = ([s for s in vigentes if s.get("reg") == "pe"][:60] + [s for s in vigentes if s.get("reg") == "la"][:60]
+                          + [s for s in vigentes if s.get("reg", "mu") == "mu"][:MAX_ULTIMAS])
     lim_fuera = (ahora - timedelta(days=14)).isoformat(timespec="minutes")
     senales["fuera"] = sorted([s for s in fuera if s["d"] >= lim_fuera], key=lambda s: s["d"], reverse=True)[:MAX_FUERA]
     return stats
@@ -352,6 +378,7 @@ def datos_pagina(cat: dict, estado: dict, senales: dict, diario: dict, ahora: da
     hoy = ahora.date()
     tend = cat["tendencias"]
     conteos = estado.get("conteos", {})
+    conteos_reg = estado.get("conteos_reg", {})
     inicio = estado.get("inicio")
     imp = M.impulso(tend, diario.get("wiki", {}), diario.get("papers", {}), conteos, hoy, inicio)
     hz = M.horizontes(tend, conteos, hoy)
@@ -376,15 +403,23 @@ def datos_pagina(cat: dict, estado: dict, senales: dict, diario: dict, ahora: da
         tid = t["id"]
         w = diario.get("wiki", {}).get(tid)
         p = diario.get("papers", {}).get(tid)
-        lst = sorted([s for s in senales.get("por_tendencia", {}).get(tid, []) if vale(s)], key=lambda s: -puntaje(s, ahora))[:14]
-        lst.sort(key=lambda s: s["d"], reverse=True)
+        todas = sorted([s for s in senales.get("por_tendencia", {}).get(tid, []) if vale(s)], key=lambda s: -puntaje(s, ahora))
+        lst = []
+        for reg, tope in (("pe", 6), ("la", 6), ("mu", 10)):
+            lst += sorted([s for s in todas if s.get("reg", "mu") == reg][:tope], key=lambda s: s["d"], reverse=True)
+        n30 = M.conteo_dias(conteos, tid, hoy, 30)
+        pe30, la30 = M.conteo_region(conteos_reg, tid, hoy, 30)
+        mez30 = M.mezcla(conteos, tid, hoy, 30)
         art = (w or {}).get("articulos") or []
         salida.append({
-            **{k: t[k] for k in ("id", "nombre", "corto", "en", "mitad", "familia", "focos", "sectores", "impacto", "que_es", "por_que")},
+            **{k: t[k] for k in ("id", "nombre", "corto", "en", "mitad", "familia", "focos", "sectores", "carreras", "impacto", "que_es", "por_que")},
             "anios": hz[tid]["anios"], "anios_base": hz[tid]["base"], "ajuste": hz[tid]["ajuste"],
             "mercado": hz[tid]["mercado"], "esperado": hz[tid]["esperado"], "n_mezcla": hz[tid]["n"], "mezcla": hz[tid]["mezcla"],
             "impulso": imp[tid]["impulso"], "nivel": M.nivel_impulso(imp[tid]["impulso"]), "componentes": imp[tid]["componentes"],
-            "n7": M.conteo_dias(conteos, tid, hoy, 7), "n30": M.conteo_dias(conteos, tid, hoy, 30),
+            "n7": M.conteo_dias(conteos, tid, hoy, 7), "n30": n30, "pe30": pe30, "la30": la30,
+            "inv30": mez30["inversion"], "lanz30": mez30["lanzamiento"], "inves30": mez30["investigacion"],
+            "accion": M.accion(hz[tid]["anios"], t["impacto"], imp[tid]["impulso"]),
+            "oportunidad": M.oportunidad_local(imp[tid]["impulso"], n30, pe30, la30),
             "semanas": M.serie_semanal(conteos, tid, hoy, 12),
             "wiki": None if not w else {
                 "vistas": [w["serie"].get(mm) for mm in meses],
@@ -395,7 +430,9 @@ def datos_pagina(cat: dict, estado: dict, senales: dict, diario: dict, ahora: da
             "senales": [limpiar_para_pagina(s) for s in lst],
         })
 
-    ultimas = [limpiar_para_pagina(s, con_tend=True) for s in senales.get("ultimas", []) if vale(s)][:80]
+    ultimas = []
+    for reg, tope in (("pe", 40), ("la", 40), ("mu", 80)):
+        ultimas += [limpiar_para_pagina(s, con_tend=True) for s in senales.get("ultimas", []) if vale(s) and s.get("reg", "mu") == reg][:tope]
     fuera = sorted([s for s in senales.get("fuera", []) if vale(s) and C.es_novedad(C.normalizar(s["t"]), C.normalizar(s.get("r", "")))],
                    key=lambda s: -puntaje(s, ahora))
     por_fuente, fuera_sel = {}, []
@@ -412,9 +449,14 @@ def datos_pagina(cat: dict, estado: dict, senales: dict, diario: dict, ahora: da
     corte7 = (ahora - timedelta(days=7)).isoformat(timespec="minutes")
     medios7 = {s["f"] for lst in senales.get("por_tendencia", {}).values() for s in lst if s["d"] >= corte7}
     total7 = sum(sum(sum(f) for f in conteos.get((hoy - timedelta(days=i)).isoformat(), {}).values()) for i in range(7))
+    # señales cercanas de 7 días, contadas por nota (no por tendencia) desde las notas guardadas
+    vistas7 = {s["id"]: s.get("reg", "mu") for lst in senales.get("por_tendencia", {}).values() for s in lst if s["d"] >= corte7}
+    for s in senales.get("ultimas", []):
+        if s["d"] >= corte7:
+            vistas7.setdefault(s["id"], s.get("reg", "mu"))
     return {
         "generado": ahora.isoformat(timespec="minutes"),
-        "catalogo": {k: cat[k] for k in ("mitades", "familias", "focos", "sectores")},
+        "catalogo": {**{k: cat[k] for k in ("mitades", "familias", "focos", "sectores", "carreras")}, "acciones": M.ACCIONES, "regiones": C.REGIONES},
         "tendencias": salida,
         "ultimas": ultimas,
         "fuera": fuera_sel,
@@ -424,6 +466,7 @@ def datos_pagina(cat: dict, estado: dict, senales: dict, diario: dict, ahora: da
             "fuentes_total": len(rss), "fuentes_ok": sum(1 for v in rss.values() if not v.get("error")),
             "caidas": sorted(k for k, v in ef.items() if v.get("error")),
             "senales_7d": total7, "medios_7d": len(medios7),
+            "pe_7d": sum(1 for r in vistas7.values() if r == "pe"), "la_7d": sum(1 for r in vistas7.values() if r == "la"),
             "diario": diario.get("fecha_wiki"), "papers": diario.get("fecha_papers"), "historia_dias": M.dias_de_historia(inicio, hoy), "inicio": inicio,
             "revisado": cat.get("revisado"),
         },
@@ -431,7 +474,7 @@ def datos_pagina(cat: dict, estado: dict, senales: dict, diario: dict, ahora: da
 
 
 def limpiar_para_pagina(s: dict, con_tend: bool = False, con_resumen: bool = False) -> dict:
-    o = {"t": s["t"], "u": s["u"], "f": s["f"], "d": s["d"], "tipo": s.get("tipo", "otro")}
+    o = {"t": s["t"], "u": s["u"], "f": s["f"], "d": s["d"], "tipo": s.get("tipo", "otro"), "reg": s.get("reg", "mu")}
     if s.get("i"):
         o["i"] = s["i"]
     if s.get("n", 1) > 1:

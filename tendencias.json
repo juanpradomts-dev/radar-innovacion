@@ -36,6 +36,23 @@
     "agro": "Agro y alimentos",
     "educacion": "Educación y sector público"
   },
+  "carreras": {
+    "ing-industrial": "Ingeniería Industrial",
+    "ing-sistemas": "Ingeniería de Sistemas y Software",
+    "ing-electronica": "Ingeniería Electrónica y Mecatrónica",
+    "ing-ambiental": "Ingeniería Ambiental",
+    "ing-civil": "Ingeniería Civil y Arquitectura",
+    "agro": "Agronomía y Agroindustria",
+    "negocios": "Administración y Negocios",
+    "economia": "Economía, Finanzas y Contabilidad",
+    "marketing": "Marketing y Comunicación",
+    "derecho": "Derecho y Ciencia Política",
+    "salud": "Medicina y Ciencias de la Salud",
+    "psicologia": "Psicología",
+    "educacion": "Educación",
+    "biologia": "Biología y Ciencias del Mar",
+    "turismo": "Turismo, Hotelería y Gastronomía"
+  },
   "tendencias": [
     {
       "id": "ia-generativa", "nombre": "IA generativa", "corto": "IA generativa", "en": "Generative AI",
@@ -47,7 +64,9 @@
       "claves": ["generative ai", "gen ?ai", "ia generativa", "inteligencia artificial generativa", "large language models?", "llms?", "chatgpt", "gpt-?\\d", "chatbots?", "foundation models?", "text-to-(video|image|speech)", "(image|video|music) generat\\w+", "ai-generated", "openai", "anthropic", "google gemini", "gemini (app|model|\\d|ai)", "claude (opus|sonnet|haiku|code|ai)", "midjourney", "deepseek", "mistral ai", "voice clon\\w+", "modelos? de lenguaje"],
       "bing": ["generative AI", "large language model"],
       "wiki": ["Generative AI", "Large language model"],
-      "oa": "\"generative AI\" OR \"large language model\" OR \"large language models\""
+      "oa": "\"generative AI\" OR \"large language model\" OR \"large language models\"",
+      "carreras": ["ing-sistemas", "ing-industrial", "negocios", "marketing", "economia", "derecho", "educacion", "salud", "psicologia"],
+      "local": "inteligencia artificial generativa Perú"
     },
     {
       "id": "ia-agentica", "nombre": "IA agéntica", "corto": "IA agéntica", "en": "Agentic AI",
@@ -59,7 +78,9 @@
       "claves": ["agentic", "ai agents?", "agentes? de (ia|inteligencia artificial)", "agente de ia", "agentes? autonomos", "autonomous agents?", "multi-agent", "computer[- ]use agents?", "coding agents?", "model context protocol", "mcp servers?"],
       "bing": ["agentic AI", "AI agents"],
       "wiki": ["AI agent"],
-      "oa": "\"agentic AI\" OR \"LLM agent\" OR \"LLM agents\" OR \"autonomous agents\""
+      "oa": "\"agentic AI\" OR \"LLM agent\" OR \"LLM agents\" OR \"autonomous agents\"",
+      "carreras": ["ing-sistemas", "ing-industrial", "negocios", "economia", "marketing"],
+      "local": "agentes de inteligencia artificial Perú"
     },
     {
       "id": "analitica-ia", "nombre": "Analítica predictiva con IA", "corto": "Analítica con IA", "en": "AI Analytics",
@@ -71,7 +92,9 @@
       "claves": ["predictive analytics", "predictive maintenance", "demand forecast\\w*", "machine learning", "aprendizaje automatico", "analitica predictiva", "mantenimiento predictivo", "data analytics", "decision intelligence", "anomaly detection", "ai-powered analytics", "prescriptive analytics", "pronostico de demanda"],
       "bing": ["predictive maintenance AI", "demand forecasting AI"],
       "wiki": ["Predictive analytics"],
-      "oa": "\"predictive analytics\" OR \"predictive maintenance\" OR \"demand forecasting\""
+      "oa": "\"predictive analytics\" OR \"predictive maintenance\" OR \"demand forecasting\"",
+      "carreras": ["ing-industrial", "ing-sistemas", "economia", "negocios", "marketing", "salud"],
+      "local": "analítica de datos empresas Perú"
     },
     {
       "id": "vision", "nombre": "Visión por computadora", "corto": "Visión por\ncomputadora", "en": "Computer Vision",
@@ -83,7 +106,9 @@
       "claves": ["computer vision", "vision artificial", "vision por computadora", "image recognition", "facial recognition", "reconocimiento facial", "object detection", "machine vision", "visual inspection", "inspeccion visual", "vision ai", "video analytics"],
       "bing": ["computer vision"],
       "wiki": ["Computer vision"],
-      "oa": "\"computer vision\" OR \"machine vision\" OR \"object detection\""
+      "oa": "\"computer vision\" OR \"machine vision\" OR \"object detection\"",
+      "carreras": ["ing-sistemas", "ing-electronica", "ing-industrial", "salud", "agro"],
+      "local": "visión artificial Perú"
     },
     {
       "id": "ia-fisica", "nombre": "IA física y modelos del mundo", "corto": "IA física", "en": "Physical AI",
@@ -95,7 +120,9 @@
       "claves": ["physical ai", "ia fisica", "world models?", "modelos? del mundo", "embodied ai", "robot foundation models?", "robotics foundation models?", "vision-language-action", "\\bvla models?", "robot learning", "nvidia cosmos", "gr00t"],
       "bing": ["physical AI", "world model AI"],
       "wiki": ["Physical artificial intelligence", "World model (artificial intelligence)"],
-      "oa": "\"embodied AI\" OR \"world model\" OR \"vision-language-action\" OR \"robot foundation model\""
+      "oa": "\"embodied AI\" OR \"world model\" OR \"vision-language-action\" OR \"robot foundation model\"",
+      "carreras": ["ing-electronica", "ing-sistemas", "ing-industrial"],
+      "local": "robótica inteligencia artificial Perú"
     },
     {
       "id": "ia-ciencia", "nombre": "IA para la ciencia", "corto": "IA para\nla ciencia", "en": "AI for Science",
@@ -107,7 +134,9 @@
       "claves": ["ai for science", "alphafold", "protein (design|structure prediction)", "self-driving lab\\w*", "autonomous lab\\w*", "ai scientists?", "ai co-scientist", "ai-(designed|discovered)", "(ai|machine learning|deep learning)[^.]{0,60}(drug discovery|materials discovery|protein|weather forecast\\w*)", "(drug|materials) discovery[^.]{0,40}(ai|machine learning)"],
       "bing": ["AI drug discovery", "AI materials discovery"],
       "wiki": ["AlphaFold"],
-      "oa": "\"AI for science\" OR \"self-driving laboratory\" OR \"AI-driven drug discovery\" OR \"machine learning materials discovery\""
+      "oa": "\"AI for science\" OR \"self-driving laboratory\" OR \"AI-driven drug discovery\" OR \"machine learning materials discovery\"",
+      "carreras": ["biologia", "salud", "ing-sistemas", "ing-ambiental"],
+      "local": "inteligencia artificial investigación científica Perú"
     },
     {
       "id": "humanoides", "nombre": "Robots humanoides", "corto": "Humanoides", "en": "Humanoid Robots",
@@ -119,7 +148,9 @@
       "claves": ["humanoids?", "humanoid robots?", "robots? humanoides?", "humanoide", "tesla optimus", "optimus robot", "figure ai", "figure 0\\d", "unitree", "agility robotics", "apptronik", "1x (technologies|neo)", "atlas robot"],
       "bing": ["humanoid robot"],
       "wiki": ["Humanoid robot"],
-      "oa": "\"humanoid robot\" OR \"humanoid robots\""
+      "oa": "\"humanoid robot\" OR \"humanoid robots\"",
+      "carreras": ["ing-electronica", "ing-industrial", "ing-sistemas"],
+      "local": "robot humanoide Perú"
     },
     {
       "id": "amr", "nombre": "Robots móviles autónomos", "corto": "Robots móviles", "en": "Autonomous Mobile Robots",
@@ -131,7 +162,9 @@
       "claves": ["autonomous mobile robots?", "\\bamrs?\\b", "warehouse robot\\w*", "robots? de almacen", "mobile robots?", "robots? moviles?", "fulfillment robot\\w*", "\\bagvs?\\b", "automated guided vehicles?", "goods-to-person", "robotic picking", "picking robots?", "delivery robots?", "sidewalk robots?", "symbotic", "locus robotics", "amazon robotics", "automated warehouse"],
       "bing": ["warehouse robots", "autonomous mobile robots"],
       "wiki": ["Autonomous robot", "Mobile robot"],
-      "oa": "\"autonomous mobile robot\" OR \"warehouse robot\" OR \"automated guided vehicle\""
+      "oa": "\"autonomous mobile robot\" OR \"warehouse robot\" OR \"automated guided vehicle\"",
+      "carreras": ["ing-industrial", "ing-electronica", "negocios"],
+      "local": "robots almacén logística Perú"
     },
     {
       "id": "cobots", "nombre": "Cobots y brazos robóticos", "corto": "Cobots", "en": "Collaborative & Stationary Robotics",
@@ -143,7 +176,9 @@
       "claves": ["cobots?", "collaborative robots?", "robots? colaborativos?", "robotic arms?", "brazos? roboticos?", "industrial robots?", "robots? industriales?", "universal robots", "fanuc", "abb robotics", "kuka", "robotic welding", "palletizing robots?"],
       "bing": ["collaborative robot", "industrial robots"],
       "wiki": ["Cobot", "Industrial robot"],
-      "oa": "\"collaborative robot\" OR cobot OR \"human-robot collaboration\""
+      "oa": "\"collaborative robot\" OR cobot OR \"human-robot collaboration\"",
+      "carreras": ["ing-industrial", "ing-electronica"],
+      "local": "robots industriales Perú"
     },
     {
       "id": "vehiculos-autonomos", "nombre": "Vehículos autónomos", "corto": "Vehículos\nautónomos", "en": "Autonomous Vehicles",
@@ -155,7 +190,9 @@
       "claves": ["self-driving", "autonomous (vehicles?|cars?|trucks?|trucking|driving|shuttles?|tractors?|ships?|buses)", "driverless", "robotaxis?", "waymo", "zoox", "aurora innovation", "tesla fsd", "full self-driving", "vehiculos? autonomos?", "conduccion autonoma", "camiones? autonomos?", "level 4 autonom\\w+"],
       "bing": ["robotaxi", "autonomous trucks"],
       "wiki": ["Self-driving car", "Robotaxi"],
-      "oa": "\"autonomous vehicle\" OR \"autonomous vehicles\" OR \"self-driving\""
+      "oa": "\"autonomous vehicle\" OR \"autonomous vehicles\" OR \"self-driving\"",
+      "carreras": ["ing-electronica", "ing-sistemas", "ing-civil", "ing-industrial", "derecho"],
+      "local": "vehículos autónomos Perú"
     },
     {
       "id": "drones", "nombre": "Drones y movilidad aérea", "corto": "Drones", "en": "Drones & Advanced Air Mobility",
@@ -165,10 +202,12 @@
       "que_es": "Aeronaves no tripuladas para entregas, inspección, mapeo y agricultura, y taxis aéreos eléctricos (eVTOL) para trayectos cortos.",
       "por_que": "Ya inspeccionan minas, líneas eléctricas y cultivos; las entregas y los taxis aéreos dependen de reglas de espacio aéreo que recién se escriben.",
       "claves": ["drones?", "\\buavs?\\b", "unmanned aerial", "drone deliver\\w+", "zipline", "wing aviation", "evtols?", "air taxis?", "taxis? aereos?", "joby", "archer aviation", "vehiculos? aereos? no tripulados?"],
-      "excluir": ["drones? (strikes?|attacks?|war\\w*)", "shot down", "missiles?", "ataques? con drones?", "kamikaze", "military", "militar\\w*", "air defen[cs]e", "airspace (violation|incursion)"],
+      "excluir": ["drones? (strikes?|attacks?|war\\w*)", "shot down", "missiles?", "ataques? con drones?", "kamikaze", "military", "militar\\w*", "air defen[cs]e", "airspace (violation|incursion)", "drone (light )?shows?", "show de (luces|drones)", "espectaculo de drones", "conciertos?", "fans?", "fandom", "k-?pop", "\\bbts\\b"],
       "bing": ["drone delivery", "eVTOL"],
       "wiki": ["Unmanned aerial vehicle", "EVTOL"],
-      "oa": "\"drone delivery\" OR \"unmanned aerial vehicle\" OR UAV OR eVTOL"
+      "oa": "\"drone delivery\" OR \"unmanned aerial vehicle\" OR UAV OR eVTOL",
+      "carreras": ["ing-electronica", "agro", "ing-civil", "ing-ambiental", "ing-industrial"],
+      "local": "drones Perú"
     },
     {
       "id": "exoesqueletos", "nombre": "Exoesqueletos", "corto": "Exoesqueletos", "en": "Exoskeletons",
@@ -180,7 +219,9 @@
       "claves": ["exoskeletons?", "exoesqueletos?", "exosuits?", "wearable robot\\w*", "powered suits?"],
       "bing": ["exoskeleton"],
       "wiki": ["Exoskeleton (human)"],
-      "oa": "exoskeleton OR exosuit"
+      "oa": "exoskeleton OR exosuit",
+      "carreras": ["ing-electronica", "salud", "ing-industrial"],
+      "local": "exoesqueleto Perú"
     },
     {
       "id": "baterias", "nombre": "Baterías de nueva generación", "corto": "Baterías nueva\ngeneración", "en": "Next-Generation Batteries",
@@ -192,7 +233,9 @@
       "claves": ["solid-state batter\\w+", "sodium-ion", "lithium-sulfur", "lithium-metal", "baterias? de estado solido", "baterias? de (ion )?sodio", "battery (breakthrough|chemistr\\w+|cells?|recycling|tech\\w*|startup|plant|factory)", "gigafactor\\w+", "lfp batter\\w+", "silicon anodes?", "energy density", "quantumscape", "\\bcatl\\b", "next-gen\\w* batter\\w+", "nuevas? baterias?"],
       "bing": ["solid-state battery", "sodium-ion battery"],
       "wiki": ["Solid-state battery", "Sodium-ion battery"],
-      "oa": "\"solid-state battery\" OR \"sodium-ion battery\" OR \"lithium-sulfur battery\""
+      "oa": "\"solid-state battery\" OR \"sodium-ion battery\" OR \"lithium-sulfur battery\"",
+      "carreras": ["ing-electronica", "ing-ambiental", "ing-industrial"],
+      "local": "baterías de litio Perú"
     },
     {
       "id": "ev-ligeros", "nombre": "Autos eléctricos", "corto": "Autos eléctricos", "en": "Light Vehicle Electrification",
@@ -204,7 +247,9 @@
       "claves": ["electric vehicles?", "\\bevs?\\b", "electric cars?", "autos? electricos?", "coches? electricos?", "vehiculos? electricos?", "\\bbevs?\\b", "plug-in hybrids?", "ev charging", "charging (stations?|network)", "electric suvs?", "tesla model", "\\bbyd\\b", "rivian", "e-bikes?", "electric (scooters?|motorcycles?|vans?)", "electromovilidad"],
       "bing": ["electric vehicles"],
       "wiki": ["Electric vehicle", "Electric car"],
-      "oa": "\"electric vehicle\" OR \"electric vehicles\""
+      "oa": "\"electric vehicle\" OR \"electric vehicles\"",
+      "carreras": ["ing-electronica", "ing-industrial", "ing-ambiental", "ing-civil", "negocios"],
+      "local": "autos eléctricos Perú"
     },
     {
       "id": "ev-pesados", "nombre": "Camiones y buses eléctricos", "corto": "Camiones y\nbuses eléctricos", "en": "Heavy Vehicle Electrification",
@@ -216,7 +261,9 @@
       "claves": ["electric (trucks?|semis?|buses|bus|lorr(y|ies)|ferr(y|ies)|ships?|tractors?)", "e-?trucks?", "tesla semi", "zero-emission trucks?", "megawatt charging", "battery-electric trucks?", "camiones? electricos?", "buses? electricos?", "electric freight", "hydrogen trucks?", "fuel[- ]cell trucks?", "electric mining trucks?", "heavy-duty (ev|electric)"],
       "bing": ["electric trucks", "electric buses"],
       "wiki": ["Electric truck", "Electric bus"],
-      "oa": "\"electric truck\" OR \"electric trucks\" OR \"battery electric bus\" OR \"heavy-duty electric\""
+      "oa": "\"electric truck\" OR \"electric trucks\" OR \"battery electric bus\" OR \"heavy-duty electric\"",
+      "carreras": ["ing-industrial", "ing-electronica", "ing-ambiental"],
+      "local": "buses eléctricos Perú"
     },
     {
       "id": "combustibles", "nombre": "Hidrógeno verde y combustibles sostenibles", "corto": "Hidrógeno y\ncombustibles", "en": "Green Hydrogen & Sustainable Fuels",
@@ -228,7 +275,9 @@
       "claves": ["green hydrogen", "hidrogeno verde", "hydrogen (production|economy|hubs?|electrolyzers?|plant)", "electroly[sz]ers?", "electrolizadores?", "sustainable aviation fuels?", "\\bsaf\\b", "e-?fuels?", "biofuels?", "biocombustibles?", "renewable diesel", "green ammonia", "amoniaco verde", "(e|green)-?methanol", "combustibles? sostenibles?"],
       "bing": ["green hydrogen", "sustainable aviation fuel"],
       "wiki": ["Green hydrogen", "Aviation biofuel"],
-      "oa": "\"green hydrogen\" OR \"sustainable aviation fuel\" OR electrofuel OR \"e-fuels\""
+      "oa": "\"green hydrogen\" OR \"sustainable aviation fuel\" OR electrofuel OR \"e-fuels\"",
+      "carreras": ["ing-ambiental", "ing-industrial", "economia"],
+      "local": "hidrógeno verde Perú"
     },
     {
       "id": "renovables", "nombre": "Renovables, almacenamiento y redes", "corto": "Renovables y\nalmacenamiento", "en": "Renewable Energy Infrastructure",
@@ -240,7 +289,9 @@
       "claves": ["energy storage", "almacenamiento (de energia|energetico)", "grid-scale", "battery storage", "\\bbess\\b", "virtual power plants?", "smart grids?", "redes? (electricas? )?inteligentes?", "(power )?grid (modernization|upgrades?|capacity|interconnection|operators?)", "transmission lines?", "long-duration (energy )?storage", "pumped hydro", "solar (farms?|plants?|power|panels?|energy|parks?|modules?)", "wind (farms?|power|turbines?|energy)", "offshore wind", "renewable energy", "renewables", "energias? renovables?", "energia (solar|eolica)", "parques? (solar|eolico)\\w*", "geothermal", "geotermi\\w+", "heat pumps?"],
       "bing": ["energy storage", "renewable energy grid"],
       "wiki": ["Grid energy storage", "Smart grid"],
-      "oa": "\"grid energy storage\" OR \"battery energy storage system\" OR \"virtual power plant\" OR \"smart grid\""
+      "oa": "\"grid energy storage\" OR \"battery energy storage system\" OR \"virtual power plant\" OR \"smart grid\"",
+      "carreras": ["ing-ambiental", "ing-electronica", "ing-civil", "economia"],
+      "local": "energía renovable Perú"
     },
     {
       "id": "nuclear", "nombre": "Nuclear modular y fusión", "corto": "Nuclear\ny fusión", "en": "Advanced Nuclear & Fusion",
@@ -252,7 +303,9 @@
       "claves": ["small modular reactors?", "\\bsmrs?\\b", "fusion (energy|power|reactors?|startups?|plants?|ignition)", "nuclear fusion", "fusion nuclear", "tokamak", "stellarator", "nuclear (reactors?|power|energy|plants?|renaissance)", "reactores? (nucleares|modulares)", "energia nuclear", "microreactors?", "nuscale", "commonwealth fusion", "helion energy","\\boklo\\b", "kairos power", "x-energy", "\\biter\\b"],
       "bing": ["small modular reactor", "fusion energy"],
       "wiki": ["Small modular reactor", "Fusion power"],
-      "oa": "\"small modular reactor\" OR \"fusion power\" OR tokamak"
+      "oa": "\"small modular reactor\" OR \"fusion power\" OR tokamak",
+      "carreras": ["ing-electronica", "ing-ambiental", "economia"],
+      "local": "energía nuclear Perú"
     },
     {
       "id": "edicion-genetica", "nombre": "Edición genética y terapias avanzadas", "corto": "Edición\ngenética", "en": "Gene Editing & Advanced Therapies",
@@ -264,7 +317,9 @@
       "claves": ["crispr", "gene editing", "edicion genetica", "gene therap\\w+", "terapias? genicas?", "base editing", "prime editing", "\\bmrna\\b", "cell therap\\w+", "car-t", "genome editing", "synthetic biology", "biologia sintetica"],
       "bing": ["CRISPR", "gene therapy"],
       "wiki": ["CRISPR gene editing", "Gene therapy"],
-      "oa": "CRISPR OR \"gene editing\" OR \"base editing\" OR \"prime editing\""
+      "oa": "CRISPR OR \"gene editing\" OR \"base editing\" OR \"prime editing\"",
+      "carreras": ["salud", "biologia", "agro", "derecho"],
+      "local": "edición genética Perú"
     },
     {
       "id": "vestibles", "nombre": "Sensores vestibles", "corto": "Vestibles", "en": "Wearable Sensors",
@@ -276,7 +331,9 @@
       "claves": ["wearables?", "smartwatch\\w*", "smart rings?", "anillos? inteligentes?", "fitness trackers?", "continuous glucose", "\\bcgms?\\b", "\\boura\\b", "whoop", "apple watch", "wearable (sensors?|devices?|tech\\w*|health)", "dispositivos? vestibles?", "biosensors?", "smart textiles?", "electronic skin", "e-skin"],
       "bing": ["wearable sensor", "smart ring health"],
       "wiki": ["Wearable technology"],
-      "oa": "\"wearable sensor\" OR \"wearable sensors\" OR \"wearable device\""
+      "oa": "\"wearable sensor\" OR \"wearable sensors\" OR \"wearable device\"",
+      "carreras": ["salud", "ing-electronica", "psicologia", "ing-sistemas"],
+      "local": "relojes inteligentes salud Perú"
     },
     {
       "id": "bci", "nombre": "Interfaces cerebro-computadora", "corto": "Interfaces\ncerebro-computadora", "en": "Brain-Computer Interfaces",
@@ -288,7 +345,9 @@
       "claves": ["brain-computer interfaces?", "brain[- ]machine interfaces?", "\\bbcis?\\b", "neuralink", "synchron", "neural implants?", "brain implants?", "interfaz cerebro", "interfaces? cerebro", "implantes? cerebrales?", "bionic (eyes?|limbs?|arms?|hands?|legs?)", "neuroprosthe\\w+","neurotech\\w*", "precision neuroscience"],
       "bing": ["brain-computer interface"],
       "wiki": ["Brain–computer interface", "Neuralink"],
-      "oa": "\"brain-computer interface\" OR \"brain-machine interface\""
+      "oa": "\"brain-computer interface\" OR \"brain-machine interface\"",
+      "carreras": ["salud", "ing-electronica", "psicologia", "derecho"],
+      "local": "neurotecnología implante cerebral"
     },
     {
       "id": "agritech", "nombre": "Agricultura de precisión y nuevos alimentos", "corto": "Agro de\nprecisión", "en": "Precision Agriculture & Food Tech",
@@ -300,7 +359,9 @@
       "claves": ["precision agriculture", "agricultura de precision", "agtech", "agritech", "agrotech", "vertical farm\\w*", "smart farming", "farm robots?", "crop (monitoring|sensors?)", "cultivated meat", "cultured meat", "lab-grown meat", "carne cultivada", "alternative proteins?", "plant-based meat", "precision fermentation", "agrivoltaic\\w*", "indoor farm\\w*", "agricultural drones?", "soil sensors?", "riego (inteligente|tecnificado)"],
       "bing": ["precision agriculture", "agtech"],
       "wiki": ["Precision agriculture", "Vertical farming"],
-      "oa": "\"precision agriculture\" OR \"smart farming\" OR \"vertical farming\""
+      "oa": "\"precision agriculture\" OR \"smart farming\" OR \"vertical farming\"",
+      "carreras": ["agro", "ing-ambiental", "ing-industrial", "biologia"],
+      "local": "agricultura de precisión Perú"
     },
     {
       "id": "cuantica", "nombre": "Computación cuántica", "corto": "Computación\ncuántica", "en": "Quantum Computing",
@@ -312,7 +373,9 @@
       "claves": ["quantum comput\\w+", "quantum computers?", "qubits?", "quantum (processors?|chips?|advantage|supremacy|error correction|networks?|networking|sensing|sensors?|internet)", "computacion cuantica", "(computador|ordenador)\\w* cuantic\\w+", "ionq", "rigetti", "d-wave", "quantinuum", "psiquantum"],
       "bing": ["quantum computing"],
       "wiki": ["Quantum computing"],
-      "oa": "\"quantum computing\" OR \"quantum computer\" OR \"quantum error correction\""
+      "oa": "\"quantum computing\" OR \"quantum computer\" OR \"quantum error correction\"",
+      "carreras": ["ing-sistemas", "ing-electronica", "economia"],
+      "local": "computación cuántica Perú"
     },
     {
       "id": "conectividad", "nombre": "Conectividad de nueva generación", "corto": "Conectividad\nnueva generación", "en": "Next-Generation Connectivity",
@@ -324,7 +387,9 @@
       "claves": ["\\b5g\\b", "\\b6g\\b", "5g-advanced", "satellite (internet|broadband|connectivity|phone)", "direct-to-(cell|device)", "starlink", "kuiper", "wi-?fi 7", "fiber (networks?|broadband|optics?)", "fibra optica", "open ran", "private (5g|lte|networks?)", "redes? privadas?", "low earth orbit (satellites?|constellations?)", "subsea cables?", "cables? submarinos?", "internet satelital"],
       "bing": ["6G", "direct-to-cell satellite"],
       "wiki": ["6G", "Satellite internet constellation"],
-      "oa": "6G OR \"5G-Advanced\" OR \"non-terrestrial network\" OR \"LEO satellite\""
+      "oa": "6G OR \"5G-Advanced\" OR \"non-terrestrial network\" OR \"LEO satellite\"",
+      "carreras": ["ing-electronica", "ing-sistemas", "educacion"],
+      "local": "5G Perú"
     },
     {
       "id": "gemelos", "nombre": "Gemelos digitales", "corto": "Gemelos\ndigitales", "en": "Digital Twins",
@@ -336,7 +401,9 @@
       "claves": ["digital twins?", "gemelos? digitales?", "omniverse", "industrial metaverse", "factory simulation", "simulacion de procesos", "virtual (factory|replica)"],
       "bing": ["digital twin"],
       "wiki": ["Digital twin"],
-      "oa": "\"digital twin\" OR \"digital twins\""
+      "oa": "\"digital twin\" OR \"digital twins\"",
+      "carreras": ["ing-industrial", "ing-civil", "ing-sistemas"],
+      "local": "gemelo digital Perú"
     },
     {
       "id": "iot", "nombre": "IoT industrial y etiquetas inteligentes", "corto": "IoT y sensores", "en": "Industrial IoT & Smart Printables",
@@ -348,7 +415,9 @@
       "claves": ["internet of things", "\\biot\\b", "\\biiot\\b", "internet de las cosas", "smart sensors?", "sensores? inteligentes?", "connected devices?", "\\brfid\\b", "\\bnfc\\b", "smart labels?", "etiquetas? inteligentes?", "printed electronics", "electronica impresa", "asset tracking", "edge (computing|ai)", "smart home"],
       "bing": ["industrial IoT", "RFID"],
       "wiki": ["Internet of things", "Radio-frequency identification"],
-      "oa": "\"industrial internet of things\" OR IIoT OR RFID OR \"printed electronics\""
+      "oa": "\"industrial internet of things\" OR IIoT OR RFID OR \"printed electronics\"",
+      "carreras": ["ing-sistemas", "ing-electronica", "ing-industrial", "agro"],
+      "local": "internet de las cosas Perú"
     },
     {
       "id": "xr", "nombre": "Realidad extendida", "corto": "Realidad\nextendida", "en": "Extended Reality",
@@ -360,7 +429,9 @@
       "claves": ["augmented reality", "virtual reality", "mixed reality", "realidad (aumentada|virtual|mixta|extendida)", "\\bxr\\b", "\\bvr\\b", "\\bar glasses", "smart ?glasses", "gafas inteligentes", "lentes inteligentes", "vision pro", "meta quest", "ray-ban meta", "android xr", "(vr|xr|mixed reality) headsets?"],
       "bing": ["smart glasses", "augmented reality"],
       "wiki": ["Extended reality", "Smartglasses"],
-      "oa": "\"augmented reality\" OR \"virtual reality\" OR \"mixed reality\""
+      "oa": "\"augmented reality\" OR \"virtual reality\" OR \"mixed reality\"",
+      "carreras": ["ing-sistemas", "educacion", "marketing", "ing-civil", "salud", "turismo"],
+      "local": "realidad aumentada Perú"
     },
     {
       "id": "impresion-3d", "nombre": "Manufactura aditiva", "corto": "Impresión 3D", "en": "Additive Manufacturing",
@@ -372,7 +443,9 @@
       "claves": ["3d[- ]print\\w*", "impres\\w+ 3d", "additive manufacturing", "manufactura aditiva", "fabricacion aditiva", "bioprint\\w*", "metal (3d )?printing", "printed (houses?|homes?)"],
       "bing": ["3D printing", "additive manufacturing"],
       "wiki": ["3D printing"],
-      "oa": "\"additive manufacturing\" OR \"3D printing\""
+      "oa": "\"additive manufacturing\" OR \"3D printing\"",
+      "carreras": ["ing-industrial", "ing-civil", "salud", "ing-electronica"],
+      "local": "impresión 3D Perú"
     },
     {
       "id": "empaques", "nombre": "Empaques de nueva generación", "corto": "Empaques\nnueva generación", "en": "Next-Generation Packaging",
@@ -385,7 +458,9 @@
       "excluir": ["chip packaging", "advanced packaging", "cowos", "semiconductor packaging", "(chip|semiconductor)s?[^.]{0,40}packaging", "packaging[^.]{0,30}(chips?|semiconductors?)"],
       "bing": ["sustainable packaging"],
       "wiki": ["Sustainable packaging"],
-      "oa": "\"sustainable packaging\" OR \"active packaging\" OR \"smart packaging\""
+      "oa": "\"sustainable packaging\" OR \"active packaging\" OR \"smart packaging\"",
+      "carreras": ["ing-industrial", "marketing", "ing-ambiental", "agro"],
+      "local": "envases sostenibles Perú"
     },
     {
       "id": "materiales", "nombre": "Materiales avanzados y de base biológica", "corto": "Materiales\navanzados", "en": "Advanced & Bio-Based Materials",
@@ -397,7 +472,9 @@
       "claves": ["graphene", "grafeno", "perovskites?", "metamaterials?", "metamateriales?", "new materials?", "nuevos? materiales?", "advanced materials?", "materiales? avanzados?", "bioplastics?", "bioplasticos?", "mycelium", "micelio", "bio-based (materials?|plastics?)", "self-healing (materials?|concrete)", "aerogels?", "superconduct\\w+", "low-carbon (cement|concrete|steel)", "green steel", "acero verde", "nanomaterials?"],
       "bing": ["graphene", "perovskite"],
       "wiki": ["Perovskite solar cell", "Graphene", "Bioplastic"],
-      "oa": "graphene OR perovskite OR metamaterial OR \"bio-based material\""
+      "oa": "graphene OR perovskite OR metamaterial OR \"bio-based material\"",
+      "carreras": ["ing-civil", "ing-industrial", "ing-ambiental"],
+      "local": "nuevos materiales construcción Perú"
     },
     {
       "id": "ciberseguridad", "nombre": "Ciberseguridad 2.0", "corto": "Ciberseguridad\n2.0", "en": "Cybersecurity 2.0",
@@ -409,7 +486,9 @@
       "claves": ["cybersecurity", "ciberseguridad", "cyber ?attacks?", "ciberataques?", "ransomware", "data breach\\w*", "hackers?", "hacked", "malware", "phishing", "zero[- ]trust", "post-quantum", "poscuantic\\w+", "zero-days?", "cybercrim\\w+", "infostealers?", "ddos", "brecha de datos", "filtracion de datos"],
       "bing": ["cybersecurity", "ransomware"],
       "wiki": ["Computer security", "Ransomware"],
-      "oa": "cybersecurity OR ransomware OR \"post-quantum cryptography\" OR \"zero trust\""
+      "oa": "cybersecurity OR ransomware OR \"post-quantum cryptography\" OR \"zero trust\"",
+      "carreras": ["ing-sistemas", "derecho", "economia", "negocios"],
+      "local": "ciberseguridad Perú"
     },
     {
       "id": "etica-ia", "nombre": "Ética y regulación de la IA", "corto": "Ética y\nregulación IA", "en": "AI Ethics & Regulation",
@@ -421,7 +500,9 @@
       "claves": ["ai (regulation|act|law|laws|safety|governance|ethics|policy|bill|rules|copyright|liability)", "regulation of ai", "eu ai act", "ley de (la )?ia", "regulacion de (la )?(ia|inteligencia artificial)", "etica de (la )?(ia|inteligencia artificial)", "responsible ai", "ia responsable", "deepfakes?", "algorithmic bias", "sesgos? algoritmicos?", "ai alignment", "superintelligence", "frontier ai", "ai companions?", "chatbot (lawsuit|safety)"],
       "bing": ["AI regulation", "AI safety"],
       "wiki": ["Regulation of artificial intelligence", "Ethics of artificial intelligence"],
-      "oa": "\"AI ethics\" OR \"AI governance\" OR \"AI regulation\" OR \"algorithmic fairness\""
+      "oa": "\"AI ethics\" OR \"AI governance\" OR \"AI regulation\" OR \"algorithmic fairness\"",
+      "carreras": ["derecho", "ing-sistemas", "psicologia", "educacion", "marketing"],
+      "local": "ley de inteligencia artificial Perú"
     },
     {
       "id": "trabajo-aumentado", "nombre": "Trabajo aumentado con IA", "corto": "Trabajo\naumentado", "en": "Augmented Workplaces",
@@ -433,7 +514,9 @@
       "claves": ["future of work", "futuro del trabajo", "ai (at work|in the workplace|productivity|and jobs|job (losses|cuts)|layoffs)", "copilots?", "workplace ai", "jobs? (lost|displaced|replaced) (to|by) ai", "white-collar (jobs|work)", "entry-level jobs", "knowledge workers?", "ia en el trabajo", "empleos? (y|e) (ia|inteligencia artificial)", "automation (of|and) jobs"],
       "bing": ["AI in the workplace", "future of work AI"],
       "wiki": ["Workplace impact of artificial intelligence"],
-      "oa": "\"future of work\" OR \"AI in the workplace\" OR \"human-AI collaboration\""
+      "oa": "\"future of work\" OR \"AI in the workplace\" OR \"human-AI collaboration\"",
+      "carreras": ["negocios", "psicologia", "ing-industrial", "economia"],
+      "local": "inteligencia artificial empleo Perú"
     },
     {
       "id": "talento", "nombre": "Recualificación y brecha de talento", "corto": "Brecha de\ntalento", "en": "Reskilling & Talent Gap",
@@ -445,7 +528,9 @@
       "claves": ["reskilling", "upskilling", "recualificacion", "skills gap", "brecha de (talento|habilidades)", "talent shortage", "labou?r shortages?", "worker shortages?", "escasez de (talento|mano de obra|trabajadores)", "apprenticeships?", "workforce (training|development)", "aging workforce", "stem (talent|education)", "h-1b"],
       "bing": ["reskilling", "skills gap"],
       "wiki": ["Retraining", "Workforce development"],
-      "oa": "reskilling OR upskilling OR \"skills gap\" OR \"labor shortage\""
+      "oa": "reskilling OR upskilling OR \"skills gap\" OR \"labor shortage\"",
+      "carreras": ["negocios", "educacion", "psicologia", "economia"],
+      "local": "brecha de talento Perú"
     },
     {
       "id": "bienestar", "nombre": "Bienestar y pertenencia laboral", "corto": "Bienestar\nlaboral", "en": "Employee Wellbeing & Belonging",
@@ -457,7 +542,9 @@
       "claves": ["employee (wellbeing|well-being|engagement|experience|retention)", "burnout", "four-day (work)?week", "4-day (work)?week", "semana (laboral )?de (4|cuatro) dias", "remote work", "hybrid work", "return[- ]to[- ]office", "trabajo (remoto|hibrido)", "mental health at work", "salud mental (laboral|en el trabajo)", "workplace (culture|inclusion|belonging)", "quiet quitting", "teletrabajo"],
       "bing": ["four-day week", "employee wellbeing"],
       "wiki": ["Four-day workweek", "Employee engagement"],
-      "oa": "\"employee well-being\" OR \"employee wellbeing\" OR \"four-day week\" OR \"hybrid work\""
+      "oa": "\"employee well-being\" OR \"employee wellbeing\" OR \"four-day week\" OR \"hybrid work\"",
+      "carreras": ["psicologia", "negocios", "salud"],
+      "local": "bienestar laboral Perú"
     },
     {
       "id": "educacion-ia", "nombre": "Educación con IA", "corto": "Educación\ncon IA", "en": "AI in Education",
@@ -469,7 +556,9 @@
       "claves": ["ai (in|for) (education|schools|classrooms?|learning|teaching)", "ai tutors?", "tutor(es)? de (ia|inteligencia artificial)", "edtech", "educacion (con|e) (ia|inteligencia artificial)", "students? (using|use) (ai|chatgpt)", "chatgpt (in|for) (schools?|students|education|universities)", "ia en (la )?educacion", "personali[sz]ed learning", "aprendizaje personalizado", "khanmigo", "duolingo", "coursera", "ai literacy"],
       "bing": ["AI in education", "AI tutor"],
       "wiki": ["Artificial intelligence in education", "Educational technology"],
-      "oa": "\"artificial intelligence in education\" OR \"AI in education\" OR \"intelligent tutoring system\""
+      "oa": "\"artificial intelligence in education\" OR \"AI in education\" OR \"intelligent tutoring system\"",
+      "carreras": ["educacion", "psicologia", "ing-sistemas"],
+      "local": "inteligencia artificial educación Perú"
     },
     {
       "id": "economia-plateada", "nombre": "Envejecimiento y economía plateada", "corto": "Economía\nplateada", "en": "Ageing Societies & Silver Economy",
@@ -481,7 +570,9 @@
       "claves": ["ag(e)?ing (population|societ\\w+)", "envejecimiento (poblacional|de la poblacion)", "silver economy", "economia plateada", "older adults", "adultos? mayores?", "longevity", "longevidad", "elder ?care", "care robots?", "age ?tech", "dementia care", "retirement age", "pension (reform|crisis|systems?)", "reforma de pensiones"],
       "bing": ["aging population", "silver economy"],
       "wiki": ["Population ageing", "Silver economy"],
-      "oa": "\"population ageing\" OR \"population aging\" OR \"silver economy\" OR gerontechnology"
+      "oa": "\"population ageing\" OR \"population aging\" OR \"silver economy\" OR gerontechnology",
+      "carreras": ["salud", "psicologia", "economia", "negocios", "turismo"],
+      "local": "adultos mayores envejecimiento Perú"
     },
     {
       "id": "comercio-ia", "nombre": "Comercio digital con IA", "corto": "Comercio\ncon IA", "en": "AI Commerce",
@@ -493,7 +584,9 @@
       "claves": ["agentic commerce", "comercio agentico", "ai shopping", "shopping (agents?|assistants?)", "conversational commerce", "ai checkout", "instant checkout", "ai-powered (shopping|retail)", "e-?commerce", "comercio electronico", "online retail\\w*", "retail media", "social commerce", "live shopping", "quick commerce", "tiktok shop", "\\btemu\\b", "\\bshein\\b", "mercado ?libre"],
       "bing": ["agentic commerce", "AI shopping"],
       "wiki": ["Agentic commerce", "E-commerce"],
-      "oa": "\"e-commerce\" AND (\"artificial intelligence\" OR \"recommender system\" OR \"conversational agent\")"
+      "oa": "\"e-commerce\" AND (\"artificial intelligence\" OR \"recommender system\" OR \"conversational agent\")",
+      "carreras": ["marketing", "negocios", "ing-sistemas", "economia", "turismo"],
+      "local": "comercio electrónico Perú"
     },
     {
       "id": "personalizacion", "nombre": "Personalización masiva", "corto": "Personalización\nmasiva", "en": "Mass Personalization",
@@ -505,7 +598,9 @@
       "claves": ["mass customi[sz]ation", "personalizacion masiva", "hyper-?personali[sz]\\w+", "made-to-order", "on-demand (manufacturing|production)", "personali[sz]ed (medicine|nutrition|products?|shopping|experiences?)", "medicina personalizada", "productos? personalizados?", "recommendation (engines?|algorithms?)"],
       "bing": ["mass customization", "hyper-personalization"],
       "wiki": ["Mass customization", "Personalization"],
-      "oa": "\"mass customization\" OR \"mass personalization\" OR \"hyper-personalization\""
+      "oa": "\"mass customization\" OR \"mass personalization\" OR \"hyper-personalization\"",
+      "carreras": ["marketing", "negocios", "ing-industrial", "salud", "turismo"],
+      "local": "experiencia del cliente personalización Perú"
     },
     {
       "id": "fintech", "nombre": "Pagos instantáneos y finanzas digitales", "corto": "Pagos y\nfinanzas digitales", "en": "Instant Payments & Digital Finance",
@@ -518,7 +613,9 @@
       "excluir": ["bitcoin price", "crypto prices?", "price predictions?", "memecoins?", "token price"],
       "bing": ["instant payments", "stablecoin"],
       "wiki": ["Stablecoin", "Open banking", "Instant payment"],
-      "oa": "fintech OR \"instant payment\" OR \"open banking\" OR stablecoin"
+      "oa": "fintech OR \"instant payment\" OR \"open banking\" OR stablecoin",
+      "carreras": ["economia", "ing-sistemas", "negocios", "derecho"],
+      "local": "pagos digitales Perú"
     },
     {
       "id": "economia-computo", "nombre": "Economía del cómputo", "corto": "Economía\ndel cómputo", "en": "Compute Economy",
@@ -530,7 +627,9 @@
       "claves": ["data ?cent(er|re)s?", "centros? de datos", "ai (chips?|infrastructure|compute|capex|spending|bubble|factor(y|ies)|supercomputers?)", "\\bgpus?\\b", "nvidia", "\\bamd\\b", "\\btsmc\\b", "semiconductors?", "semiconductores?", "chipmakers?", "chips? de (ia|inteligencia artificial)", "hyperscalers?", "compute capacity", "supercomput\\w+", "stargate", "\\bhbm\\b"],
       "bing": ["AI data center", "AI chips"],
       "wiki": ["Data center", "AI boom"],
-      "oa": "\"data center\" AND (energy OR \"artificial intelligence\") OR \"AI accelerator\""
+      "oa": "\"data center\" AND (energy OR \"artificial intelligence\") OR \"AI accelerator\"",
+      "carreras": ["ing-sistemas", "economia", "ing-electronica", "negocios"],
+      "local": "centro de datos Perú"
     },
     {
       "id": "economia-espacial", "nombre": "Economía espacial", "corto": "Economía\nespacial", "en": "Space Economy",
@@ -542,7 +641,9 @@
       "claves": ["space (economy|industry|startups?|stations?|tourism|manufacturing|launch\\w*|exploration|mining|agency)", "economia espacial", "satellites?", "satelites?", "(space|orbital|reusable|heavy-lift) rockets?", "rockets? (launch\\w*|engines?|stages?|boosters?)", "cohetes?", "space probes?", "sondas? espacial\\w*","spacex", "blue origin", "rocket lab", "starship", "falcon 9", "new glenn", "artemis", "lunar (landers?|base|missions?)", "moon (missions?|landing|base)", "mars missions?", "orbital", "spacecraft", "\\bnasa\\b", "european space agency", "agencia espacial", "mision espacial", "earth observation", "observacion de la tierra"],
       "bing": ["space economy", "satellite launch"],
       "wiki": ["Space industry", "Private spaceflight"],
-      "oa": "\"space economy\" OR \"Earth observation\" OR \"small satellite\" OR \"satellite constellation\""
+      "oa": "\"space economy\" OR \"Earth observation\" OR \"small satellite\" OR \"satellite constellation\"",
+      "carreras": ["ing-electronica", "ing-sistemas", "agro", "ing-ambiental"],
+      "local": "satélite Perú"
     },
     {
       "id": "cadenas", "nombre": "Diversificación de cadenas de suministro", "corto": "Diversificación\nde cadenas", "en": "Supply Chain Diversification",
@@ -554,7 +655,9 @@
       "claves": ["supply chains?", "cadenas? de (suministro|abastecimiento|valor)", "nearshoring", "reshoring", "friend-?shoring", "onshoring", "relocalizacion", "(tariffs?|aranceles?|trade war|guerra comercial)[^.]{0,60}(supply chains?|cadenas?|sourcing|suppliers?|proveedores|nearshoring|reshoring|factor(y|ies)|fabricas?|plants?|manufactur\\w+|production|produccion)", "(supply chains?|sourcing|factor(y|ies)|manufactur\\w+)[^.]{0,60}(tariffs?|aranceles?)","freight (rates|market)", "shipping (rates|routes|disruptions?)", "red sea", "panama canal", "canal de panama", "port congestion", "logistics", "logistica", "inventor(y|ies)", "inventarios?", "procurement", "chancay"],
       "bing": ["nearshoring", "supply chain resilience"],
       "wiki": ["Nearshoring", "Supply chain"],
-      "oa": "\"supply chain resilience\" OR nearshoring OR reshoring OR \"supply chain diversification\""
+      "oa": "\"supply chain resilience\" OR nearshoring OR reshoring OR \"supply chain diversification\"",
+      "carreras": ["ing-industrial", "negocios", "economia", "derecho"],
+      "local": "cadena de suministro Perú"
     },
     {
       "id": "minerales", "nombre": "Minerales críticos", "corto": "Minerales\ncríticos", "en": "Critical Minerals",
@@ -567,7 +670,9 @@
       "excluir": ["bitcoin mining", "crypto mining", "data mining", "cryptocurrency mining"],
       "bing": ["critical minerals", "rare earths"],
       "wiki": ["Critical raw materials", "Rare-earth element"],
-      "oa": "\"critical minerals\" OR \"critical raw materials\" OR \"rare earth supply\""
+      "oa": "\"critical minerals\" OR \"critical raw materials\" OR \"rare earth supply\"",
+      "carreras": ["ing-ambiental", "economia", "ing-industrial", "derecho"],
+      "local": "minería cobre litio Perú"
     },
     {
       "id": "economia-circular", "nombre": "Economía circular", "corto": "Economía\ncircular", "en": "Circularity",
@@ -579,7 +684,9 @@
       "claves": ["circular economy", "economia circular", "circularity", "circularidad", "recycl\\w+", "reciclaj\\w+", "reciclad\\w+", "upcycl\\w+", "remanufactur\\w+", "refurbish\\w+", "reus(e|able)", "reutiliz\\w+", "right to repair", "derecho a reparar", "zero waste", "e-waste", "textile waste", "resale", "second-hand", "segunda mano", "plastic (waste|pollution)", "reverse logistics", "logistica inversa", "residuos"],
       "bing": ["circular economy", "recycling technology"],
       "wiki": ["Circular economy", "Recycling"],
-      "oa": "\"circular economy\" OR remanufacturing OR \"reverse logistics\""
+      "oa": "\"circular economy\" OR remanufacturing OR \"reverse logistics\"",
+      "carreras": ["ing-ambiental", "ing-industrial", "negocios", "marketing"],
+      "local": "economía circular Perú"
     },
     {
       "id": "descarbonizacion", "nombre": "Descarbonización", "corto": "Descarbonización", "en": "Decarbonization",
@@ -591,7 +698,9 @@
       "claves": ["decarboni[sz]\\w+", "descarboniz\\w+", "net[- ]zero", "cero emisiones", "carbon[o]? neutral\\w*", "neutralidad de carbono", "emissions? (reduction|cuts?|targets?)", "reduccion de emisiones", "carbon (capture|removal|credits?|markets?|pricing|tax|footprint|accounting|offsets?)", "captura de carbono", "direct air capture", "huella de carbono", "scope 3", "greenhouse gas\\w*", "gases de efecto invernadero", "energy transition", "transicion energetica", "low-carbon", "bajo en carbono", "\\bcop ?3\\d\\b", "paris agreement", "acuerdo de paris"],
       "bing": ["decarbonization", "carbon capture"],
       "wiki": ["Net-zero emissions", "Carbon capture and storage"],
-      "oa": "decarbonization OR \"net zero\" OR \"carbon capture\""
+      "oa": "decarbonization OR \"net zero\" OR \"carbon capture\"",
+      "carreras": ["ing-ambiental", "ing-industrial", "economia", "negocios"],
+      "local": "huella de carbono Perú"
     },
     {
       "id": "esg", "nombre": "Transparencia ESG", "corto": "Transparencia\nESG", "en": "ESG Advocacy",
@@ -603,7 +712,9 @@
       "claves": ["\\besg\\b", "sustainability report\\w*", "reportes? de sostenibilidad", "climate disclosures?", "\\bcsrd\\b", "\\bissb\\b", "greenwashing", "green bonds?", "bonos? verdes?", "sustainable finance", "finanzas sostenibles", "impact investing", "b corp\\w*", "due diligence directive", "\\bcsddd\\b", "\\bsbti\\b", "science based targets"],
       "bing": ["ESG reporting", "greenwashing"],
       "wiki": ["Environmental, social, and governance", "Greenwashing"],
-      "oa": "ESG OR \"sustainability reporting\" OR greenwashing"
+      "oa": "ESG OR \"sustainability reporting\" OR greenwashing",
+      "carreras": ["economia", "negocios", "derecho", "ing-ambiental", "marketing"],
+      "local": "sostenibilidad ESG empresas Perú"
     },
     {
       "id": "ciudades", "nombre": "Transformación urbana verde", "corto": "Ciudades\nverdes", "en": "Green Urban Transformation",
@@ -615,7 +726,9 @@
       "claves": ["smart cit(y|ies)", "ciudades? inteligentes?", "urban (planning|mobility|heat|design|greening|transport)", "planificacion urbana", "movilidad urbana", "15-minute cit\\w+", "ciudad de (los )?15 minutos", "public transit", "transporte publico", "bike lanes?", "ciclovias?", "green (roofs?|buildings?|infrastructure|corridors?)", "techos? verdes?", "edificios? verdes?", "congestion pricing", "low-emission zones?", "zonas? de bajas emisiones", "heat islands?", "islas? de calor", "mass timber"],
       "bing": ["smart city", "urban mobility"],
       "wiki": ["Smart city", "Green building"],
-      "oa": "\"smart city\" OR \"urban mobility\" OR \"green infrastructure\""
+      "oa": "\"smart city\" OR \"urban mobility\" OR \"green infrastructure\"",
+      "carreras": ["ing-civil", "ing-ambiental", "turismo", "derecho"],
+      "local": "movilidad urbana Lima"
     },
     {
       "id": "adaptacion", "nombre": "Adaptación y resiliencia climática", "corto": "Adaptación\nclimática", "en": "Climate Adaptation",
@@ -624,10 +737,12 @@
       "sectores": ["agro", "energia", "logistica", "salud", "educacion"],
       "que_es": "Soluciones para vivir con un clima más extremo: alertas tempranas, defensas contra inundaciones, agua desalinizada, cultivos resistentes a la sequía.",
       "por_que": "El Niño y las olas de calor ya golpean cosechas, rutas y plantas; adaptarse es gestión de riesgo, no solo ambientalismo.",
-      "claves": ["climate (adaptation|resilience|risk|insurance)", "adaptacion (climatica|al cambio climatico)", "resiliencia climatica", "climate-resilient", "early warning systems?", "alertas? tempranas?", "desalinat\\w+", "desaliniz\\w+", "flood (defen[cs]es?|barriers?|protection|resilience)", "heat-resilient", "drought-(resistant|tolerant)", "resistentes? a la sequia", "water (recycling|reuse|scarcity)", "escasez de agua", "seawalls?", "cooling centers?"],
+      "claves": ["climate (adaptation|resilience|risk|insurance)", "adaptacion (climatica|al cambio climatico)", "resiliencia climatica", "climate-resilient", "early warning systems?", "alertas? tempranas?", "desalinat\\w+", "desaliniz\\w+", "flood (defen[cs]es?|barriers?|protection|resilience)", "heat-resilient", "drought-(resistant|tolerant)", "resistentes? a la sequia", "water (recycling|reuse|scarcity)", "escasez de agua", "seawalls?", "cooling centers?", "fenomeno (de )?el nino", "nino costero", "gestion de(l)? riesgos? de desastres", "prevencion de desastres", "reconstruccion con cambios"],
       "bing": ["climate adaptation", "climate resilience"],
       "wiki": ["Climate change adaptation", "Climate resilience"],
-      "oa": "\"climate change adaptation\" OR \"climate resilience\" OR \"early warning system\""
+      "oa": "\"climate change adaptation\" OR \"climate resilience\" OR \"early warning system\"",
+      "carreras": ["ing-ambiental", "ing-civil", "agro", "salud", "biologia"],
+      "local": "Fenómeno El Niño prevención Perú"
     }
   ]
 }

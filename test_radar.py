@@ -44,6 +44,20 @@ class Catalogo(unittest.TestCase):
             self.assertTrue(set(t["sectores"]) <= set(CAT["sectores"]), t["id"])
             self.assertTrue(t["focos"] and t["sectores"])
 
+    def test_carreras_y_busqueda_local(self):
+        for t in CAT["tendencias"]:
+            self.assertTrue(t["carreras"], t["id"])
+            self.assertTrue(set(t["carreras"]) <= set(CAT["carreras"]), t["id"])
+            self.assertTrue(t["local"].strip(), t["id"])
+            self.assertNotIn(" OR ", t["local"])
+        for c in CAT["carreras"]:
+            self.assertGreaterEqual(sum(c in t["carreras"] for t in CAT["tendencias"]), 3, c)
+
+    def test_fuentes_locales(self):
+        locales = [f for f in CONF["feeds"] if f.get("region") in ("pe", "la")]
+        self.assertGreaterEqual(len(locales), 10)
+        self.assertTrue(all(f.get("idioma") == "es" for f in locales))
+
     def test_etiqueta_corta_cabe_en_el_radar(self):
         for t in CAT["tendencias"]:
             lineas = t["corto"].split("\n")
@@ -77,6 +91,49 @@ class Catalogo(unittest.TestCase):
         self.assertEqual(len(urls), len(set(urls)))
         for f in CONF["feeds"]:
             self.assertIn(f.get("nivel"), (1, 2))
+
+
+class Cercania(unittest.TestCase):
+    def reg(self, titulo, fuente_region=None, local=False):
+        return C.region_de(C.normalizar(titulo), "", fuente_region, local)
+
+    def test_peru_latam_mundo(self):
+        self.assertEqual(self.reg("Hidrógeno verde gana fuerza en Perú"), "pe")
+        self.assertEqual(self.reg("Retiro de AFP de 4 UIT podría aprobarse"), "pe")
+        self.assertEqual(self.reg("Mexico nearshoring boom draws new auto plants"), "la")
+        self.assertEqual(self.reg("Waymo expands robotaxi service to Miami"), "mu")
+
+    def test_la_prensa_peruana_general_no_vuelve_peruana_una_noticia_global(self):
+        self.assertEqual(self.reg("Meta presenta nuevo modelo de IA", "pe", False), "mu")
+        self.assertEqual(self.reg("Anthropic sugiere que la IA podrá autorreplicarse", "pe", True), "mu")
+        self.assertEqual(self.reg("Proyectos mineros demorados: qué se necesita", "pe", True), "pe")
+        self.assertEqual(self.reg("Reino Unido anuncia medidas para proteger proyecto", "pe", True), "mu")
+
+    def test_ingles_comun_no_se_confunde_con_peru(self):
+        self.assertEqual(self.reg("Companies produce batteries with new process"), "mu")
+        self.assertEqual(self.reg("Tell us what you think about chili recipes"), "mu")
+
+
+class Decision(unittest.TestCase):
+    def test_accion_sugerida(self):
+        self.assertEqual(M.accion(1.5, 10, 90), "actuar")
+        self.assertEqual(M.accion(2.0, 4, 70), "actuar")      # poco impacto pero mucho impulso
+        self.assertEqual(M.accion(2.0, 4, 20), "preparar")
+        self.assertEqual(M.accion(5.0, 9, 30), "preparar")
+        self.assertEqual(M.accion(9.0, 9, 20), "explorar")
+        self.assertEqual(M.accion(9.0, 4, 20), "vigilar")
+        self.assertEqual(set(M.ACCIONES), {"actuar", "preparar", "explorar", "vigilar"})
+
+    def test_oportunidad_local(self):
+        self.assertTrue(M.oportunidad_local(80, 60, 1, 0))
+        self.assertFalse(M.oportunidad_local(80, 60, 5, 2))   # ya se mueve en la región
+        self.assertFalse(M.oportunidad_local(40, 60, 0, 0))   # el mundo tampoco se mueve
+        self.assertFalse(M.oportunidad_local(90, 5, 0, 0))    # muy pocas señales para afirmarlo
+
+    def test_conteo_region(self):
+        hoy = date(2026, 10, 13)
+        cr = {hoy.isoformat(): {"a": [2, 1]}, (hoy - timedelta(days=40)).isoformat(): {"a": [9, 9]}}
+        self.assertEqual(M.conteo_region(cr, "a", hoy, 30), (2, 1))
 
 
 class Texto(unittest.TestCase):
@@ -119,6 +176,7 @@ class Calidad(unittest.TestCase):
         self.assertTrue(self.excl("The Download: open model trade-offs and geothermal power's promise"))
         self.assertTrue(self.excl("What's the difference between alkaline and lithium-ion batteries?"))
         self.assertTrue(self.excl("Highmark Health taps Karen Hanlon as CEO"))
+        self.assertTrue(self.excl("Mercado Libre está rematando el celular ultra resistente"))
         self.assertTrue(self.excl("What is Reskilling? 5 Concrete Examples", fuente="note"))
 
     def test_deja_pasar_noticias(self):
@@ -140,6 +198,7 @@ class Tendencias(unittest.TestCase):
 
     def test_falsos_positivos(self):
         self.assertNotIn("drones", tend("Drone strike hits fuel depot as war escalates"))
+        self.assertNotIn("drones", tend("Show de drones de BTS ilumina Lima y emociona a los fans"))
         self.assertNotIn("empaques", tend("TSMC expands advanced packaging capacity for AI chips"))
         self.assertNotIn("minerales", tend("Bitcoin mining firm buys more machines"))
         self.assertNotIn("ia-agentica", tend("Travel agents report record bookings this summer"))
@@ -301,12 +360,14 @@ class Proceso(unittest.TestCase):
         self.assertEqual(len(hum), 1)           # dos medios, una sola historia
         self.assertEqual(hum[0]["n"], 2)
         dia = (AHORA - timedelta(hours=1)).date().isoformat()
-        self.assertEqual(sum(estado["conteos"][dia]["humanoides"]), 2)
+        # la misma historia en dos medios suma una sola señal
+        self.assertEqual(sum(estado["conteos"][dia]["humanoides"]), 1)
+        self.assertEqual(st["misma_historia"], 1)
         self.assertTrue(any("economia-espacial" in s["tend"] for s in senales["ultimas"]))
         # segunda corrida con lo mismo: nada nuevo
         st2 = radar.procesar(items, CAT, CONF, estado, senales, AHORA)
         self.assertEqual(st2["nuevas"], 0)
-        self.assertEqual(sum(estado["conteos"][dia]["humanoides"]), 2)
+        self.assertEqual(sum(estado["conteos"][dia]["humanoides"]), 1)
 
 
 class Pagina(unittest.TestCase):

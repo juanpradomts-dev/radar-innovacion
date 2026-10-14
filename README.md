@@ -11,11 +11,24 @@ Un radar al estilo del *Logistics Trend Radar* de DHL, pero que **se actualiza s
 - **Altura:** impacto esperado (arriba, más).
 - **Tamaño del punto:** impulso, de 0 a 100, relativo a las demás tendencias.
 
+## Para decidir
+
+- **¿Qué estudias?** 15 carreras; cada tendencia tiene sus carreras afines (`tendencias.json`, campo `carreras`).
+- **Acción sugerida** por tendencia, con una regla a la vista (`metricas.accion`):
+  - *Actuar ahora*: llega en ≤ 3 años y (impacto alto, 8+, o impulso ≥ 60).
+  - *Prepararse*: llega en ≤ 6 años y no es «Actuar ahora».
+  - *Explorar*: más de 6 años y (impacto 8+ o impulso ≥ 60).
+  - *Vigilar*: más de 6 años, impacto < 8 e impulso < 60.
+  - Los años se redondean a medio año, igual que en la página, para que la regla escrita y la clasificación coincidan.
+- **Una historia cuenta una vez:** si varios medios publican la misma noticia (títulos parecidos, ±3 días), suma una sola señal en los conteos.
+- **Cerca de ti** (historias sobre Perú y Latinoamérica en 30 días) y **Oportunidades en Perú** (impulso ≥ 65, ≥ 15 historias y como mucho el 3 % sobre la región) van primero; luego las acciones, la **matriz de decisión** (años para la adopción frente a impulso) y **Dónde se invierte** (historias de inversión en 30 días).
+- **Prioridad a lo cercano:** cada señal se marca como Perú, Latinoamérica o mundo según lo que nombra (`clasificar.region_de`). «Lo último» y las fichas muestran primero Perú, luego la región y después el mundo. Además de los medios internacionales se leen 18 medios de Perú y la región y una búsqueda en español centrada en Perú por tendencia (`local`).
+
 ## Qué se actualiza solo
 
 | Qué | Fuente | Frecuencia |
 |---|---|---|
-| Noticias por tendencia | 41 feeds RSS de medios (`fuentes.json`) + Bing News RSS (1–2 búsquedas por tendencia) | cada 3 h |
+| Noticias por tendencia | 59 feeds RSS (41 internacionales y 18 de Perú y Latinoamérica, `fuentes.json`) + Bing News RSS (1–2 búsquedas en inglés y 1 en español para Perú por tendencia) | cada 3 h |
 | Interés público | Vistas mensuales de Wikipedia (API de Wikimedia) | 1 vez al día |
 | Ciencia | Artículos por año en OpenAlex | 1 vez al día |
 

@@ -175,6 +175,7 @@ def leer_feed(feed: dict) -> list[dict]:
 # ---------------------------------------------------------------- Bing News RSS
 
 BING = "https://www.bing.com/news/search?format=rss&count=50&setlang=en-us&q="
+BING_LOCAL = "https://www.bing.com/news/search?format=rss&count=50&setlang=es&cc=PE&q="
 
 
 def _url_real(link: str) -> str:
@@ -188,10 +189,10 @@ def _url_real(link: str) -> str:
     return link
 
 
-def bing_news(consulta: str) -> list[dict]:
+def bing_news(consulta: str, local: bool = False) -> list[dict]:
     # desde IPs de GitHub, Bing a veces responde algo que no es RSS válido; se reintenta una vez
     for intento in range(2):
-        datos = http_get(BING + urllib.parse.quote_plus(consulta), ua=UA_NAVEGADOR, intentos=2)
+        datos = http_get((BING_LOCAL if local else BING) + urllib.parse.quote_plus(consulta), ua=UA_NAVEGADOR, intentos=2)
         try:
             raiz = ET.fromstring(datos)
             break

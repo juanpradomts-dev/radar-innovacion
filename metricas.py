@@ -161,6 +161,49 @@ def horizontes(tendencias: list[dict], conteos: dict, hoy: date, dias: int = 60)
     return out
 
 
+ACCIONES = {
+    "actuar": ("Actuar ahora", "Ya se está adoptando: conviene aprenderla y aplicarla en proyectos desde ya."),
+    "preparar": ("Prepararse", "Llega en pocos años: buen momento para formarse, hacer pilotos y seguir a quienes la adoptan."),
+    "explorar": ("Explorar", "Lejana pero de alto impacto o con mucho impulso: seguir la investigación y buscar nichos tempranos."),
+    "vigilar": ("Vigilar", "Lejana y de menor impacto: revisarla de vez en cuando."),
+}
+
+
+def accion(anios: float, impacto: int, impulso: int | None) -> str:
+    """Acción sugerida con una regla a la vista (la página la imprime con estos mismos números).
+
+    Se usan los años tal como se muestran (redondeados a medio año) y el corte de «impacto alto» (8+):
+    actuar   = llega en 3 años o menos y (impacto 8+ o impulso 60+)
+    preparar = llega en 6 años o menos y no es «actuar»
+    explorar = más de 6 años y (impacto 8+ o impulso 60+)
+    vigilar  = más de 6 años, impacto menor a 8 e impulso menor a 60
+    """
+    a = round(anios * 2) / 2
+    fuerte = impacto >= 8 or (impulso or 0) >= 60
+    if a <= 3 and fuerte:
+        return "actuar"
+    if a <= 6:
+        return "preparar"
+    return "explorar" if fuerte else "vigilar"
+
+
+def conteo_region(conteos_reg: dict, tid: str, hoy: date, dias: int = 30) -> tuple[int, int]:
+    """(señales de Perú, señales del resto de Latinoamérica) en los últimos `dias`."""
+    pe = la = 0
+    for i in range(dias):
+        fila = conteos_reg.get((hoy - timedelta(days=i)).isoformat(), {}).get(tid)
+        if fila:
+            pe += fila[0]
+            la += fila[1]
+    return pe, la
+
+
+def oportunidad_local(impulso: int | None, n30: int, pe: int, la: int) -> bool:
+    """El mundo se mueve y la región casi no: impulso de 65 o más, al menos 15 señales en 30 días
+    y, como mucho, el 3 % de ellas (o una sola) sobre Perú o Latinoamérica."""
+    return (impulso or 0) >= 65 and n30 >= 15 and (pe + la) <= max(1, 0.03 * n30)
+
+
 def cambios(historial: dict[str, dict[str, list]], hoy: date, nombres: dict[str, str], dias: int = 7) -> dict:
     """Comparación con hace ~7 días: quién acelera, quién se enfría, quién se acerca o se aleja."""
     clave_hoy = hoy.isoformat()
