@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-14T04:34:08+00:00",
+  "generatedAt": "2026-10-14T12:35:19+00:00",
   "title": "Design System: Radar de Innovación",
   "extensions": {
     "colorMeta": {
@@ -519,6 +519,31 @@
         "purpose": "Barrido único del radar al cargar."
       },
       {
+        "name": "nacer",
+        "value": "0.55s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Cada punto nace (escala 0.3 → 1) cuando lo alcanza la aguja; su nombre llega 0.12 s después."
+      },
+      {
+        "name": "ping",
+        "value": "1s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Pulso único de las 5 tendencias con más impulso al aparecer."
+      },
+      {
+        "name": "senalar",
+        "value": "0.2s cubic-bezier(.16,1,.3,1)",
+        "purpose": "El punto señalado crece a 1.22; el resto baja a opacidad 0.38."
+      },
+      {
+        "name": "asentir",
+        "value": "0.45s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Al filtrar, las que quedan asienten una vez (máximo 0.24 s de escalonado)."
+      },
+      {
+        "name": "visto",
+        "value": "1.8s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Al cerrar una ficha, su punto queda marcado con el anillo."
+      },
+      {
         "name": "ficha",
         "value": "0.34s",
         "purpose": "Apertura de la ficha: fundido y subida de 14px."
@@ -636,7 +661,7 @@
   ],
   "narrative": {
     "northStar": "El Radar Bicolor",
-    "overview": "**Creative North Star: \"El Radar Bicolor\"**\n\nEl sistema es un instrumento de lectura antes que una página de marketing. El radar ocupa el centro y sus dos mitades son a la vez el mapa y la marca. A la izquierda, en naranja UCSUR, va sociedad y negocio; a la derecha, en azul UCSUR, va tecnología. Todo lo demás (filtros, listas, tabla, fichas) es un soporte claro sobre un fondo azulado muy suave, con tarjetas blancas y líneas finas.\n\nLa densidad es de tablero: mucha información por pantalla, ordenada por líneas de 1 px y por fondos planos, no por cajas dentro de cajas. Montserrat pone la voz en los títulos y en las cifras. Source Sans 3 se encarga de leer. El movimiento es escaso y siempre responde a algo: una aguja barre el radar una vez al cargar, un anillo enciende el punto enlazado y la ficha se abre con un fundido corto.\n\nRechazos confirmados por el autor:\n- el panel gris con un solo acento;\n- el informe estático en PDF;\n- cualquier parecido con un sitio oficial (sin logo ni nombre de la universidad).",
+    "overview": "**Creative North Star: \"El Radar Bicolor\"**\n\nEl sistema es un instrumento de lectura antes que una página de marketing. El radar ocupa el centro y sus dos mitades son a la vez el mapa y la marca. A la izquierda, en naranja UCSUR, va sociedad y negocio; a la derecha, en azul UCSUR, va tecnología. Todo lo demás (filtros, listas, tabla, fichas) es un soporte claro sobre un fondo azulado muy suave, con tarjetas blancas y líneas finas.\n\nLa densidad es de tablero: mucha información por pantalla, ordenada por líneas de 1 px y por fondos planos, no por cajas dentro de cajas. Montserrat pone la voz en los títulos y en las cifras. Source Sans 3 se encarga de leer. El movimiento es escaso y siempre responde a algo:\n- una aguja barre el radar una vez al cargar y cada punto se enciende a su paso;\n- al señalar un punto, el resto baja la voz;\n- al filtrar, las tendencias que quedan asienten una vez;\n- la ficha se abre con un fundido corto.\n\nRechazos confirmados por el autor:\n- el panel gris con un solo acento;\n- el informe estático en PDF;\n- cualquier parecido con un sitio oficial (sin logo ni nombre de la universidad).",
     "keyCharacteristics": [
       "Bicolor con significado: el naranja es sociedad y negocio y el azul es tecnología, también fuera del radar.",
       "Estructura en azul: barra superior, chips activos y escala de acciones.",

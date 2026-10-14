@@ -156,10 +156,32 @@ summary::-webkit-details-marker{display:none}
 .etq-movil{display:none;pointer-events:none}
 .etq-movil rect{fill:#fff;stroke:rgba(20,33,61,.18);stroke-width:2}
 .compacto .etq-movil{display:inline}
+.etq-movil g{transition:opacity .25s ease-out}
+.etq-movil g.apagado{opacity:0}
 .compacto .nodo .etq,.compacto .nodo .guia{display:none!important}
 .compacto .solo-ancho-svg{display:none}
-.nodo.entra{animation:aparecer .5s var(--curva) backwards}
+/* el punto responde: crece al señalarlo y se hunde un poco al presionarlo */
+.nodo .punto{transform-box:fill-box;transform-origin:center;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.nodo:hover .punto,.nodo:focus-visible .punto,.nodo.foco .punto,.nodo.enlazado .punto{transform:scale(1.22)}
+.nodo:active .punto{transform:scale(.92);transition-duration:.08s}
+.nodo.apagado .punto{transform:scale(.8)}
+/* foco y contexto: con un punto señalado, el resto baja la voz */
+.radar-svg.enfoca .nodo:not(.foco):not(.enlazado):not(.activo):not(.apagado){opacity:.38}
+/* entrada: cada punto se enciende cuando lo alcanza la aguja; su nombre llega justo después */
+.nodo.entra{animation:aparecer .35s ease-out backwards;animation-delay:var(--d,0s)}
+.nodo.entra .punto{animation:nacer .55s cubic-bezier(.16,1,.3,1) backwards;animation-delay:var(--d,0s)}
+.nodo.entra .etq,.nodo.entra .guia{animation:aparecer .43s ease-out backwards;animation-delay:calc(var(--d,0s) + .12s)}
 @keyframes aparecer{from{opacity:0}to{opacity:1}}
+@keyframes nacer{from{transform:scale(.3)}to{transform:none}}
+/* las 5 con más impulso emiten un solo pulso al aparecer */
+.nodo .ping{fill:none;stroke-width:2;pointer-events:none;transform-box:fill-box;transform-origin:center;animation:ping 1s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--d,0s) + .15s)}
+@keyframes ping{0%{opacity:0;transform:scale(1)}12%{opacity:.75}100%{opacity:0;transform:scale(2.8)}}
+/* al filtrar, las que quedan asienten una vez */
+.nodo.asiente .punto{animation:asentir .45s cubic-bezier(.16,1,.3,1);animation-delay:var(--da,0s)}
+@keyframes asentir{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+/* al cerrar una ficha, su punto queda marcado un momento */
+.nodo.visto .anillo{animation:visto 1.8s cubic-bezier(.16,1,.3,1)}
+@keyframes visto{0%{opacity:1;transform:scale(1.3)}15%{opacity:1;transform:scale(1)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
 .aguja{transform-box:view-box;transform-origin:500px 500px;animation:barrer 1.5s cubic-bezier(.45,.05,.3,1) both}
 @keyframes barrer{from{transform:rotate(0deg);opacity:1}85%{opacity:1}to{transform:rotate(360deg);opacity:0}}
 @media (prefers-reduced-motion:no-preference){
@@ -173,6 +195,9 @@ summary::-webkit-details-marker{display:none}
 .globo.ver{opacity:1;transform:none}
 .globo b{display:block;font-size:15px;margin-bottom:1px}
 .globo span{color:var(--azul-texto)}
+.globo small{display:block;margin-top:4px;font-size:12.5px;color:var(--azul-texto)}
+.empieza{margin:0;padding:0 6px 2px;font-size:14.5px;color:var(--tinta-2)}
+.empieza .btn-txt{font-size:inherit;padding:0 1px}
 
 /* lateral */
 .lateral{display:flex;flex-direction:column;gap:18px}
@@ -439,12 +464,13 @@ dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
     <section class="radar-caja caja" id="radar" aria-labelledby="t-radar">
       <h2 id="t-radar" class="sr">Radar de tendencias</h2>
       <div class="radar-cab">
-        <p class="pista"><svg class="icono" aria-hidden="true"><use href="#i-dedo"/></svg><span><b>Toca un punto</b> para ver qué está pasando en esa tendencia.</span></p>
+        <p class="pista"><svg class="icono" aria-hidden="true"><use href="#i-dedo"/></svg><span><b id="pista-verbo">Toca un punto</b> para ver qué está pasando en esa tendencia.</span></p>
         <ul class="mitades" aria-label="Colores del radar">
           <li><span class="bola soc"></span>Sociedad y negocio</li>
           <li><span class="bola tec"></span>Tecnología</li>
         </ul>
       </div>
+      <p class="empieza" id="empieza"></p>
       <svg class="radar-svg" id="lienzo-radar" viewBox="0 0 1000 1000" role="group" aria-labelledby="radar-desc">
         <desc id="radar-desc">Radar de 49 tendencias. Mitad izquierda: sociedad y negocio. Mitad derecha: tecnología. Más cerca del centro, se adopta antes; más arriba, más impacto. Usa las flechas para recorrer los puntos y Enter para abrir una tendencia. La tabla «Todas las tendencias» tiene los mismos datos.</desc>
       </svg>
@@ -481,12 +507,12 @@ dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
     <div class="decidir-fila primera">
       <div class="panel">
         <h3>Cerca de ti</h3>
-        <p class="sub">Historias sobre Perú y Latinoamérica en los últimos 30 días (una historia cuenta una vez aunque la publiquen varios medios).</p>
+        <p class="sub">Noticias sobre Perú y Latinoamérica en los últimos 30 días (cada noticia cuenta una vez aunque la publiquen varios medios).</p>
         <ul class="barras-h" id="cerca"></ul>
       </div>
       <div class="panel">
         <h3>Oportunidades en Perú</h3>
-        <p class="sub">Crecen en el mundo y aquí casi no aparecen en las noticias: impulso de 65 o más, al menos 15 historias en 30 días y como mucho el 3 % sobre la región. Puede ser un espacio por explorar.</p>
+        <p class="sub">Crecen en el mundo y aquí casi no aparecen en las noticias: impulso de 65 o más, al menos 15 noticias en 30 días y como mucho el 3 % sobre la región. Puede ser un espacio por explorar.</p>
         <ul class="oportunidades" id="oportunidades"></ul>
       </div>
     </div>
@@ -495,12 +521,12 @@ dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
     <div class="decidir-fila">
       <div class="panel">
         <h3>Matriz de decisión</h3>
-        <p class="sub">Cuándo llega cada tendencia frente a cuánto se está moviendo. El tamaño es el impacto. Toca un punto para ver su ficha.</p>
+        <p class="sub">Cuándo llega cada tendencia frente a cuánto se está moviendo. El tamaño es el impacto. Elige un punto para ver su ficha.</p>
         <div class="matriz" id="matriz"></div>
       </div>
       <div class="panel">
         <h3>Dónde se invierte</h3>
-        <p class="sub">Historias de rondas de financiamiento, inversiones y compras en los últimos 30 días.</p>
+        <p class="sub">Noticias de rondas de financiamiento, inversiones y compras en los últimos 30 días.</p>
         <ul class="barras-h" id="inversion"></ul>
       </div>
     </div>
@@ -509,7 +535,7 @@ dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
   <section class="seccion caja" id="lo-ultimo" aria-labelledby="t-ultimo">
     <div class="sec-cab">
       <div><h2 id="t-ultimo">Lo último</h2><p id="ultimo-sub">Primero lo que pasa en Perú, luego en Latinoamérica y después en el mundo.</p></div>
-      <div class="segmentos" id="tipos-noticia" role="group" aria-label="Tipo de señal"></div>
+      <div class="segmentos" id="tipos-noticia" role="group" aria-label="Tipo de noticia"></div>
     </div>
     <div id="ultimas"></div>
   </section>
@@ -523,7 +549,7 @@ dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
     <div class="sec-cab"><div><h2 id="t-todas">Todas las tendencias</h2><p id="todas-sub"></p></div></div>
     <div class="tabla-env">
       <table class="tabla">
-        <caption class="sr">Las 49 tendencias con su acción sugerida, horizonte, impacto, impulso y señales. Toca una fila para abrir su ficha.</caption>
+        <caption class="sr">Las 49 tendencias con su acción sugerida, horizonte, impacto, impulso y noticias. Toca una fila para abrir su ficha.</caption>
         <thead><tr id="cabecera-tabla"></tr></thead>
         <tbody id="filas-tabla"></tbody>
       </table>
@@ -535,7 +561,7 @@ dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
       <summary>¿Cómo se mide?<svg class="icono" aria-hidden="true"><use href="#i-abajo"/></svg></summary>
       <h3>Dónde está cada punto</h3>
       <ul>
-        <li><b>Distancia al centro:</b> años estimados hasta la adopción masiva. Parte de una evaluación base y se ajusta solo según el tipo de señales de los últimos 60 días: si una tendencia acumula más lanzamientos e inversiones de lo típico para su plazo, se acerca; si tiene menos (predomina la investigación), se aleja. Máximo ±30 %.</li>
+        <li><b>Distancia al centro:</b> años estimados hasta la adopción masiva. Parte de una evaluación base y se ajusta solo según el tipo de noticias de los últimos 60 días: si una tendencia acumula más lanzamientos e inversiones de lo típico para su plazo, se acerca; si tiene menos (predomina la investigación), se aleja. Máximo ±30 %.</li>
         <li><b>Altura:</b> impacto esperado en la economía y la vida diaria (arriba, más). Mitad izquierda: sociedad y negocio; derecha: tecnología.</li>
         <li><b>Tamaño:</b> impulso relativo (0–100) frente a las demás tendencias.</li>
       </ul>
@@ -550,10 +576,10 @@ dialog.detalle[open]::backdrop{animation:fondo .34s ease-out}
       <ul id="reglas-accion"></ul>
       <h3>Perú, Latinoamérica y el mundo</h3>
       <ul>
-        <li>Una señal es de <b>Perú</b> si nombra al país, una de sus ciudades, entidades o empresas; de <b>Latinoamérica</b> si nombra otro país o ciudad de la región. La prensa peruana general no basta: también publica noticias globales.</li>
+        <li>Una noticia es de <b>Perú</b> si nombra al país, una de sus ciudades, entidades o empresas; de <b>Latinoamérica</b> si nombra otro país o ciudad de la región. La prensa peruana general no basta: también publica noticias globales.</li>
         <li>Además de los medios internacionales, se leen 18 medios de Perú y la región y una búsqueda por tendencia en español centrada en Perú.</li>
-        <li><b>Una historia cuenta una vez:</b> si varios medios publican la misma noticia en pocos días, suma una sola señal en los conteos.</li>
-        <li><b>Oportunidad en Perú:</b> impulso de 65 o más, al menos 15 señales en 30 días y, como mucho, el 3 % (o una sola) sobre Perú o Latinoamérica.</li>
+        <li><b>Una noticia cuenta una vez:</b> si varios medios publican la misma noticia en pocos días, se cuenta una sola vez.</li>
+        <li><b>Oportunidad en Perú:</b> impulso de 65 o más, al menos 15 noticias en 30 días y, como mucho, el 3 % (o una sola) sobre Perú o Latinoamérica.</li>
       </ul>
       <h3>Límites honestos</h3>
       <ul>
@@ -602,7 +628,7 @@ const $ = s => document.querySelector(s);
 const T = Object.fromEntries(D.tendencias.map(t => [t.id, t]));
 const filtros = {carrera:"", foco:null, familia:null, sector:null, q:""};
 const orden = {col:"accion", dir:1};
-let tipoNoticia = "todo", abierta = null, ordenRadar = [];
+let tipoNoticia = "todo", abierta = null, ordenRadar = [], ultimaVista = "";
 const limiteRegion = {pe:6, la:6, mu:9};
 
 /* ---------- utilidades ---------- */
@@ -850,10 +876,19 @@ function dibujarRadar(){
     const rp = radioPunto(t);
     const g = el("g", {class:"nodo entra" + (p.conEtq ? "" : " sin-etq") + (calientes.has(t.id) ? " caliente" : ""), "data-id":t.id, tabindex:-1, role:"button",
       "aria-label":`${t.nombre}: ${aniosTxt(t.anios)} para la adopción, impacto ${impactoTxt(t.impacto).toLowerCase()}, impulso ${t.impulso ?? "sin datos"}, acción sugerida: ${accionNombre(t.accion).toLowerCase()}`, style:`color:${col}`}, capa);
-    g.style.animationDelay = (0.1 + reloj(t.id) / (2 * Math.PI) * 1.25).toFixed(2) + "s";
-    g.addEventListener("animationend", e => { if (e.animationName === "aparecer") g.classList.remove("entra"); });
+    g.style.setProperty("--d", (0.1 + reloj(t.id) / (2 * Math.PI) * 1.25).toFixed(2) + "s");
+    // cada animación de un solo uso se retira al terminar: así reinsertar el nodo no la repite
+    g.addEventListener("animationend", e => {
+      if (e.animationName === "nacer") g.classList.remove("entra");
+      if (e.animationName === "asentir") g.classList.remove("asiente");
+      if (e.animationName === "visto") g.classList.remove("visto");
+      if (e.animationName === "ping") e.target.remove();
+    });
     if (p.guia) el("line", {class:"guia", x1:p.guia[0], y1:p.guia[1], x2:p.guia[2], y2:p.guia[3]}, g);
-    if (calientes.has(t.id)) el("circle", {class:"halo", cx:p.x, cy:p.y, r:rp + 6, stroke:col}, g);
+    if (calientes.has(t.id)){
+      el("circle", {class:"halo", cx:p.x, cy:p.y, r:rp + 6, stroke:col}, g);
+      el("circle", {class:"ping", cx:p.x, cy:p.y, r:rp, stroke:col}, g);
+    }
     el("circle", {class:"anillo", cx:p.x, cy:p.y, r:rp + 9, stroke:col}, g);
     el("circle", {cx:p.x, cy:p.y, r:20, fill:"transparent"}, g);
     el("circle", {class:"punto", cx:p.x, cy:p.y, r:rp, fill:col, stroke:"#fff", "stroke-width":2.2, "data-r":rp}, g);
@@ -869,10 +904,10 @@ function dibujarRadar(){
     p.lineas.forEach((l, i) => { const s = el("tspan", {x:p.etq.x0 + 8, dy: i ? 18 : 0}, tx); s.textContent = l; });
     g.addEventListener("click", () => { if (!svg.classList.contains("compacto")) abrir(t.id); });
     g.addEventListener("keydown", e => teclaNodo(e, t.id));
-    g.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") globo(t, g); });
-    g.addEventListener("pointerleave", () => ocultarGlobo());
-    g.addEventListener("focus", () => globo(t, g));
-    g.addEventListener("blur", () => ocultarGlobo());
+    g.addEventListener("pointerenter", e => { if (e.pointerType === "mouse"){ globo(t, g); enfocar(g, true); } });
+    g.addEventListener("pointerleave", () => { ocultarGlobo(); enfocar(g, false); });
+    g.addEventListener("focus", () => { globo(t, g, true); enfocar(g, true); });
+    g.addEventListener("blur", () => { ocultarGlobo(); enfocar(g, false); });
   }
   capa.querySelector(`[data-id="${ordenRadar[0]}"]`).setAttribute("tabindex", 0);
   etiquetasMovil(svg, pos, porImpulso.slice(0, 5));
@@ -922,18 +957,22 @@ function etiquetasMovil(svg, pos, top){
       if (!dentroCirculo(b, -4) || etiquetas.some(o => solapa(b, o, 6))) continue;
       const tapa = puntos.filter(o => solapa(b, o, 0));
       if (tapa.some(o => o.id === t.id)) continue;
-      const costo = tapa.length * 10 + sep / 8;
+      // una etiqueta que cruza a la otra mitad confunde el color: solo si no queda otra opción
+      const cruza = t.mitad === "tec" ? b.x0 < CX : b.x1 > CX;
+      const costo = tapa.length * 10 + sep / 8 + (cruza ? 30 : 0);
       if (!mejor || costo < mejor.costo) mejor = {b, costo, sep, dx, dy};
     }
     if (!mejor) continue;
     const b = mejor.b;
     etiquetas.push(b);
+    // cada nombre va en su grupo para ocultarlo cuando un filtro apaga su punto
+    const gl = el("g", {"data-id":t.id}, capa);
     if (mejor.sep > 8){
       const ax = Math.min(Math.max(p.x, b.x0), b.x1), ay = Math.min(Math.max(p.y, b.y0), b.y1);
-      el("line", {x1:p.x, y1:p.y, x2:ax, y2:ay, stroke:"#34435E", "stroke-width":3}, capa);
+      el("line", {x1:p.x, y1:p.y, x2:ax, y2:ay, stroke:"#34435E", "stroke-width":3}, gl);
     }
-    el("rect", {x:b.x0, y:b.y0, width:w, height:h, rx:12}, capa);
-    const tx = el("text", {x:b.x0 + 12, y:b.y0 + 36, "font-size":34}, capa);
+    el("rect", {x:b.x0, y:b.y0, width:w, height:h, rx:12}, gl);
+    const tx = el("text", {x:b.x0 + 12, y:b.y0 + 36, "font-size":34}, gl);
     tx.textContent = txt;
   }
 }
@@ -953,9 +992,10 @@ function teclaNodo(e, id){
   sig.setAttribute("tabindex", 0);
   sig.focus();
 }
-function globo(t, g){
+function globo(t, g, conTeclado){
   const d = deltaDe(t.id);
-  $("#globo").innerHTML = `<b>${esc(t.nombre)}</b><span>${accionNombre(t.accion)} · ${aniosTxt(t.anios)} · impulso ${t.impulso ?? "—"}${d ? ` (${d > 0 ? "+" : "−"}${Math.abs(d)})` : ""}</span>`;
+  $("#globo").innerHTML = `<b>${esc(t.nombre)}</b><span>${accionNombre(t.accion)} · ${aniosTxt(t.anios)} · impulso ${t.impulso ?? "—"}${d ? ` (${d > 0 ? "+" : "−"}${Math.abs(d)})` : ""}</span>` +
+    `<small>${conTeclado ? "Pulsa Enter" : "Haz clic"} para ver su ficha</small>`;
   const r = g.querySelector(".punto").getBoundingClientRect();
   posicionarGlobo(r.left + r.width / 2, r.top, r.bottom);
 }
@@ -969,10 +1009,21 @@ function posicionarGlobo(cx, arriba, abajo){
   b.style.left = x + "px"; b.style.top = y + "px";
 }
 const ocultarGlobo = () => $("#globo").classList.remove("ver");
+// foco y contexto: el punto señalado queda al frente y el resto se atenúa
+function enfocar(nodo, si){
+  nodo.classList.toggle("foco", si);
+  $("#lienzo-radar").classList.toggle("enfoca", si);
+}
 // resaltado enlazado: al pasar por una fila o etiqueta, su punto se enciende en el radar
 function enlazar(elemento, id){
-  const on = () => { const n = document.querySelector(`.nodo[data-id="${id}"]`); if (n){ n.classList.add("enlazado"); n.parentNode.appendChild(n); } };
-  const off = () => document.querySelector(`.nodo[data-id="${id}"]`)?.classList.remove("enlazado");
+  const on = () => {
+    const n = document.querySelector(`.nodo[data-id="${id}"]`);
+    if (!n) return;
+    n.classList.add("enlazado");
+    if (!n.classList.contains("entra")) n.parentNode.appendChild(n);
+    $("#lienzo-radar").classList.add("enfoca");
+  };
+  const off = () => { document.querySelector(`.nodo[data-id="${id}"]`)?.classList.remove("enlazado"); $("#lienzo-radar").classList.remove("enfoca"); };
   elemento.addEventListener("pointerenter", on);
   elemento.addEventListener("pointerleave", off);
   elemento.addEventListener("focusin", on);
@@ -1034,14 +1085,48 @@ function aplicarFiltros(){
   });
   const vis = visibles();
   const ids = new Set(vis.map(t => t.id));
-  document.querySelectorAll(".nodo").forEach(n => n.classList.toggle("apagado", !ids.has(n.dataset.id)));
+  // las listas se vuelven a dibujar: un resaltado que dejó una fila borrada no debe quedar pegado
+  document.querySelectorAll(".nodo.enlazado").forEach(n => n.classList.remove("enlazado"));
+  if (!document.querySelector(".nodo.foco")) $("#lienzo-radar").classList.remove("enfoca");
+  document.querySelectorAll(".nodo, .etq-movil g").forEach(n => n.classList.toggle("apagado", !ids.has(n.dataset.id)));
   document.querySelectorAll(".punto-m").forEach(n => n.classList.toggle("apagado", !ids.has(n.dataset.id)));
+  // si el filtro cambió lo que se ve, las tendencias que quedan asienten una vez (en el orden de la aguja)
+  const claveVis = [...ids].sort().join();
+  if (claveVis !== ultimaVista && hayFiltro() && ordenRadar.length){
+    ordenRadar.filter(id => ids.has(id)).forEach((id, i) => {
+      const n = document.querySelector(`.nodo[data-id="${id}"]`);
+      if (!n || n.classList.contains("entra")) return;
+      n.classList.remove("asiente");
+      n.getBoundingClientRect();
+      n.style.setProperty("--da", Math.min(i * 0.012, 0.24).toFixed(3) + "s");
+      n.classList.add("asiente");
+    });
+  }
+  ultimaVista = claveVis;
+  dibujarEmpieza(vis);
   $("#cuenta-filtro").textContent = hayFiltro() ? `Mostrando ${vis.length} de ${D.tendencias.length}` : `${D.tendencias.length} tendencias`;
   $("#limpiar").classList.toggle("oculto", !hayFiltro());
   limiteRegion.pe = 6; limiteRegion.la = 6; limiteRegion.mu = 9;
   dibujarDecidir();
   dibujarNoticias();
   dibujarTabla();
+}
+// una primera acción concreta: la tendencia que más se mueve dentro de lo que se ve
+function dibujarEmpieza(vis){
+  const p = $("#empieza");
+  if (!vis.length){
+    p.innerHTML = `Ninguna tendencia coincide con tu selección. <button class="btn-txt" type="button">Quitar filtros</button>`;
+    p.querySelector("button").addEventListener("click", () => $("#limpiar").click());
+    return;
+  }
+  const t = [...vis].sort((a, b) => (b.impulso ?? -1) - (a.impulso ?? -1))[0];
+  const boton = `<button class="btn-txt" type="button">${esc(t.nombre)}</button>`;
+  p.innerHTML = vis.length === 1 ? `Con tu selección queda una: ${boton}.` :
+    hayFiltro() ? `Con tu selección, empieza por ${boton}: es la que más se mueve.` :
+    `¿No sabes por dónde empezar? Prueba con ${boton}, la que más se mueve ahora.`;
+  const b = p.querySelector("button");
+  b.addEventListener("click", () => abrir(t.id));
+  enlazar(b, t.id);
 }
 function textoFiltros(){
   const partes = [];
@@ -1066,7 +1151,7 @@ function filaTendencia(t, extra){
 function dibujarLateral(){
   const top = [...D.tendencias].filter(t => t.impulso != null).sort((a, b) => b.impulso - a.impulso).slice(0, 6);
   const c = $("#top-impulso"); c.innerHTML = "";
-  for (const t of top) c.appendChild(filaTendencia(t, `${t.n7} señales esta semana`));
+  for (const t of top) c.appendChild(filaTendencia(t, `${t.n7} ${t.n7 === 1 ? "noticia" : "noticias"} esta semana`));
   const cam = D.cambios || {};
   const grupos = [["acelera","Acelera", x => `+${x.delta} de impulso`], ["enfria","Se enfría", x => `${x.delta} de impulso`],
                   ["acerca","Se acerca", x => `${String(x.delta).replace(".", ",")} años`], ["aleja","Se aleja", x => `+${String(x.delta).replace(".", ",")} años`]];
@@ -1085,10 +1170,10 @@ function dibujarLateral(){
     }
   }
   const e = D.estado;
-  $("#cifras-semana").innerHTML = `<li><b>${nf.format(e.senales_7d)}</b><span>señales</span></li><li><b>${nf.format(e.pe_7d || 0)}</b><span>sobre Perú</span></li><li><b>${nf.format(e.la_7d || 0)}</b><span>Latinoamérica</span></li>`;
+  $("#cifras-semana").innerHTML = `<li><b>${nf.format(e.senales_7d)}</b><span>noticias</span></li><li><b>${nf.format(e.pe_7d || 0)}</b><span>sobre Perú</span></li><li><b>${nf.format(e.la_7d || 0)}</b><span>Latinoamérica</span></li>`;
   const tot = {lanzamiento:0, inversion:0, investigacion:0, regulacion:0, otro:0};
   for (const t of D.tendencias) for (const k in tot) tot[k] += (t.mezcla?.[k] || 0);
-  $("#semana-tipos").innerHTML = `<p class="sub" style="margin:0">Tipo de señal en los últimos 60 días · ${nf.format(e.medios_7d)} medios esta semana</p>` + barraMezcla(tot);
+  $("#semana-tipos").innerHTML = `<p class="sub" style="margin:0">Tipo de noticia en los últimos 60 días · ${nf.format(e.medios_7d)} medios esta semana</p>` + barraMezcla(tot);
 }
 function barraMezcla(m){
   const ks = ["lanzamiento","inversion","investigacion","regulacion","otro"].filter(k => m[k]);
@@ -1124,18 +1209,18 @@ function dibujarDecidir(){
   // cerca de ti
   const cerca = vis.filter(t => t.pe30 + t.la30 > 0).sort((a, b) => (b.pe30 + b.la30) - (a.pe30 + a.la30) || b.pe30 - a.pe30).slice(0, 8);
   barrasH($("#cerca"), cerca, t => t.pe30 + t.la30, "var(--azul)", t => `${t.pe30} Perú · ${t.la30} región`,
-    "Todavía no hay historias sobre Perú o Latinoamérica para esta selección.");
+    "Todavía no hay noticias sobre Perú o Latinoamérica para esta selección.");
   // dónde se invierte
   const inv = vis.filter(t => t.inv30 > 0).sort((a, b) => b.inv30 - a.inv30).slice(0, 8);
-  barrasH($("#inversion"), inv, t => t.inv30, "var(--t-inversion)", t => `${t.inv30} ${t.inv30 === 1 ? "historia" : "historias"}`,
-    "Sin historias de inversión en los últimos 30 días para esta selección.");
+  barrasH($("#inversion"), inv, t => t.inv30, "var(--t-inversion)", t => `${t.inv30} ${t.inv30 === 1 ? "noticia" : "noticias"}`,
+    "Sin noticias de inversión en los últimos 30 días para esta selección.");
   // oportunidades
   const op = vis.filter(t => t.oportunidad).sort((a, b) => (b.impulso ?? 0) - (a.impulso ?? 0));
   const ul = $("#oportunidades"); ul.innerHTML = "";
   if (!op.length) ul.innerHTML = `<li class="vacio">Por ahora no hay brechas claras: lo que crece en el mundo también se mueve aquí.</li>`;
   for (const t of op.slice(0, 6)){
     const li = document.createElement("li");
-    li.innerHTML = `<button type="button"><b>${esc(t.nombre)}</b><span>Impulso ${t.impulso} · ${t.n30} historias en el mundo y ${t.pe30 + t.la30} sobre Perú o la región (30 días)</span></button>`;
+    li.innerHTML = `<button type="button"><b>${esc(t.nombre)}</b><span>Impulso ${t.impulso} · ${t.n30} noticias en el mundo y ${t.pe30 + t.la30} sobre Perú o la región (30 días)</span></button>`;
     li.firstChild.addEventListener("click", () => abrir(t.id));
     enlazar(li.firstChild, t.id);
     ul.appendChild(li);
@@ -1257,7 +1342,7 @@ function dibujarNoticias(){
   const filtro = textoFiltros();
   $("#ultimo-sub").textContent = (filtro ? `Con tu selección (${filtro}). ` : "") + "Primero lo que pasa en Perú, luego en Latinoamérica y después en el mundo.";
   if (!lst.length){
-    c.innerHTML = `<p class="vacio">No hay señales recientes con esta combinación.${hayFiltro() ? ' <button class="btn-txt" type="button" id="vacio-limpiar">Ver todas las tendencias</button>' : ""}</p>`;
+    c.innerHTML = `<p class="vacio">No hay noticias recientes con esta combinación.${hayFiltro() ? ' <button class="btn-txt" type="button" id="vacio-limpiar">Ver todas las tendencias</button>' : ""}</p>`;
     $("#vacio-limpiar")?.addEventListener("click", () => $("#limpiar").click());
     return;
   }
@@ -1265,7 +1350,7 @@ function dibujarNoticias(){
     const grupo = lst.filter(s => (s.reg || "mu") === reg);
     const cab = document.createElement("div"); cab.className = "region-cab";
     const titulo = {pe:"En Perú", la:"En Latinoamérica", mu:"En el mundo"}[reg];
-    cab.innerHTML = `<h3>${titulo}</h3><span>${grupo.length ? `${grupo.length} ${grupo.length === 1 ? "señal" : "señales"}` : "sin señales recientes"}</span>`;
+    cab.innerHTML = `<h3>${titulo}</h3><span>${grupo.length ? `${grupo.length} ${grupo.length === 1 ? "noticia" : "noticias"}` : "sin noticias recientes"}</span>`;
     c.appendChild(cab);
     if (!grupo.length) continue;
     const ul = document.createElement("ul"); ul.className = "noticias";
@@ -1292,7 +1377,7 @@ const COLUMNAS = [
   {id:"anios", txt:"Llega en", clase:"num col-anios", valor:t => t.anios},
   {id:"impacto", txt:"Impacto", clase:"num col-impacto", valor:t => t.impacto},
   {id:"impulso", txt:"Impulso", clase:"num", valor:t => t.impulso ?? -1},
-  {id:"n30", txt:"Señales 30 d", clase:"num col-n30", valor:t => t.n30},
+  {id:"n30", txt:"Noticias 30 d", clase:"num col-n30", valor:t => t.n30},
   {id:"cerca", txt:"Perú y región", clase:"num col-cerca", valor:t => t.pe30 + t.la30},
   {id:"inv", txt:"Inversión 30 d", clase:"num col-inv", valor:t => t.inv30},
 ];
@@ -1398,7 +1483,7 @@ function abrir(id, desdeHash){
   const base = `${String(t.anios_base).replace(".", ",")} ${t.anios_base === 1 ? "año" : "años"}`;
   const pm = Math.round(100 * (t.mercado ?? 0)), pe = Math.round(100 * (t.esperado ?? 0));
   let hzTxt;
-  if (Math.abs(t.ajuste) < 0.05) hzTxt = t.n_mezcla < 8 ? `Estimación base: ${base}. Aún hay pocas señales para moverla.` : `Estimación base: ${base}; sus señales van en línea con ese plazo.`;
+  if (Math.abs(t.ajuste) < 0.05) hzTxt = t.n_mezcla < 8 ? `Estimación base: ${base}. Aún hay pocas noticias para moverla.` : `Estimación base: ${base}; sus noticias van en línea con ese plazo.`;
   else if (t.ajuste < 0) hzTxt = `Base ${base}. Se acerca: en 60 días, de sus lanzamientos, inversiones e investigaciones, ${pm} % son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
   else hzTxt = `Base ${base}. Se aleja: en 60 días, de sus lanzamientos, inversiones e investigaciones, solo ${pm} % son lanzamientos o inversiones; lo típico a ese plazo es ${pe} %.`;
   const d = deltaDe(t.id);
@@ -1414,11 +1499,11 @@ function abrir(id, desdeHash){
   const cerca = t.pe30 + t.la30, pctCerca = t.n30 ? Math.round(100 * cerca / t.n30) : 0;
   const pctDe = n => t.n30 ? Math.round(100 * n / t.n30) : 0;
   const indicadores = [
-    ["Historias en 30 días", nf.format(t.n30), `${t.n7} en los últimos 7 días`],
-    ["Sobre Perú y Latinoamérica", nf.format(cerca), `${t.pe30} de Perú · ${pctCerca} % de las historias`],
-    ["Inversiones (30 días)", nf.format(t.inv30), `${pctDe(t.inv30)} % de las historias`],
-    ["Lanzamientos (30 días)", nf.format(t.lanz30), `${pctDe(t.lanz30)} % de las historias`],
-    ["Investigación (30 días)", nf.format(t.inves30), `${pctDe(t.inves30)} % de las historias`],
+    ["Noticias en 30 días", nf.format(t.n30), `${t.n7} en los últimos 7 días`],
+    ["Sobre Perú y Latinoamérica", nf.format(cerca), `${t.pe30} de Perú · ${pctCerca} % de sus noticias`],
+    ["Inversiones (30 días)", nf.format(t.inv30), `${pctDe(t.inv30)} % de sus noticias`],
+    ["Lanzamientos (30 días)", nf.format(t.lanz30), `${pctDe(t.lanz30)} % de sus noticias`],
+    ["Investigación (30 días)", nf.format(t.inves30), `${pctDe(t.inves30)} % de sus noticias`],
     ["Interés público", wikiPct == null ? "sin datos aún" : signo(wikiPct), "vistas en Wikipedia, últimos 3 meses"],
     ["Ciencia", papPct == null ? "sin datos aún" : signo(papPct), "artículos científicos, último año completo"],
   ];
@@ -1444,8 +1529,8 @@ function abrir(id, desdeHash){
   const vacias = Math.max(0, 12 - (Math.floor(hist / 7) + 1));
   const desde = D.estado.inicio && vacias ? `midiendo desde el ${fechaCorta(D.estado.inicio)}` : "hace 12 semanas";
   const etiqSem = t.semanas.map((_, i) => i === 11 ? "Esta semana" : `Hace ${11 - i} semana${11 - i > 1 ? "s" : ""}`);
-  const gNot = `<div class="grafico"><h4>Noticias</h4><p class="g-sub">Señales por semana · ${t.n7} en los últimos 7 días</p>` +
-    lienzo({tipo:"barras", color:col, valores:t.semanas, etiquetas:etiqSem, vacias, unidad:"señales", resumen:`Señales por semana en las últimas 12 semanas; esta semana ${t.n7}`}) +
+  const gNot = `<div class="grafico"><h4>Noticias</h4><p class="g-sub">Noticias por semana · ${t.n7} en los últimos 7 días</p>` +
+    lienzo({tipo:"barras", color:col, valores:t.semanas, etiquetas:etiqSem, vacias, unidad:"noticias", resumen:`Noticias por semana en las últimas 12 semanas; esta semana ${t.n7}`}) +
     `<div class="g-pie"><span>${desde}</span><span>esta semana</span></div></div>`;
   const sumaM = Object.values(t.mezcla || {}).reduce((a, b) => a + b, 0);
   const wikiLink = t.wiki?.url_es || t.wiki?.url;
@@ -1465,8 +1550,8 @@ function abrir(id, desdeHash){
     <div class="parr"><h3>Por qué importa</h3><p>${esc(t.por_que)}</p></div>
     <div class="parr"><h3>Para qué carreras</h3><div class="chips-det">${t.carreras.map(c => `<span class="chip-s">${esc(D.catalogo.carreras[c])}</span>`).join("")}</div></div>
     <div class="graficos">${gWiki}${gPap}${gNot}</div>
-    ${sumaM ? `<div class="parr"><h3>Qué tipo de señales tiene (60 días)</h3>${barraMezcla(t.mezcla)}</div>` : ""}
-    <div class="parr"><h3>Últimas señales</h3>${t.senales.length ? "" : `<p class="aviso">Sin señales en las últimas semanas.</p>`}<div id="det-senales"></div></div>
+    ${sumaM ? `<div class="parr"><h3>Qué tipo de noticias tiene (60 días)</h3>${barraMezcla(t.mezcla)}</div>` : ""}
+    <div class="parr"><h3>Últimas noticias</h3>${t.senales.length ? "" : `<p class="aviso">Sin noticias en las últimas semanas.</p>`}<div id="det-senales"></div></div>
     <div class="parr"><h3>Dónde aplica</h3><div class="chips-det">${t.focos.map(f => `<span class="chip-s">${esc(D.catalogo.focos[f])}</span>`).join("")}${t.sectores.map(s => `<span class="chip-s">${esc(D.catalogo.sectores[s])}</span>`).join("")}</div></div>
     <div class="enlaces">
       ${wikiLink ? `<a class="boton" href="${esc(urlSegura(wikiLink))}" target="_blank" rel="noopener">Leer en Wikipedia${icono("externo")}</a>` : ""}
@@ -1495,6 +1580,8 @@ function vecina(paso){
   const base = (visibles().length ? visibles() : [...D.tendencias]).sort((a, b) => (b.impulso ?? -1) - (a.impulso ?? -1));
   const i = base.findIndex(t => t.id === abierta);
   abrir(base[(i + paso + base.length) % base.length].id);
+  // la ficha nueva entra desde el lado hacia el que se avanzó
+  $("#det-cuerpo").animate([{opacity:0, transform:`translateX(${paso * 18}px)`}, {opacity:1, transform:"none"}], {duration:260, easing:"cubic-bezier(.16,1,.3,1)"});
 }
 function prepararDetalle(){
   const dlg = $("#detalle");
@@ -1511,9 +1598,18 @@ function prepararDetalle(){
   });
   dlg.addEventListener("click", e => { if (e.target === dlg) cerrar(); });
   dlg.addEventListener("close", () => {
+    const vista = abierta;
     abierta = null;
     ocultarGlobo();
     document.querySelectorAll(".nodo.activo").forEach(n => n.classList.remove("activo"));
+    // "estabas aquí": el punto de la ficha que se cerró queda marcado un momento en el radar
+    const n = vista && document.querySelector(`.nodo[data-id="${vista}"]`);
+    if (n && !n.classList.contains("apagado") && !n.classList.contains("entra")){
+      n.parentNode.appendChild(n);
+      n.classList.remove("visto");
+      n.getBoundingClientRect();
+      n.classList.add("visto");
+    }
     history.replaceState(null, "", location.pathname + location.search);
   });
   dlg.addEventListener("keydown", e => {
@@ -1530,7 +1626,7 @@ function dibujarEstado(){
   const luz = $("#estado .luz");
   luz.classList.toggle("tarde", horas >= 8 && horas < 24);
   luz.classList.toggle("vieja", horas >= 24);
-  $("#estado-txt").textContent = `Actualizado ${hace(D.generado)} · ${nf.format(e.senales_7d)} señales esta semana`;
+  $("#estado-txt").textContent = `Actualizado ${hace(D.generado)} · ${nf.format(e.senales_7d)} noticias esta semana`;
   $("#estado").title = `Generado: ${new Date(D.generado).toLocaleString("es-PE")}. Se actualiza cada 3 horas.`;
   $("#generado").textContent = "Datos del " + new Date(D.generado).toLocaleString("es-PE", {day:"numeric", month:"long", hour:"2-digit", minute:"2-digit"});
   $("#revisado").textContent = "catálogo revisado el " + new Date(e.revisado + "T12:00:00").toLocaleDateString("es-PE", {day:"numeric", month:"long", year:"numeric"});
@@ -1543,6 +1639,7 @@ function dibujarReglas(){
 
 /* ---------- arranque ---------- */
 function iniciar(){
+  if (matchMedia("(hover:hover) and (pointer:fine)").matches) $("#pista-verbo").textContent = "Haz clic en un punto";
   dibujarEstado();
   dibujarReglas();
   dibujarFiltros();

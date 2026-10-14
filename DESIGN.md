@@ -167,7 +167,11 @@ components:
 
 El sistema es un instrumento de lectura antes que una página de marketing. El radar ocupa el centro y sus dos mitades son a la vez el mapa y la marca. A la izquierda, en naranja UCSUR, va sociedad y negocio; a la derecha, en azul UCSUR, va tecnología. Todo lo demás (filtros, listas, tabla, fichas) es un soporte claro sobre un fondo azulado muy suave, con tarjetas blancas y líneas finas.
 
-La densidad es de tablero: mucha información por pantalla, ordenada por líneas de 1 px y por fondos planos, no por cajas dentro de cajas. Montserrat pone la voz en los títulos y en las cifras. Source Sans 3 se encarga de leer. El movimiento es escaso y siempre responde a algo: una aguja barre el radar una vez al cargar, un anillo enciende el punto enlazado y la ficha se abre con un fundido corto.
+La densidad es de tablero: mucha información por pantalla, ordenada por líneas de 1 px y por fondos planos, no por cajas dentro de cajas. Montserrat pone la voz en los títulos y en las cifras. Source Sans 3 se encarga de leer. El movimiento es escaso y siempre responde a algo:
+- una aguja barre el radar una vez al cargar y cada punto se enciende a su paso;
+- al señalar un punto, el resto baja la voz;
+- al filtrar, las tendencias que quedan asienten una vez;
+- la ficha se abre con un fundido corto.
 
 Rechazos confirmados por el autor:
 - el panel gris con un solo acento;
@@ -304,9 +308,13 @@ La barra superior es azul a todo el ancho. Lleva la marca (radar bicolor de 42px
 - **Anillos:** marcan los años hasta la adopción.
 - **Puntos:** naranja o azul dato, con un tamaño que sigue al impulso.
 - **Etiquetas:** píldoras blancas con línea guía cuando no caben junto al punto.
-- **Estados:** al pasar el mouse o el foco por una fila enlazada, se enciende un anillo alrededor del punto. Al filtrar, lo que queda fuera baja a opacidad 0.12 y pierde su etiqueta.
-- **Al cargar:** una aguja barre el radar una vez en 1.5 s.
-- **Bucles:** el latido de las tendencias calientes y el pulso de «hoy» corren solo con `prefers-reduced-motion: no-preference`.
+- **Al cargar (el momento firma):** una aguja barre el radar una vez en 1.5 s. Cada punto nace a su paso (de escala 0.3 a 1 en 0.55 s, con desaceleración) y su nombre llega 0.12 s después. Las 5 tendencias con más impulso emiten un solo pulso, un anillo que se expande y se apaga en 1 s.
+- **Señalar:** con el mouse o el foco, el punto crece a 1.22 y el resto del radar baja a opacidad 0.38. Lo mismo pasa cuando se pasa por una fila enlazada, que además enciende un anillo alrededor del punto. Al presionar, el punto se hunde a 0.92.
+- **Filtrar:** lo que queda fuera baja a opacidad 0.12, se encoge a 0.8 y pierde su etiqueta. Las que quedan asienten una vez (suben a 1.35 y vuelven en 0.45 s), en el orden de la aguja y con 0.24 s de escalonado como máximo. Si nada cambia en lo que se ve, no asienten.
+- **Volver de una ficha:** el punto de la ficha cerrada queda marcado con su anillo 1.8 s.
+- **Ficha anterior y siguiente:** el contenido entra desde el lado hacia el que se avanzó, en 0.26 s.
+- **Cada animación de un solo uso se retira al terminar**, para que reordenar los nodos no la repita.
+- **Bucles:** el latido de las tendencias calientes y el pulso de «hoy» corren solo con `prefers-reduced-motion: no-preference`. Todo lo demás es de un solo uso o responde a un gesto, y corre para todos.
 
 ### Ficha (modo enfoque)
 - **Forma:** diálogo nativo de hasta 920px con radio de 22px. Abre en 0.34 s con un fundido y una subida de 14px.
